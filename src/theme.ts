@@ -1,15 +1,12 @@
 import { Context, useContext, createContext } from 'react';
 
-enum mods {
-  light = 'light',
-  dark = 'dark',
-}
+export type Mods = 'light' | 'dark';
 
-type theme = {
+export type Theme = {
   background: string;
 };
 
-export const themes: Record<mods, theme> = {
+export const themes: Record<Mods, Theme> = {
   light: {
     background: '#F3F4F5',
   },
@@ -19,10 +16,10 @@ export const themes: Record<mods, theme> = {
 };
 
 export const createThemeContext = (
-  defaultTheme: mods
+  defaultTheme: Mods
 ): {
-  ThemeContext: Context<theme>;
-  useTheme: () => theme;
+  ThemeContext: Context<Theme>;
+  useTheme: () => Theme;
 } => {
   const ThemeContext = createContext(themes[defaultTheme]);
   const useTheme = () => useContext(ThemeContext);
