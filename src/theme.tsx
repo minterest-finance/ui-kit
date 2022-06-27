@@ -1,4 +1,4 @@
-import { Provider, useContext, createContext } from 'react';
+import React, { FC, useContext, createContext } from 'react';
 
 export type Mods = 'light' | 'dark';
 
@@ -18,13 +18,18 @@ export const themes: Record<Mods, Theme> = {
 export const createThemeContext = (
   defaultTheme?: Mods
 ): {
-  Provider: Provider<Theme>;
+  Provider: FC<{ children: React.ReactNode; value?: Theme }>;
   useTheme: () => Theme;
 } => {
-  const ThemeContext = createContext(themes[defaultTheme || 'dark']);
+  const theme = themes[defaultTheme || 'dark'];
+  const ThemeContext = createContext(theme);
   const useTheme = () => useContext(ThemeContext);
   return {
     useTheme,
-    Provider: ThemeContext.Provider,
+    Provider: ({ value, children }) => (
+      <ThemeContext.Provider value={value || theme}>
+        {children}
+      </ThemeContext.Provider>
+    ),
   };
 };
