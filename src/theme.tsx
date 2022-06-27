@@ -28,9 +28,10 @@ export const createThemeContext = (
     useTheme,
     Provider: ({ value, children }) => {
       return (
-          <ThemeContext.Provider value={value || theme}>
-        {children}
-      </ThemeContext.Provider>)
-    }
+        <ThemeContext.Provider value={value || theme}>
+          {children}
+        </ThemeContext.Provider>
+      );
+    },
   };
 };

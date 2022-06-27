@@ -1,22 +1,82 @@
-// Button.stories.ts|tsx
-
 import React from 'react';
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { H1 } from 'components/Typography';
+import { Typography } from 'components';
 
 export default {
-  /* 👇 The title prop is optional.
-   * See https://storybook.js.org/docs/react/configure/overview#configure-story-loading
-   * to learn how to generate automatic titles
-   */
   title: 'Typography',
-  component: H1,
-} as ComponentMeta<typeof H1>;
+  component: Typography,
+} as ComponentMeta<typeof Typography>;
 
-export const Heading1: ComponentStory<typeof H1> = (args) => <H1 {...args} />;
+export const H1: ComponentStory<typeof Typography> = (args) => (
+  <Typography {...args} variant={'h1'} />
+);
 
-Heading1.args = {
-  text: 'H1',
+H1.args = {
+  text: 'The quick brown fox jumps over the lazy dog.',
+};
+
+export const H2: ComponentStory<typeof Typography> = (args) => (
+  <Typography {...args} variant={'h2'} />
+);
+
+H2.args = {
+  text: 'The quick brown fox jumps over the lazy dog.',
+};
+
+export const H3: ComponentStory<typeof Typography> = (args) => (
+  <Typography {...args} variant={'h3'} />
+);
+
+H3.args = {
+  text: 'The quick brown fox jumps over the lazy dog.',
+};
+
+export const H4: ComponentStory<typeof Typography> = (args) => (
+  <Typography {...args} variant={'h4'} />
+);
+
+H4.args = {
+  text: 'The quick brown fox jumps over the lazy dog.',
+};
+
+export const Button: ComponentStory<typeof Typography> = (args) => (
+  <Typography {...args} variant={'button'} />
+);
+
+Button.args = {
+  text: 'The quick brown fox jumps over the lazy dog.',
+};
+
+export const CopyL: ComponentStory<typeof Typography> = (args) => (
+  <Typography {...args} variant={'body1'} />
+);
+
+CopyL.args = {
+  text: 'The quick brown fox jumps over the lazy dog.',
+};
+
+export const CopyM: ComponentStory<typeof Typography> = (args) => (
+  <Typography {...args} variant={'body2'} />
+);
+
+CopyM.args = {
+  text: 'The quick brown fox jumps over the lazy dog.',
+};
+
+export const CopySSemibold: ComponentStory<typeof Typography> = (args) => (
+  <Typography {...args} variant={'subtitle1'} />
+);
+
+CopySSemibold.args = {
+  text: 'The quick brown fox jumps over the lazy dog.',
+};
+
+export const CopySRegular: ComponentStory<typeof Typography> = (args) => (
+  <Typography {...args} variant={'subtitle2'} />
+);
+
+CopySRegular.args = {
+  text: 'The quick brown fox jumps over the lazy dog.',
 };
