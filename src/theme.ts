@@ -16,12 +16,12 @@ export const themes: Record<Mods, Theme> = {
 };
 
 export const createThemeContext = (
-  defaultTheme: Mods
+  defaultTheme?: Mods
 ): {
   Provider: Provider<Theme>;
   useTheme: () => Theme;
 } => {
-  const ThemeContext = createContext(themes[defaultTheme]);
+  const ThemeContext = createContext(themes[defaultTheme || 'dark']);
   const useTheme = () => useContext(ThemeContext);
   return {
     useTheme,
