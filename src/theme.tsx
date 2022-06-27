@@ -24,12 +24,15 @@ export const createThemeContext = (
   const theme = themes[defaultTheme || 'dark'];
   const ThemeContext = createContext(theme);
   const useTheme = () => useContext(ThemeContext);
+  console.log("1", {theme})
   return {
     useTheme,
-    Provider: ({ value, children }) => (
-      <ThemeContext.Provider value={value || theme}>
+    Provider: ({ value, children }) => {
+      console.log("2", {theme})
+      return (
+          <ThemeContext.Provider value={value || theme}>
         {children}
-      </ThemeContext.Provider>
-    ),
+      </ThemeContext.Provider>)
+    }
   };
 };
