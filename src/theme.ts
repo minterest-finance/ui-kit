@@ -1,4 +1,4 @@
-import { Context, useContext, createContext } from 'react';
+import { Provider, useContext, createContext } from 'react';
 
 export type Mods = 'light' | 'dark';
 
@@ -18,13 +18,13 @@ export const themes: Record<Mods, Theme> = {
 export const createThemeContext = (
   defaultTheme: Mods
 ): {
-  ThemeContext: Context<Theme>;
+  Provider: Provider<Theme>;
   useTheme: () => Theme;
 } => {
   const ThemeContext = createContext(themes[defaultTheme]);
   const useTheme = () => useContext(ThemeContext);
   return {
     useTheme,
-    ThemeContext,
+    Provider: ThemeContext.Provider,
   };
 };
