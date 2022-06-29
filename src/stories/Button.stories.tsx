@@ -4,30 +4,43 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Button, SmallButton, BigButton } from 'components';
 
-import { themes } from '../theme';
+import { getTheme, ThemeProvider } from '../theme';
 
 export default {
   title: 'Button',
   component: Button,
+  args: {
+    mode: 'light',
+  },
+  argTypes: {
+    mode: { control: 'select', options: ['light', 'dark'] },
+  },
+  decorators: [
+    (Story, Context) => {
+      return (
+        <ThemeProvider theme={getTheme(Context.args.mode)}>
+          <Story />
+        </ThemeProvider>
+      );
+    },
+  ],
 } as ComponentMeta<typeof Button>;
 
 export const Small: ComponentStory<typeof Button> = (args) => (
-  <SmallButton {...args} onClick={undefined} />
+  <SmallButton {...args} />
 );
 
 Small.args = {
-  theme: themes['light'],
   children: 'Supply',
   color: 'primary',
   disabled: false,
 };
 
 export const Big: ComponentStory<typeof Button> = (args) => (
-  <BigButton {...args} theme={themes['light']} onClick={undefined} />
+  <BigButton {...args} />
 );
 
 Big.args = {
-  theme: themes['light'],
   children: 'Supply',
   color: 'primary',
   disabled: false,
