@@ -1,14 +1,8 @@
 import React, { FC } from 'react';
 
 import MaterialButton, { ButtonProps } from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 
-export const Button: FC<ButtonProps> = (props) => (
-  <>
-    <CssBaseline />
-    <MaterialButton {...props} />
-  </>
-);
+export const Button: FC<ButtonProps> = (props) => <MaterialButton {...props} />;
 
 export const SmallButton: FC<ButtonProps> = (props) => (
   <Button variant={'contained'} size={'small'} {...props} />

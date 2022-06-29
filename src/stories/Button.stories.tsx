@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Button, SmallButton, BigButton } from 'components';
 
-import { getTheme, ThemeProvider } from '../theme';
+import { CssBaseline, getTheme, ThemeProvider } from '../theme';
 
 export default {
   title: 'Button',
@@ -19,6 +19,7 @@ export default {
     (Story, Context) => {
       return (
         <ThemeProvider theme={getTheme(Context.args.mode)}>
+          <CssBaseline />
           <Story />
         </ThemeProvider>
       );

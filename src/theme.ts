@@ -9,14 +9,15 @@ import OpenSansSemiBold from './assets/fonts/OpenSans-SemiBold.ttf';
 import UbuntuBold from './assets/fonts/Ubuntu-Bold.ttf';
 
 export { ThemeProvider, useTheme } from '@mui/material/styles';
+export { default as CssBaseline } from '@mui/material/CssBaseline';
 
 export const getTheme = (mode: PaletteMode): Theme =>
   createTheme({
     palette: {
       mode,
-      // background: {
-      //   default: mode === 'light' ? '#F3F4F5' : '#061953',
-      // },
+      background: {
+        default: mode === 'light' ? '#F3F4F5' : '#061953',
+      },
       primary: {
         main: mode === 'light' ? '#0C2D9C' : '#ffffff',
       },
@@ -93,7 +94,11 @@ export const getTheme = (mode: PaletteMode): Theme =>
     },
     components: {
       MuiCssBaseline: {
+        // disabled body changes
         styleOverrides: `
+        body {
+          all: unset;
+        }
         @font-face {
           font-family: 'Ubuntu';
           font-style: normal;

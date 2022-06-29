@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Typography } from 'components';
 
-import { getTheme, ThemeProvider } from '../theme';
+import { getTheme, ThemeProvider, CssBaseline } from '../theme';
 
 export default {
   title: 'Typography',
@@ -21,6 +21,7 @@ export default {
     (Story, Context) => {
       return (
         <ThemeProvider theme={getTheme(Context.args.mode)}>
+          <CssBaseline />
           <Story />
         </ThemeProvider>
       );
