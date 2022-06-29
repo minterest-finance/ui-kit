@@ -5,7 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 
 export const Button: FC<ButtonProps> = (props) => (
   <>
-    <CssBaseline enableColorScheme />
+    <CssBaseline />
     <MaterialButton {...props} />
   </>
 );

@@ -14,9 +14,9 @@ export const getTheme = (mode: PaletteMode): Theme =>
   createTheme({
     palette: {
       mode,
-      background: {
-        default: mode === 'light' ? '#F3F4F5' : '#061953',
-      },
+      // background: {
+      //   default: mode === 'light' ? '#F3F4F5' : '#061953',
+      // },
       primary: {
         main: mode === 'light' ? '#0C2D9C' : '#ffffff',
       },
