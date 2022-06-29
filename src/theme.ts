@@ -94,11 +94,7 @@ export const getTheme = (mode: PaletteMode): Theme =>
     },
     components: {
       MuiCssBaseline: {
-        // disabled body changes
         styleOverrides: `
-        body {
-          all: unset;
-        }
         @font-face {
           font-family: 'Ubuntu';
           font-style: normal;
