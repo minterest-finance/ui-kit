@@ -11,6 +11,9 @@
 # production
 /build
 /storybook-static
+/lib
+/lib-esm
+/dist
 
 # misc
 .DS_Store

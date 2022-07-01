@@ -1,27 +1,27 @@
 {
   "compilerOptions": {
     "baseUrl": "src",
-    "target": "es2020",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "module": "commonjs",
+    "target": "es5",
+    "lib": [ "es2015", "dom", "dom.iterable"],
+    "rootDir": "src",
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react",
+    "sourceMap": true,
+    "declaration": true
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    "src/stories"
   ]
 }
