@@ -1,6 +1,7 @@
 import React, { ReactComponentElement } from 'react';
 
-import classes from './HeaderMessage.module.scss';
+import { styled } from '@mui/material/styles';
+
 import { Typography } from 'components';
 import { CloseButton } from 'components/Button/Button';
 
@@ -11,6 +12,74 @@ export type HeaderMessagePropsType = {
   secondLine?: string | JSX.Element[];
 };
 
+const Body = styled('div')(
+  ({ theme }) => `
+width: 100%;
+height: fit-content;
+background: #f6f7f9;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 16px 120px 18px 94px;
+
+${theme.breakpoints.down('md')}{
+  padding: 16px 110px 18px 78px;
+}
+
+${theme.breakpoints.down('sm')}{
+  padding: 8px 40px 8px 20px;
+}
+
+`
+);
+
+const Message = styled('div')(
+  ({ theme }) => `
+position: relative;
+width: 1226px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+
+${theme.breakpoints.down('md')}{
+  max-width: 100%;
+  flex-wrap: wrap;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+${theme.breakpoints.down('sm')}{
+  flex-wrap: wrap;
+}
+
+`
+);
+
+const Title = styled(Typography)(
+  () => `
+  color: #061953;
+`
+);
+
+const TextWrapper = styled('div')(
+  () => `
+max-width: 729px;
+`
+);
+
+const Description = styled('div')(
+  ({ theme }) => `
+margin-top: 8px;
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 150%;
+color: ${theme.palette.action.disabled};
+`
+);
+
 export const HeaderMessageComponent = ({
   title,
   firstLine,
@@ -18,18 +87,17 @@ export const HeaderMessageComponent = ({
   secondLine,
 }: HeaderMessagePropsType): ReactComponentElement<'div'> => {
   return (
-    <div className={classes.body}>
-      <div className={classes.message}>
-        <div className={classes.textWrapper}>
-          <Typography className={classes.title} text={title} variant='h3' />
-
-          <div className={classes.description}>
+    <Body>
+      <Message>
+        <TextWrapper>
+          <Title text={title} variant='h3' />
+          <Description>
             {firstLine}
             {secondLine && secondLine}
-          </div>
-        </div>
+          </Description>
+        </TextWrapper>
         <CloseButton onClick={onClose} />
-      </div>
-    </div>
+      </Message>
+    </Body>
   );
 };
