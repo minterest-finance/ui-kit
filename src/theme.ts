@@ -30,7 +30,7 @@ export const getTheme = (mode: PaletteMode): Theme =>
         disabledOpacity: 0.08,
       },
     },
-    breakpoints:{
+    breakpoints: {
       values: {
         xs: 0,
         sm: 360,
