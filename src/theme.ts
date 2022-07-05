@@ -30,6 +30,15 @@ export const getTheme = (mode: PaletteMode): Theme =>
         disabledOpacity: 0.08,
       },
     },
+    breakpoints:{
+      values: {
+        xs: 0,
+        sm: 360,
+        md: 767,
+        lg: 1249,
+        xl: 1440,
+      },
+    },
     typography: {
       allVariants: {
         color: mode === 'light' ? '#061953' : '#ffffff',
