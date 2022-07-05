@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { Button, SmallButton, BigButton } from 'components';
+import { Button, SmallButton, BigButton, CloseButton } from 'components';
 
 import { CssBaseline, getTheme, ThemeProvider } from '../theme';
 
@@ -44,5 +44,13 @@ export const Big: ComponentStory<typeof Button> = (args) => (
 Big.args = {
   children: 'Supply',
   color: 'primary',
+  disabled: false,
+};
+
+export const Close: ComponentStory<typeof Button> = (args) => (
+  <CloseButton {...args} />
+);
+
+CloseButton.args = {
   disabled: false,
 };

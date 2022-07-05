@@ -1,0 +1,68 @@
+$minterestBlue: #0c2d9c;
+$minterestBtnPrimary: #146eff;
+$minterestBlueLight: #0058bf;
+$minterestTypeDark: #061953;
+$minterestTypeLight: #7a8c9c;
+$minterestHotCoral: #f35b53;
+$minterestWhite: #fefefd;
+$minterestGreen: #67d693;
+$minterestTurquoise: #00c7cf;
+$minterestBackground: #f3f4f5;
+$minterestGrey: #fbfbfb;
+$bottonLine: 0px 1px 0px rgba(0, 88, 191, 0.08);
+$minterestDark8: rgba(22, 32, 44, 0.08);
+$minterestBlueSoftGradient: linear-gradient(
+  103.02deg,
+  rgba(20, 110, 255, 0.08) 2.11%,
+  rgba(220, 17, 21, 0.05) 94.41%
+);
+$minterestBackdrop: linear-gradient(
+  103.02deg,
+  rgba(220, 232, 250, 0.7) 2.11%,
+  rgba(249, 232, 232, 0.7) 94.41%
+);
+$boxShadowLight: rgba(0, 45, 102, 0.1);
+$withdrawTextError: #dc1115;
+$tableActiveArrow: #002d66;
+$buttonDisabled: #c4c4c4;
+
+$maxWidthContainer: 1248px;
+$marketsColumnPaddingTop: 24px;
+$marketsTablePaddingLeft: 24px;
+$marketsLendPaddingRight: 72.67px;
+$marketsBorrowPaddingRight: 37.7px;
+$backgroundTopHeight: 738px;
+
+$screen-sm-min: 360px;
+$screen-md-min: 767px;
+$screen-lg-min: 1249px;
+
+@mixin sm {
+  @media (max-width: #{$screen-md-min}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: #{$screen-md-min}) and (max-width: #{$screen-lg-min}) {
+    @content;
+  }
+}
+
+@mixin breakpoint($keys...) {
+  @each $key in $keys {
+    @if ($key == sm) {
+      @include sm {
+        @content;
+      }
+    } @else if ($key == md) {
+      @include md {
+        @content;
+      }
+    } @else if ($key == lg) {
+      @include lg {
+        @content;
+      }
+    }
+  }
+}
