@@ -27,10 +27,10 @@ export default [
     ],
     plugins: [
       url({
-        include: ['**/*.ttf', '**/*.svg'],
+        include: ['**/*.ttf'],
         limit: Infinity,
       }),
-      svgr(),
+      svgr({exportType: 'named'}),
       peerDepsExternal(),
       resolve({rootDir: 'src'}),
       commonjs(),
