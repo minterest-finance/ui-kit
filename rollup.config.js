@@ -40,8 +40,8 @@ export default [
     ],
   },
   {
-    input: 'dist/esm/types/index.d.ts',
-    output: [{ file: 'dist/index.d.ts', format: 'esm' }],
+    input: 'dist/cjs/types/index.d.ts',
+    output: [{ file: 'dist/index.d.ts', format: 'cjs' }],
     plugins: [dts()],
     external: [/\.scss$/, /\.css$/, /\.svg$/, /\.ttf/],
   },
