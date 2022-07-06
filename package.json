@@ -12,6 +12,10 @@
     "dist"
   ],
   "types": "dist/index.d.ts",
+  "peerDependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
@@ -29,14 +33,12 @@
     "gulp-uglify": "^3.0.2",
     "merge2": "^1.4.1",
     "postcss": "^8.4.14",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
     "rollup": "2.60.0",
     "rollup-plugin-dts": "4.0.1",
     "rollup-plugin-peer-deps-external": "2.2.4",
     "rollup-plugin-postcss": "4.0.1",
-    "rollup-plugin-terser": "7.0.2",
+    "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-url": "^3.0.1",
     "sass": "^1.39.0",
     "shx": "^0.3.4",
