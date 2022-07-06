@@ -27,7 +27,7 @@ export default [
     ],
     plugins: [
       url({
-        include: ['**/*.ttf'],
+        include: ['**/*.ttf', '**/*.svg'],
         limit: Infinity,
       }),
       svgr(),
