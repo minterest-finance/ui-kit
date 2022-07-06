@@ -1,11 +1,8 @@
 import { PaletteMode } from '@mui/material';
 import { createTheme, Theme } from '@mui/material/styles';
 
-// @ts-ignore
 import OpenSansRegular from './assets/fonts/OpenSans-Regular.ttf';
-// @ts-ignore
 import OpenSansSemiBold from './assets/fonts/OpenSans-SemiBold.ttf';
-// @ts-ignore
 import UbuntuBold from './assets/fonts/Ubuntu-Bold.ttf';
 
 export { ThemeProvider, useTheme } from '@mui/material/styles';

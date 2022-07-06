@@ -2,8 +2,8 @@ import React, { ReactComponentElement } from 'react';
 
 import { styled } from '@mui/material/styles';
 
-import { Typography } from 'components';
 import { CloseButton } from 'components/Button/Button';
+import Typography from 'components/Typography/Typography';
 
 export type HeaderMessagePropsType = {
   title: string;
