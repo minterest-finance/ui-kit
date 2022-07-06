@@ -18,7 +18,6 @@
     "sourceMap": true,
     "declaration": true
   },
-  "include": ["src"],
-  "exclude": ["src/stories"],
-  "files": ["custom.d.ts"]
+  "include": ["src", "custom.d.ts"],
+  "exclude": ["src/stories"]
 }
