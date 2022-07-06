@@ -1,10 +1,9 @@
 import React, { FC } from 'react';
 
 import MaterialButton, { ButtonProps } from '@mui/material/Button';
+import { ReactComponent as CloseIcon } from 'assets/svg/closeIcon.svg';
 
 import classes from './CloseButton.module.scss';
-
-import CloseIcon from '../../assets/svg/closeIcon.svg';
 
 export const Button: FC<ButtonProps> = (props) => <MaterialButton {...props} />;
 
