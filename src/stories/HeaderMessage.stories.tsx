@@ -36,4 +36,5 @@ Header.args = {
   firstLine:
     'Open to a limited audience of community members. Access is only available to MNT token holders. Your connected wallet is not associated to MNT on Minterest. For access, sign up here.',
   onClose: () => console.log('click'),
+  buttonTitle: 'Close',
 };

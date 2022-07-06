@@ -6,6 +6,7 @@ import { CloseButton } from 'components/Button/Button';
 import Typography from 'components/Typography/Typography';
 
 export type HeaderMessagePropsType = {
+  buttonTitle: string;
   title: string;
   firstLine: string;
   onClose: () => void;
@@ -85,6 +86,7 @@ export const HeaderMessageComponent = ({
   firstLine,
   onClose,
   secondLine,
+  buttonTitle,
 }: HeaderMessagePropsType): ReactComponentElement<'div'> => {
   return (
     <Body>
@@ -96,7 +98,7 @@ export const HeaderMessageComponent = ({
             {secondLine && secondLine}
           </Description>
         </TextWrapper>
-        <CloseButton onClick={onClose} />
+        <CloseButton onClick={onClose}>{buttonTitle}</CloseButton>
       </Message>
     </Body>
   );

@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
 
 import MaterialButton, { ButtonProps } from '@mui/material/Button';
+import { styled } from '@mui/material/styles';
 import { CloseIcon } from 'assets/svg';
-
-import classes from './CloseButton.module.scss';
 
 export const Button: FC<ButtonProps> = (props) => <MaterialButton {...props} />;
 
@@ -15,13 +14,20 @@ export const BigButton: FC<ButtonProps> = (props) => (
   <Button variant={'contained'} size={'large'} {...props} />
 );
 
-export const CloseButton: FC<ButtonProps> = (props) => {
-  return (
-    <button className={classes.closeButton} {...props}>
-      <span>Close</span>
-      <div className={classes.closeIcon}>
-        <CloseIcon />
-      </div>
-    </button>
-  );
-};
+export const IconButton = styled(MaterialButton)(({ theme }) => ({
+  color: theme.palette.secondary.main,
+  '& .MuiButton-endIcon': {
+    '& svg': {
+      fill: theme.palette.secondary.main,
+    },
+  },
+}));
+
+export const CloseButton: FC<ButtonProps> = (props) => (
+  <IconButton
+    variant={'text'}
+    size={'medium'}
+    endIcon={<CloseIcon />}
+    {...props}
+  />
+);

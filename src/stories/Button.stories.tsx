@@ -51,6 +51,7 @@ export const Close: ComponentStory<typeof Button> = (args) => (
   <CloseButton {...args} />
 );
 
-CloseButton.args = {
+Close.args = {
+  children: 'Close',
   disabled: false,
 };
