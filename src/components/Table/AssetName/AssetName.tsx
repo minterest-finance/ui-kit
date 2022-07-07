@@ -21,12 +21,12 @@ type Props = {
 
 const UnderlyingWrapper = styled(({ ...props }: any) => (
   <LightTooltip title={<TooltipTitle assetName={'ASSET'} />} arrow>
-  <div {...props}>
-    {props.children}
-    <AmountWrapper>
-      <Typography variant={'subtitle1'} text='123' />
-    </AmountWrapper>
-  </div>
+    <div {...props}>
+      {props.children}
+      <AmountWrapper>
+        <Typography variant={'subtitle1'} text='123' />
+      </AmountWrapper>
+    </div>
   </LightTooltip>
 ))(underlyingWrapperStyles);
 
@@ -93,11 +93,9 @@ const AssetName: FC<Props> = ({
           {isHovered && (
             // <LightTooltip title={<TooltipTitle assetName={assetName} />} arrow>
 
-              <UnderlyingWrapper>
-                  <MetamaskIcon />
-
-              </UnderlyingWrapper>
-
+            <UnderlyingWrapper>
+              <MetamaskIcon />
+            </UnderlyingWrapper>
           )}
         </div>
       </div>

@@ -1,6 +1,4 @@
-import {
-    tooltipClasses,
-  } from '@mui/material';
+import { tooltipClasses } from '@mui/material';
 
 export const underlyingWrapperStyles = ({ theme }) => ({
   display: 'flex',
@@ -21,4 +19,4 @@ export const lightTooltipStyles = ({ theme }) => ({
   [`& .${tooltipClasses.arrow}`]: {
     color: '#FCFCFC',
   },
-})
+});
