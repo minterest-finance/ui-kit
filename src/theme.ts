@@ -1,11 +1,8 @@
 import { PaletteMode } from '@mui/material';
 import { createTheme, Theme } from '@mui/material/styles';
 
-// @ts-ignore
 import OpenSansRegular from './assets/fonts/OpenSans-Regular.ttf';
-// @ts-ignore
 import OpenSansSemiBold from './assets/fonts/OpenSans-SemiBold.ttf';
-// @ts-ignore
 import UbuntuBold from './assets/fonts/Ubuntu-Bold.ttf';
 
 export { ThemeProvider, useTheme } from '@mui/material/styles';
@@ -28,6 +25,15 @@ export const getTheme = (mode: PaletteMode): Theme =>
         disabledBackground: '#F0F1F2',
         disabled: '#6D7692',
         disabledOpacity: 0.08,
+      },
+    },
+    breakpoints: {
+      values: {
+        xs: 0,
+        sm: 360,
+        md: 767,
+        lg: 1249,
+        xl: 1440,
       },
     },
     typography: {

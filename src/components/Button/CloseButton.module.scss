@@ -1,0 +1,47 @@
+.closeButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+  border: 1px solid rgba(12, 45, 156, 0);
+  background: none;
+  border-radius: 8px;
+
+  & > span {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 150%;
+    color: #061953;
+  }
+
+  & > .closeIcon {
+    margin-left: 4px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2px;
+
+    & > svg {
+      width: 14px;
+      height: 14px;
+      fill: #061953;
+    }
+  }
+
+  &:hover {
+    border: 1px solid rgba(12, 45, 156, 0.08);
+    cursor: pointer;
+    background: #fafafa;
+
+    span {
+      color: #0c2d9c;
+    }
+
+    .closeIcon > svg {
+      fill: #0c2d9c;
+    }
+  }
+}

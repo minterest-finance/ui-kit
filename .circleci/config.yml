@@ -1,0 +1,25 @@
+version: 2.1
+orbs:
+  slack: circleci/slack@4.4.4
+
+parameters:
+  version:
+    type: string
+    description: Any git reference (commit SHA, branch name, tag) to deploy contracts from a custom git version. Reference tags to deploy to production or run a rollback.
+    default: ""
+
+jobs:
+  lint:
+      docker:
+        - image: cimg/node:17.0.0
+      steps:
+        - checkout
+        - run: yarn install --frozen-lockfile
+        - run: yarn run lint:ci
+      resource_class: small
+
+workflows:
+  version: 2
+  main:
+    jobs:
+      - lint
