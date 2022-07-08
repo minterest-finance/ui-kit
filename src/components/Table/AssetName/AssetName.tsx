@@ -1,40 +1,74 @@
-import React, { Children, FC } from 'react';
+import React, { FC } from 'react';
+
+import { Tooltip, TooltipProps, TypographyProps } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import {
+  BTCIcon,
+  MetamaskSmallIcon,
+  AssetIconBlank,
+  AssetNameLoading,
+  WETHIcon,
+  DAIIcon,
+  USDCIcon,
+  USDTIcon,
+  LedgerSmallIcon,
+  TrezorSmallIcon,
+  WalletConnectSmallIcon,
+} from 'assets/svg';
 
 import {
-  Tooltip,
-  TooltipProps,
-  tooltipClasses,
-  TypographyProps,
-  typographyClasses,
-} from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { BTCIcon, MetamaskIcon } from 'assets/svg';
-
-import { lightTooltipStyles, underlyingWrapperStyles } from './AssetNameStyles';
+  lightTooltipStyles,
+  tooltipTitleStyles,
+  underlyingWrapperStyles,
+  amountWrapperStyles,
+  containerStyles,
+  assetNameLoadingStyles,
+  assetNameWrapperStyles,
+  dataContainerStyles,
+} from './AssetNameStyles';
 import { Typography } from 'components';
 
 type Props = {
-  variant: string;
+  isLoading: boolean;
   isHovered: boolean;
-  assetName: string;
+  assetName: 'BTC' | 'WETH' | 'DAI' | 'USDC' | 'USDT';
+  wallet: 'Metamask' | 'Trezor' | 'Ledger' | 'WalletConnect';
+  balance: string;
 };
 
+const Icons = {
+  BTC: BTCIcon,
+  WETH: WETHIcon,
+  DAI: DAIIcon,
+  USDC: USDCIcon,
+  USDT: USDTIcon,
+};
+
+const Wallets = {
+  Metamask: MetamaskSmallIcon,
+  Trezor: TrezorSmallIcon,
+  Ledger: LedgerSmallIcon,
+  WalletConnect: WalletConnectSmallIcon,
+};
+
+const Container = styled('div')(containerStyles);
+const DataContainer = styled('div')(dataContainerStyles);
+const AmountWrapper = styled('div')(amountWrapperStyles);
+const AssetNameLoadingComponent = styled(({ ...props }) => (
+  <AssetNameLoading {...props} />
+))(assetNameLoadingStyles);
+const AssetNameWrapper = styled('div')(assetNameWrapperStyles);
+
 const UnderlyingWrapper = styled(({ ...props }: any) => (
-  <LightTooltip title={<TooltipTitle assetName={'ASSET'} />} arrow>
+  <LightTooltip title={<TooltipTitle assetName={props.assetName} />} arrow>
     <div {...props}>
       {props.children}
       <AmountWrapper>
-        <Typography variant={'subtitle1'} text='123' />
+        <Typography variant={'subtitle1'} text={props.balance} />
       </AmountWrapper>
     </div>
   </LightTooltip>
 ))(underlyingWrapperStyles);
-
-const AmountWrapper = styled('div')(
-  ({ theme }) => `
-        margin-left: 4px;
-  `
-);
 
 const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -48,58 +82,46 @@ const TooltipTitle = styled(
       {...props}
     />
   )
-)(({ theme }) => ({
-  [`&.${typographyClasses.subtitle2}`]: {
-    color: '#6D7692',
-    width: 128,
-    textAlign: 'center',
-  },
-}));
+)(tooltipTitleStyles);
 
 const AssetName: FC<Props> = ({
-  variant,
-  isHovered = true,
-  assetName = 'BTCC',
+  isLoading,
+  isHovered,
+  assetName,
+  wallet,
+  balance,
 }: Props) => {
-  if (variant === 'normal')
-    return (
-      <div
-        style={{
-          height: 39,
-          display: 'flex',
-          alignItems: 'center',
-        }}
-      >
-        <BTCIcon />
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: isHovered ? 'space-between' : 'center',
-            height: 39,
-            marginLeft: 8,
-          }}
-        >
-          <div
-            style={{
-              fontFamily: 'Open Sans',
-              fontWeight: 700,
-              fontSize: 14,
-              lineHeight: 1.5,
+  const Icon = Icons[assetName];
+  const Wallet = Wallets[wallet];
+  return (
+    <Container>
+      {!isLoading && (
+        <>
+          <Icon />
+          <DataContainer
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: isHovered ? 'space-between' : 'center',
             }}
           >
-            BTC
-          </div>
-          {isHovered && (
-            // <LightTooltip title={<TooltipTitle assetName={assetName} />} arrow>
-
-            <UnderlyingWrapper>
-              <MetamaskIcon />
-            </UnderlyingWrapper>
-          )}
-        </div>
-      </div>
-    );
+            <AssetNameWrapper>{assetName}</AssetNameWrapper>
+            {isHovered && (
+              <UnderlyingWrapper assetName={assetName} balance={balance}>
+                <Wallet />
+              </UnderlyingWrapper>
+            )}
+          </DataContainer>
+        </>
+      )}
+      {isLoading && (
+        <>
+          <AssetIconBlank />
+          <AssetNameLoadingComponent />
+        </>
+      )}
+    </Container>
+  );
 };
 
 export default AssetName;

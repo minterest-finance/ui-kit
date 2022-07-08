@@ -32,5 +32,9 @@ export const AssetName: ComponentStory<any> = (args) => (
 );
 
 AssetName.args = {
-  variant: 'normal',
+  isHovered: false,
+  isLoading: false,
+  assetName: 'BTC',
+  wallet: 'Metamask',
+  balance: '~17.23',
 };
