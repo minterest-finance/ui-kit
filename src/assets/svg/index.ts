@@ -5,7 +5,7 @@ export { ReactComponent as DAIIcon } from './DAI.svg';
 export { ReactComponent as USDCIcon } from './USDC.svg';
 export { ReactComponent as USDTIcon } from './USDT.svg';
 
-export { ReactComponent as MetamaskSmallIcon } from './MetamaskSmallIcon.svg';
+export { ReactComponent as MetaMaskSmallIcon } from './MetaMaskSmallIcon.svg';
 export { ReactComponent as CloseIcon } from './closeIcon.svg';
 export { ReactComponent as AssetNameLoading } from './assetNameLoading.svg';
 export { ReactComponent as AssetIconBlank } from './assetIconBlank.svg';

@@ -4,7 +4,7 @@ import { Tooltip, TooltipProps, TypographyProps } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import {
   BTCIcon,
-  MetamaskSmallIcon,
+  MetaMaskSmallIcon,
   AssetIconBlank,
   AssetNameLoading,
   WETHIcon,
@@ -45,7 +45,7 @@ const Icons = {
 };
 
 const Wallets = {
-  Metamask: MetamaskSmallIcon,
+  Metamask: MetaMaskSmallIcon,
   Trezor: TrezorSmallIcon,
   Ledger: LedgerSmallIcon,
   WalletConnect: WalletConnectSmallIcon,
