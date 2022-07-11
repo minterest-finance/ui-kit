@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { Tooltip, TooltipProps, TypographyProps } from '@mui/material';
+import { Tooltip } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import {
   BTCIcon,
@@ -16,16 +16,6 @@ import {
   WalletConnectSmallIcon,
 } from 'assets/svg';
 
-import {
-  lightTooltipStyles,
-  tooltipTitleStyles,
-  underlyingWrapperStyles,
-  amountWrapperStyles,
-  containerStyles,
-  assetNameLoadingStyles,
-  assetNameWrapperStyles,
-  dataContainerStyles,
-} from './AssetNameStyles';
 import { Typography } from 'components';
 
 type Props = {
@@ -34,6 +24,7 @@ type Props = {
   assetName: 'BTC' | 'WETH' | 'DAI' | 'USDC' | 'USDT';
   wallet: 'Metamask' | 'Trezor' | 'Ledger' | 'WalletConnect';
   balance: string;
+  tooltipText: string;
 };
 
 const Icons = {
@@ -51,38 +42,49 @@ const Wallets = {
   WalletConnect: WalletConnectSmallIcon,
 };
 
-const Container = styled('div')(containerStyles);
-const DataContainer = styled('div')(dataContainerStyles);
-const AmountWrapper = styled('div')(amountWrapperStyles);
+const Container = styled('div')({
+  height: 39,
+  display: 'flex',
+  alignItems: 'center',
+});
+
+const DataContainer = styled('div', {
+  shouldForwardProp: (prop) => prop !== 'isHovered',
+})<{ isHovered?: boolean }>(({ isHovered }) => ({
+  marginLeft: 8,
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: isHovered ? 'space-between' : 'center',
+}));
+
+const Amount = styled(Typography)({
+  marginLeft: 4,
+  color: '#6D7692',
+});
+
 const AssetNameLoadingComponent = styled(({ ...props }) => (
   <AssetNameLoading {...props} />
-))(assetNameLoadingStyles);
-const AssetNameWrapper = styled('div')(assetNameWrapperStyles);
+))({ marginLeft: 8 });
 
-const UnderlyingWrapper = styled(({ ...props }: any) => (
-  <LightTooltip title={<TooltipTitle assetName={props.assetName} />} arrow>
-    <div {...props}>
-      {props.children}
-      <AmountWrapper>
-        <Typography variant={'subtitle1'} text={props.balance} />
-      </AmountWrapper>
-    </div>
-  </LightTooltip>
-))(underlyingWrapperStyles);
+const Title = styled(Typography)({
+  fontFamily: 'Open Sans',
+  fontWeight: 700,
+  fontSize: 14,
+  lineHeight: 1.5,
+});
 
-const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
-  <Tooltip {...props} classes={{ popper: className }} />
-))(lightTooltipStyles);
+const UnderlyingWrapper = styled('div')({
+  display: 'flex',
+  '&:hover': {
+    cursor: 'pointer',
+  },
+});
 
-const TooltipTitle = styled(
-  ({ ...props }: TypographyProps & { assetName: string }) => (
-    <Typography
-      variant={'subtitle2'}
-      text={`Your current ${props.assetName} balance in your wallet`}
-      {...props}
-    />
-  )
-)(tooltipTitleStyles);
+const TooltipTitle = styled(Typography)({
+  color: '#6D7692',
+  width: 128,
+  textAlign: 'center',
+});
 
 const AssetName: FC<Props> = ({
   isLoading,
@@ -90,6 +92,7 @@ const AssetName: FC<Props> = ({
   assetName,
   wallet,
   balance,
+  tooltipText,
 }: Props) => {
   const Icon = Icons[assetName];
   const Wallet = Wallets[wallet];
@@ -98,18 +101,20 @@ const AssetName: FC<Props> = ({
       {!isLoading && (
         <>
           <Icon />
-          <DataContainer
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: isHovered ? 'space-between' : 'center',
-            }}
-          >
-            <AssetNameWrapper>{assetName}</AssetNameWrapper>
+          <DataContainer isHovered={isHovered}>
+            <Title text={assetName} />
             {isHovered && (
-              <UnderlyingWrapper assetName={assetName} balance={balance}>
-                <Wallet />
-              </UnderlyingWrapper>
+              <Tooltip
+                title={
+                  <TooltipTitle variant={'subtitle2'} text={tooltipText} />
+                }
+                arrow
+              >
+                <UnderlyingWrapper>
+                  <Wallet />
+                  <Amount variant={'subtitle1'} text={balance} />
+                </UnderlyingWrapper>
+              </Tooltip>
             )}
           </DataContainer>
         </>

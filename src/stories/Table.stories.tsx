@@ -37,4 +37,5 @@ AssetName.args = {
   assetName: 'BTC',
   wallet: 'Metamask',
   balance: '~17.23',
+  tooltipText: 'Your current BTC balance in your wallet',
 };
