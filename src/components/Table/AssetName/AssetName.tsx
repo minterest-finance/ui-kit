@@ -1,45 +1,23 @@
-import React, { FC } from 'react';
+import React, { FC, SVGProps } from 'react';
 
 import { Tooltip } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import {
-  BTCIcon,
-  MetaMaskSmallIcon,
-  AssetIconBlank,
-  AssetNameLoading,
-  WETHIcon,
-  DAIIcon,
-  USDCIcon,
-  USDTIcon,
-  LedgerSmallIcon,
-  TrezorSmallIcon,
-  WalletConnectSmallIcon,
-} from 'assets/svg';
+import { AssetIconBlank, AssetNameLoading } from 'assets/svg';
 
 import { Typography } from 'components';
+
+export type SVGIcon = FC<
+  SVGProps<SVGSVGElement> & { title?: string | undefined }
+>;
 
 type Props = {
   isLoading: boolean;
   isHovered: boolean;
-  assetName: 'BTC' | 'WETH' | 'DAI' | 'USDC' | 'USDT';
-  wallet: 'Metamask' | 'Trezor' | 'Ledger' | 'WalletConnect';
+  title: string;
+  Icon: SVGIcon;
+  SubIcon?: SVGIcon;
   balance: string;
   tooltipText: string;
-};
-
-const Icons = {
-  BTC: BTCIcon,
-  WETH: WETHIcon,
-  DAI: DAIIcon,
-  USDC: USDCIcon,
-  USDT: USDTIcon,
-};
-
-const Wallets = {
-  Metamask: MetaMaskSmallIcon,
-  Trezor: TrezorSmallIcon,
-  Ledger: LedgerSmallIcon,
-  WalletConnect: WalletConnectSmallIcon,
 };
 
 const Container = styled('div')({
@@ -89,20 +67,19 @@ const TooltipTitle = styled(Typography)({
 const AssetName: FC<Props> = ({
   isLoading,
   isHovered,
-  assetName,
-  wallet,
+  title,
+  Icon,
+  SubIcon,
   balance,
   tooltipText,
 }: Props) => {
-  const Icon = Icons[assetName];
-  const Wallet = Wallets[wallet];
   return (
     <Container>
       {!isLoading && (
         <>
           <Icon />
           <DataContainer isHovered={isHovered}>
-            <Title text={assetName} />
+            <Title text={title} />
             {isHovered && (
               <Tooltip
                 title={
@@ -111,7 +88,7 @@ const AssetName: FC<Props> = ({
                 arrow
               >
                 <UnderlyingWrapper>
-                  <Wallet />
+                  {SubIcon && <SubIcon />}
                   <Amount variant={'subtitle1'} text={balance} />
                 </UnderlyingWrapper>
               </Tooltip>
