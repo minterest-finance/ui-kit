@@ -26,6 +26,10 @@ export const getTheme = (mode: PaletteMode): Theme =>
         disabled: '#6D7692',
         disabledOpacity: 0.08,
       },
+      common: {
+        black: '#061953',
+        white: '#f6f7f9',
+      },
     },
     breakpoints: {
       values: {
