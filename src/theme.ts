@@ -102,12 +102,12 @@ export const getTheme = (mode: PaletteMode): Theme =>
         lineHeight: 1.3,
       },
       // example todo remove later
-      custom:{
+      custom: {
         fontSize: 50,
         fontFamily: 'Open Sans',
         fontWeight: 700,
         lineHeight: 1.5,
-      }
+      },
     },
     components: {
       MuiCssBaseline: {
