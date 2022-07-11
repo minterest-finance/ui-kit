@@ -16,7 +16,7 @@ export type HeaderMessagePropsType = {
 const Body = styled('div')(({ theme }) => ({
   width: '100%',
   height: 'fit-content',
-  background: theme.palette.common.white,
+  background: theme.palette.custom.light,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -52,7 +52,7 @@ const Message = styled('div')(({ theme }) => ({
 }));
 
 const Title = styled(Typography)(({ theme }) => ({
-  color: theme.palette.common.black,
+  color: theme.palette.custom.dark,
 }));
 
 const TextWrapper = styled('div')(() => ({

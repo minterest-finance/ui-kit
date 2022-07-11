@@ -21,14 +21,16 @@ export const getTheme = (mode: PaletteMode): Theme =>
       secondary: {
         main: '#061953',
       },
+      // example todo remove later
+      custom: {
+        main: 'red',
+        dark: '#061953',
+        light: '#f6f7f9',
+      },
       action: {
         disabledBackground: '#F0F1F2',
         disabled: '#6D7692',
         disabledOpacity: 0.08,
-      },
-      common: {
-        black: '#061953',
-        white: '#f6f7f9',
       },
     },
     breakpoints: {
@@ -100,6 +102,13 @@ export const getTheme = (mode: PaletteMode): Theme =>
         fontFamily: 'Open Sans',
         fontWeight: 400,
         lineHeight: 1.3,
+      },
+      // example todo remove later
+      custom: {
+        fontSize: 50,
+        fontFamily: 'Open Sans',
+        fontWeight: 700,
+        lineHeight: 1.5,
       },
     },
     components: {
