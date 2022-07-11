@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { BTCIcon, MetaMaskSmallIcon } from 'assets/svg';
 
 import { AssetName as AssetComponent } from 'components';
 
@@ -28,13 +29,13 @@ export default {
 } as ComponentMeta<any>;
 
 export const AssetName: ComponentStory<any> = (args) => (
-  <AssetComponent {...args} />
+  <AssetComponent Icon={BTCIcon} SubIcon={MetaMaskSmallIcon} {...args} />
 );
 
 AssetName.args = {
   isHovered: false,
   isLoading: false,
-  assetName: 'BTC',
-  wallet: 'Metamask',
+  title: 'BTC',
   balance: '~17.23',
+  tooltipText: 'Your current BTC balance in your wallet',
 };

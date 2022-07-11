@@ -1,115 +1,97 @@
-import React, { FC } from 'react';
+import React, { FC, SVGProps } from 'react';
 
-import { Tooltip, TooltipProps, TypographyProps } from '@mui/material';
+import { Tooltip } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import {
-  BTCIcon,
-  MetaMaskSmallIcon,
-  AssetIconBlank,
-  AssetNameLoading,
-  WETHIcon,
-  DAIIcon,
-  USDCIcon,
-  USDTIcon,
-  LedgerSmallIcon,
-  TrezorSmallIcon,
-  WalletConnectSmallIcon,
-} from 'assets/svg';
+import { AssetIconBlank, AssetNameLoading } from 'assets/svg';
 
-import {
-  lightTooltipStyles,
-  tooltipTitleStyles,
-  underlyingWrapperStyles,
-  amountWrapperStyles,
-  containerStyles,
-  assetNameLoadingStyles,
-  assetNameWrapperStyles,
-  dataContainerStyles,
-} from './AssetNameStyles';
 import { Typography } from 'components';
+
+export type SVGIcon = FC<
+  SVGProps<SVGSVGElement> & { title?: string | undefined }
+>;
 
 type Props = {
   isLoading: boolean;
   isHovered: boolean;
-  assetName: 'BTC' | 'WETH' | 'DAI' | 'USDC' | 'USDT';
-  wallet: 'Metamask' | 'Trezor' | 'Ledger' | 'WalletConnect';
+  title: string;
+  Icon: SVGIcon;
+  SubIcon?: SVGIcon;
   balance: string;
+  tooltipText: string;
 };
 
-const Icons = {
-  BTC: BTCIcon,
-  WETH: WETHIcon,
-  DAI: DAIIcon,
-  USDC: USDCIcon,
-  USDT: USDTIcon,
-};
+const Container = styled('div')({
+  height: 39,
+  display: 'flex',
+  alignItems: 'center',
+});
 
-const Wallets = {
-  Metamask: MetaMaskSmallIcon,
-  Trezor: TrezorSmallIcon,
-  Ledger: LedgerSmallIcon,
-  WalletConnect: WalletConnectSmallIcon,
-};
+const DataContainer = styled('div', {
+  shouldForwardProp: (prop) => prop !== 'isHovered',
+})<{ isHovered?: boolean }>(({ isHovered }) => ({
+  marginLeft: 8,
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: isHovered ? 'space-between' : 'center',
+}));
 
-const Container = styled('div')(containerStyles);
-const DataContainer = styled('div')(dataContainerStyles);
-const AmountWrapper = styled('div')(amountWrapperStyles);
+const Amount = styled(Typography)({
+  marginLeft: 4,
+  color: '#6D7692',
+});
+
 const AssetNameLoadingComponent = styled(({ ...props }) => (
   <AssetNameLoading {...props} />
-))(assetNameLoadingStyles);
-const AssetNameWrapper = styled('div')(assetNameWrapperStyles);
+))({ marginLeft: 8 });
 
-const UnderlyingWrapper = styled(({ ...props }: any) => (
-  <LightTooltip title={<TooltipTitle assetName={props.assetName} />} arrow>
-    <div {...props}>
-      {props.children}
-      <AmountWrapper>
-        <Typography variant={'subtitle1'} text={props.balance} />
-      </AmountWrapper>
-    </div>
-  </LightTooltip>
-))(underlyingWrapperStyles);
+const Title = styled(Typography)({
+  fontFamily: 'Open Sans',
+  fontWeight: 700,
+  fontSize: 14,
+  lineHeight: 1.5,
+});
 
-export const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
-  <Tooltip {...props} classes={{ popper: className }} />
-))(lightTooltipStyles);
+const UnderlyingWrapper = styled('div')({
+  display: 'flex',
+  '&:hover': {
+    cursor: 'pointer',
+  },
+});
 
-const TooltipTitle = styled(
-  ({ ...props }: TypographyProps & { assetName: string }) => (
-    <Typography
-      variant={'subtitle2'}
-      text={`Your current ${props.assetName} balance in your wallet`}
-      {...props}
-    />
-  )
-)(tooltipTitleStyles);
+const TooltipTitle = styled(Typography)({
+  color: '#6D7692',
+  width: 128,
+  textAlign: 'center',
+});
 
 const AssetName: FC<Props> = ({
   isLoading,
   isHovered,
-  assetName,
-  wallet,
+  title,
+  Icon,
+  SubIcon,
   balance,
+  tooltipText,
 }: Props) => {
-  const Icon = Icons[assetName];
-  const Wallet = Wallets[wallet];
   return (
     <Container>
       {!isLoading && (
         <>
           <Icon />
-          <DataContainer
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: isHovered ? 'space-between' : 'center',
-            }}
-          >
-            <AssetNameWrapper>{assetName}</AssetNameWrapper>
+          <DataContainer isHovered={isHovered}>
+            <Title text={title} />
             {isHovered && (
-              <UnderlyingWrapper assetName={assetName} balance={balance}>
-                <Wallet />
-              </UnderlyingWrapper>
+              <Tooltip
+                title={
+                  <TooltipTitle variant={'subtitle2'} text={tooltipText} />
+                }
+                arrow
+              >
+                <UnderlyingWrapper>
+                  {SubIcon && <SubIcon />}
+                  <Amount variant={'subtitle1'} text={balance} />
+                </UnderlyingWrapper>
+              </Tooltip>
             )}
           </DataContainer>
         </>
