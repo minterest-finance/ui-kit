@@ -12,3 +12,4 @@ export { ReactComponent as AssetIconBlank } from './assetIconBlank.svg';
 export { ReactComponent as LedgerSmallIcon } from './LedgerSmallIcon.svg';
 export { ReactComponent as TrezorSmallIcon } from './TrezorSmallIcon.svg';
 export { ReactComponent as WalletConnectSmallIcon } from './WalletConnectSmallIcon.svg';
+export { ReactComponent as MinterestSmallicon } from './MinterestSmallicon.svg';

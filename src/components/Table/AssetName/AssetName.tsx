@@ -70,7 +70,7 @@ const UnderlyingWrapper = styled(({ ...props }: any) => (
   </LightTooltip>
 ))(underlyingWrapperStyles);
 
-const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
+export const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} classes={{ popper: className }} />
 ))(lightTooltipStyles);
 
