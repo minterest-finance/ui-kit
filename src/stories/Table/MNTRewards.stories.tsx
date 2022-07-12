@@ -31,10 +31,7 @@ export const MNTReward: ComponentStory<any> = (args) => (
   <MNTRewardComponent {...args} />
 );
 
-// AssetName.args = {
-//   isHovered: false,
-//   isLoading: false,
-//   assetName: 'BTC',
-//   wallet: 'Metamask',
-//   balance: '~17.23',
-// };
+MNTReward.args = {
+  value: '0.45',
+  tooltipText: 'Example Text',
+};
