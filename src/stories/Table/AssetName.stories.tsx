@@ -1,7 +1,17 @@
 import React from 'react';
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { BTCIcon, DAIIcon, USDCIcon, USDTIcon, WETHIcon, MetaMaskSmallIcon, LedgerSmallIcon, TrezorSmallIcon, WalletConnectSmallIcon } from 'assets/svg';
+import {
+  BTCIcon,
+  DAIIcon,
+  USDCIcon,
+  USDTIcon,
+  WETHIcon,
+  MetaMaskSmallIcon,
+  LedgerSmallIcon,
+  TrezorSmallIcon,
+  WalletConnectSmallIcon,
+} from 'assets/svg';
 
 import { AssetName as AssetComponent } from 'components';
 
@@ -15,8 +25,14 @@ export default {
   },
   argTypes: {
     mode: { control: 'select', options: ['light', 'dark'] },
-    icon: { control: 'select', options: ['BTCIcon', 'DAIIcon', 'USDCIcon', 'USDTIcon', 'WETHIcon'] },
-    subicon: { control: 'select', options: ['MetaMask', 'Ledger', 'Trezor', 'WalletConnect']},
+    icon: {
+      control: 'select',
+      options: ['BTCIcon', 'DAIIcon', 'USDCIcon', 'USDTIcon', 'WETHIcon'],
+    },
+    subicon: {
+      control: 'select',
+      options: ['MetaMask', 'Ledger', 'Trezor', 'WalletConnect'],
+    },
     Icon: {
       table: {
         disable: true,
@@ -26,7 +42,7 @@ export default {
       table: {
         disable: true,
       },
-    }, 
+    },
   },
   decorators: [
     (Story, Context) => {
@@ -41,7 +57,11 @@ export default {
 } as ComponentMeta<any>;
 
 export const AssetName: ComponentStory<any> = (args) => (
-  <AssetComponent Icon={assetIcons[args.icon]} SubIcon={walletIcons[args.subicon]} {...args} />
+  <AssetComponent
+    Icon={assetIcons[args.icon]}
+    SubIcon={walletIcons[args.subicon]}
+    {...args}
+  />
 );
 
 AssetName.args = {
@@ -55,16 +75,16 @@ AssetName.args = {
 };
 
 const assetIcons = {
-  'BTCIcon': BTCIcon,
-  'DAIIcon': DAIIcon,
-  'USDCIcon': USDCIcon,
-  'USDTIcon': USDTIcon,
-  'WETHIcon': WETHIcon,
+  BTCIcon,
+  DAIIcon,
+  USDCIcon,
+  USDTIcon,
+  WETHIcon,
 };
 
 const walletIcons = {
-  'MetaMask': MetaMaskSmallIcon,
-  'Ledger': LedgerSmallIcon,
-  'Trezor': TrezorSmallIcon,
-  'WalletConnect': WalletConnectSmallIcon, 
-}
+  MetaMask: MetaMaskSmallIcon,
+  Ledger: LedgerSmallIcon,
+  Trezor: TrezorSmallIcon,
+  WalletConnect: WalletConnectSmallIcon,
+};

@@ -66,7 +66,7 @@ const TooltipTitle = styled(Typography)({
 const Loader: React.FC = () => (
   <ContentLoader height={32} width={104}>
     <circle cx={16} cy={16} r={16} />
-    <rect x={40} y={5} rx={4} ry={4} width={64} height={21}/>
+    <rect x={40} y={5} rx={4} ry={4} width={64} height={21} />
   </ContentLoader>
 );
 
