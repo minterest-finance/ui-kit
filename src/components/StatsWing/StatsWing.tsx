@@ -11,7 +11,11 @@ export type StatsWingProps = {
   rightTextTitle: string;
   rightTextValue: string;
   rightTextCurrencty: string;
+  leftTextNotConnected: string;
+  rightTextNotConnected: string;
   loading: boolean;
+  netApy: string;
+  connectClick: () => void;
   connected?: boolean;
 };
 
@@ -20,7 +24,15 @@ type TextBlockType = {
   value: string;
   currency: string;
   loading: boolean;
+  extraTitle?: string;
   connected?: boolean;
+};
+
+type MiddleCircleType = {
+  connected: boolean;
+  netApy: string;
+  connectClick: () => void;
+  loading: boolean;
 };
 
 const Body = styled('div')<{ connected?: boolean }>(({ theme, connected }) => ({
@@ -45,6 +57,9 @@ const CircleWrapper = styled('div')(() => ({
   borderRadius: '80px',
   position: 'relative',
   zIndex: 1,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
 
   '&:before': {
     position: 'absolute',
@@ -90,6 +105,13 @@ const Title = styled(Typography)(({ theme }) => ({
   color: theme.palette.action.disabled,
 }));
 
+const ConnectWalletText = styled(Typography)(({ theme }) => ({
+  color: theme.palette.secondary.main,
+  maxWidth: 64,
+  textAlign: 'center',
+  cursor: 'pointer',
+}));
+
 const Value = styled(Typography)<{ connected?: boolean }>(
   ({ theme, connected }) => ({
     color: connected
@@ -107,6 +129,12 @@ const Currency = styled(Typography)<{ connected?: boolean }>(
   })
 );
 
+const PercentSymbol = styled(Currency)(({ theme }) => ({
+  color: theme.palette.action.disabled,
+}));
+
+const MiddleTextBlock = styled('div')();
+
 export const Shimmer = styled('div')<{
   width: number;
   height: number;
@@ -121,10 +149,13 @@ export const Shimmer = styled('div')<{
   marginTop: '4px',
 }));
 
-export const TextBlock = (props: TextBlockType) => {
+export const TextBlock = (props: TextBlockType): JSX.Element => {
   return (
     <TextBlockWrapper>
-      <Title text={props.title} variant='subtitle1' />
+      <Title
+        text={props.connected ? props.title : props.extraTitle}
+        variant='subtitle1'
+      />
 
       {props.loading ? (
         <Shimmer width={257} height={47} dark={!props.connected} />
@@ -142,10 +173,36 @@ export const TextBlock = (props: TextBlockType) => {
   );
 };
 
-export const MiddleCircle = () => {
+export const MiddleCircle = (props: MiddleCircleType): JSX.Element => {
   return (
     <CircleWrapper>
-      <p>4.68%</p>
+      {props.connected ? (
+        <MiddleTextBlock>
+          <Title text={'Net APY'} variant='subtitle1' />
+          {props.loading ? (
+            <Shimmer width={102} height={47} dark={!props.connected} />
+          ) : (
+            <ValueWrapper>
+              <Value
+                text={props.netApy}
+                variant='h2'
+                connected={props.connected}
+              />
+              <PercentSymbol
+                text={'%'}
+                variant='h2'
+                connected={props.connected}
+              />
+            </ValueWrapper>
+          )}
+        </MiddleTextBlock>
+      ) : (
+        <ConnectWalletText
+          onClick={props.connectClick}
+          text='Connect wallet'
+          variant='h4'
+        />
+      )}
     </CircleWrapper>
   );
 };
@@ -161,14 +218,21 @@ export const StatsWing = (
         value={props.leftTextValue}
         loading={props.loading}
         connected={props.connected}
+        extraTitle={props.leftTextNotConnected}
       />
-      <MiddleCircle />
+      <MiddleCircle
+        connected={props.connected}
+        netApy={props.netApy}
+        connectClick={props.connectClick}
+        loading={props.loading}
+      />
       <TextBlock
         currency={props.rightTextCurrencty}
         title={props.rightTextTitle}
         value={props.rightTextValue}
         loading={props.loading}
         connected={props.connected}
+        extraTitle={props.rightTextNotConnected}
       />
     </Body>
   );
