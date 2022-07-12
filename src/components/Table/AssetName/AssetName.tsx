@@ -2,7 +2,7 @@ import React, { FC, SVGProps } from 'react';
 
 import { Tooltip } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { AssetIconBlank, AssetNameLoading } from 'assets/svg';
+import ContentLoader from 'react-content-loader';
 
 import { Typography } from 'components';
 
@@ -40,10 +40,6 @@ const Amount = styled(Typography)({
   color: '#6D7692',
 });
 
-const AssetNameLoadingComponent = styled(({ ...props }) => (
-  <AssetNameLoading {...props} />
-))({ marginLeft: 8 });
-
 const Title = styled(Typography)({
   fontFamily: 'Open Sans',
   fontWeight: 700,
@@ -55,6 +51,9 @@ const UnderlyingWrapper = styled('div')({
   display: 'flex',
   '&:hover': {
     cursor: 'pointer',
+    '& .MuiTypography-root': {
+      color: '#061953',
+    },
   },
 });
 
@@ -63,6 +62,13 @@ const TooltipTitle = styled(Typography)({
   width: 128,
   textAlign: 'center',
 });
+
+const Loader: React.FC = () => (
+  <ContentLoader height={32} width={104}>
+    <circle cx={16} cy={16} r={16} />
+    <rect x={40} y={5} rx={4} ry={4} width={64} height={21}/>
+  </ContentLoader>
+);
 
 const AssetName: FC<Props> = ({
   isLoading,
@@ -96,12 +102,7 @@ const AssetName: FC<Props> = ({
           </DataContainer>
         </>
       )}
-      {isLoading && (
-        <>
-          <AssetIconBlank />
-          <AssetNameLoadingComponent />
-        </>
-      )}
+      {isLoading && <Loader />}
     </Container>
   );
 };
