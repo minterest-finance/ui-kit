@@ -204,6 +204,10 @@ export const getTheme = (mode: PaletteMode): Theme =>
             borderRadius: '4px',
             padding: '4px 16px',
             minWidth: '88px',
+            height: '32px',
+
+            // button
+            fontSize: 16,
           },
           sizeLarge: {
             borderRadius: '8px',
