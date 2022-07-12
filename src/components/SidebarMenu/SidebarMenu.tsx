@@ -1,5 +1,6 @@
 import React, { FC, useState, SVGProps } from 'react';
 
+import { SwipeableDrawer } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
@@ -8,7 +9,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import { styled } from '@mui/material/styles';
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 
 export type SVGIcon = FC<SVGProps<SVGSVGElement>>;
 export type Anchor = 'top' | 'left' | 'bottom' | 'right';
@@ -75,9 +75,10 @@ export const SidebarMenuComponent: FC<Props> = ({
       </List>
     </Box>
   );
-  return (
+    return (
     <Body>
       <Button onClick={toggleDrawer('right', true)}>right</Button>
+      {/*@ts-ignore*/}
       <SwipeableDrawer
         anchor={'right'}
         open={state['right']}
@@ -86,7 +87,7 @@ export const SidebarMenuComponent: FC<Props> = ({
       >
         {title}
         <div aria-hidden='true' onClick={onClose}>
-          <IconCross />
+          {/*<IconCross />*/}
         </div>
         <Divider />
         {list('right')}
