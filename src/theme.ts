@@ -31,6 +31,9 @@ export const getTheme = (mode: PaletteMode): Theme =>
       secondary: {
         main: '#061953',
       },
+      info:{
+        main: '#fafafa'
+      },
       // example todo remove later
       custom: {
         main: 'red',
