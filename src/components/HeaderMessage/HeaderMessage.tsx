@@ -59,13 +59,8 @@ const TextWrapper = styled('div')(() => ({
   maxWidth: '729px',
 }));
 
-const Description = styled('div')(({ theme }) => ({
+const Description = styled(Typography)(({ theme }) => ({
   marginTop: '8px',
-  fontFamily: 'Open Sans',
-  fontStyle: 'normal',
-  fontWeight: 400,
-  fontSize: '16px',
-  lineHeight: '150%',
   color: theme.palette.action.disabled,
 }));
 
@@ -81,8 +76,7 @@ export const HeaderMessageComponent = ({
       <Message>
         <TextWrapper>
           <Title text={title} variant='h3' />
-          <Description>
-            {firstLine}
+          <Description text={firstLine} variant={'body2'}>
             {secondLine && secondLine}
           </Description>
         </TextWrapper>
