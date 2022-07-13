@@ -9,6 +9,16 @@ import UbuntuBold from './assets/fonts/Ubuntu-Bold.ttf';
 export { ThemeProvider, useTheme } from '@mui/material/styles';
 export { default as CssBaseline } from '@mui/material/CssBaseline';
 
+export const breakpoints = {
+  values: {
+    xs: 0,
+    sm: 360,
+    md: 767,
+    lg: 1249,
+    xl: 1440,
+  },
+};
+
 export const getTheme = (mode: PaletteMode): Theme =>
   createTheme({
     palette: {
@@ -22,21 +32,20 @@ export const getTheme = (mode: PaletteMode): Theme =>
       secondary: {
         main: '#061953',
       },
+      info:{
+        main: '#fafafa'
+      },
+      // example todo remove later
+      custom: {
+        main: 'red',
+      },
       action: {
         disabledBackground: '#F0F1F2',
         disabled: '#6D7692',
         disabledOpacity: 0.08,
       },
     },
-    breakpoints: {
-      values: {
-        xs: 0,
-        sm: 360,
-        md: 767,
-        lg: 1249,
-        xl: 1440,
-      },
-    },
+    breakpoints,
     typography: {
       allVariants: {
         color: mode === 'light' ? '#061953' : '#ffffff',
@@ -47,12 +56,25 @@ export const getTheme = (mode: PaletteMode): Theme =>
         fontFamily: 'Ubuntu',
         fontWeight: 'bold',
         lineHeight: 1.3,
+        [`@media (max-width:${breakpoints.values.lg}px)`]: {
+          fontSize: 36,
+        },
+        [`@media (max-width:${breakpoints.values.md}px)`]: {
+          fontSize: 28,
+          lineHeight: 1.2,
+        },
       },
       h2: {
         fontSize: 36,
         fontFamily: 'Ubuntu',
         fontWeight: 'bold',
         lineHeight: 1.3,
+        [`@media (max-width:${breakpoints.values.lg}px)`]: {
+          fontSize: 28,
+        },
+        [`@media (max-width:${breakpoints.values.md}px)`]: {
+          fontSize: 20,
+        },
       },
       h3: {
         fontSize: 20,
@@ -60,6 +82,13 @@ export const getTheme = (mode: PaletteMode): Theme =>
         fontWeight: 'bold',
         lineHeight: 1.3,
         textTransform: 'none',
+        [`@media (max-width:${breakpoints.values.lg}px)`]: {
+          fontSize: 20,
+        },
+        [`@media (max-width:${breakpoints.values.md}px)`]: {
+          fontSize: 16,
+          lineHeight: 1.5,
+        },
       },
       h4: {
         fontSize: 16,
@@ -79,12 +108,26 @@ export const getTheme = (mode: PaletteMode): Theme =>
         fontFamily: 'Open Sans',
         fontWeight: 400,
         lineHeight: 1.5,
+        [`@media (max-width:${breakpoints.values.lg}px)`]: {
+          fontSize: 18,
+        },
+        [`@media (max-width:${breakpoints.values.md}px)`]: {
+          fontSize: 16,
+          lineHeight: 1.5,
+        },
       },
       body2: {
         fontSize: 16,
         fontFamily: 'Open Sans',
         fontWeight: 400,
         lineHeight: 1.5,
+        [`@media (max-width:${breakpoints.values.lg}px)`]: {
+          fontSize: 16,
+        },
+        [`@media (max-width:${breakpoints.values.md}px)`]: {
+          fontSize: 14,
+          lineHeight: 1.5,
+        },
       },
       subtitle1: {
         fontSize: 12,
@@ -97,6 +140,42 @@ export const getTheme = (mode: PaletteMode): Theme =>
         fontFamily: 'Open Sans',
         fontWeight: 400,
         lineHeight: 1.3,
+        [`@media (max-width:${breakpoints.values.lg}px)`]: {
+          fontSize: 12,
+        },
+        [`@media (max-width:${breakpoints.values.md}px)`]: {
+          fontSize: 10,
+          lineHeight: 1.5,
+        },
+      },
+      table1: {
+        fontSize: 14,
+        fontFamily: 'Open Sans',
+        fontWeight: 600,
+        lineHeight: 1.5,
+      },
+      table2: {
+        fontSize: 14,
+        fontFamily: 'Open Sans',
+        fontWeight: 400,
+        lineHeight: 1.5,
+      },
+      overline: {
+        fontSize: 12,
+        fontFamily: 'Open Sans',
+        fontWeight: 600,
+        lineHeight: 1.3,
+        [`@media (max-width:${breakpoints.values.md}px)`]: {
+          fontSize: 10,
+          lineHeight: 1.3,
+        },
+      },
+      // example todo remove later
+      custom: {
+        fontSize: 50,
+        fontFamily: 'Open Sans',
+        fontWeight: 700,
+        lineHeight: 1.5,
       },
     },
     components: {
@@ -147,6 +226,10 @@ export const getTheme = (mode: PaletteMode): Theme =>
             borderRadius: '4px',
             padding: '4px 16px',
             minWidth: '88px',
+            height: '32px',
+
+            // button
+            fontSize: 16,
           },
           sizeLarge: {
             borderRadius: '8px',

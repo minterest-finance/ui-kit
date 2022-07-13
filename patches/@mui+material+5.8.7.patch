@@ -1,0 +1,34 @@
+diff --git a/node_modules/@mui/material/styles/createPalette.d.ts b/node_modules/@mui/material/styles/createPalette.d.ts
+index 5e28388..b80e6f1 100644
+--- a/node_modules/@mui/material/styles/createPalette.d.ts
++++ b/node_modules/@mui/material/styles/createPalette.d.ts
+@@ -89,6 +89,7 @@ export interface Palette {
+   warning: PaletteColor;
+   info: PaletteColor;
+   success: PaletteColor;
++  custom: PaletteColor;
+   grey: Color;
+   text: TypeText;
+   divider: TypeDivider;
+@@ -114,6 +115,7 @@ export interface PaletteOptions {
+   warning?: PaletteColorOptions;
+   info?: PaletteColorOptions;
+   success?: PaletteColorOptions;
++  custom?: PaletteColorOptions;
+   mode?: PaletteMode;
+   tonalOffset?: PaletteTonalOffset;
+   contrastThreshold?: number;
+diff --git a/node_modules/@mui/material/styles/createTypography.d.ts b/node_modules/@mui/material/styles/createTypography.d.ts
+index d45b25a..12ecd88 100644
+--- a/node_modules/@mui/material/styles/createTypography.d.ts
++++ b/node_modules/@mui/material/styles/createTypography.d.ts
+@@ -15,6 +15,10 @@ export type Variant =
+   | 'body2'
+   | 'caption'
+   | 'button'
++  | 'custom'
++  | 'table1'
++  | 'table2'
+   | 'overline';
+
+ export interface FontStyle
