@@ -34,5 +34,5 @@ export const Menu: ComponentStory<typeof SidebarMenuComponent> = (args) => (
 Menu.args = {
   title: 'Menu',
   links: ['Markets', 'Dashboard', 'Send email', 'Drafts'],
-  onClose: () => console.log('click'),
+  bottomButton: 'connectWallet',
 };
