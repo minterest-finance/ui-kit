@@ -92,6 +92,7 @@ const TextBlockWrapper = styled('div')(() => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
+  width: 306,
 }));
 
 const ValueWrapper = styled('div')(() => ({
