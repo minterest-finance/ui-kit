@@ -16,6 +16,8 @@ export const BigButton: FC<ButtonProps> = (props) => (
 
 export const IconButton = styled(MaterialButton)(({ theme }) => ({
   color: theme.palette.secondary.main,
+  minWidth: 118,
+  height: 48,
   '& .MuiButton-endIcon': {
     '& svg': {
       fill: theme.palette.secondary.main,
