@@ -78,12 +78,8 @@ export const SidebarMenuComponent: FC<Props> = ({
       <List>
         {links.map((link, index) => (
           <ListItem key={index} disablePadding>
-            <ListItemButton>
-              <Typography
-                text={link}
-                variant='button'
-                className={'listItemButtonCustom'}
-              />
+            <ListItemButton className={'listItemButtonCustom'}>
+              <Typography text={link} variant='button' />
             </ListItemButton>
           </ListItem>
         ))}
