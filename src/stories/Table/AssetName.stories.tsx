@@ -3,14 +3,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import {
   BTCIcon,
-  DAIIcon,
-  USDCIcon,
-  USDTIcon,
-  WETHIcon,
   MetaMaskSmallIcon,
-  LedgerSmallIcon,
-  TrezorSmallIcon,
-  WalletConnectSmallIcon,
 } from 'assets/svg';
 
 import { AssetName as AssetComponent } from 'components';
@@ -25,14 +18,6 @@ export default {
   },
   argTypes: {
     mode: { control: 'select', options: ['light', 'dark'] },
-    icon: {
-      control: 'select',
-      options: ['BTCIcon', 'DAIIcon', 'USDCIcon', 'USDTIcon', 'WETHIcon'],
-    },
-    subicon: {
-      control: 'select',
-      options: ['MetaMask', 'Ledger', 'Trezor', 'WalletConnect'],
-    },
     Icon: {
       table: {
         disable: true,
@@ -58,8 +43,8 @@ export default {
 
 export const AssetName: ComponentStory<any> = (args) => (
   <AssetComponent
-    Icon={assetIcons[args.icon]}
-    SubIcon={walletIcons[args.subicon]}
+    Icon={BTCIcon}
+    SubIcon={MetaMaskSmallIcon}
     {...args}
   />
 );
@@ -70,21 +55,4 @@ AssetName.args = {
   title: 'BTC',
   balance: '~17.23',
   tooltipText: 'Your current BTC balance in your wallet',
-  icon: 'BTCIcon',
-  subicon: 'MetaMask',
-};
-
-const assetIcons = {
-  BTCIcon,
-  DAIIcon,
-  USDCIcon,
-  USDTIcon,
-  WETHIcon,
-};
-
-const walletIcons = {
-  MetaMask: MetaMaskSmallIcon,
-  Ledger: LedgerSmallIcon,
-  Trezor: TrezorSmallIcon,
-  WalletConnect: WalletConnectSmallIcon,
 };
