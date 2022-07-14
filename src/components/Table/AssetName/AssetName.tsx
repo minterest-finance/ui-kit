@@ -35,33 +35,26 @@ const DataContainer = styled('div', {
   justifyContent: isHovered ? 'space-between' : 'center',
 }));
 
-const Amount = styled(Typography)({
+const Amount = styled(Typography)(({ theme }) => ({
   marginLeft: 4,
-  color: '#6D7692',
-});
+  color: theme.palette.action.disabled,
+}));
 
-const Title = styled(Typography)({
-  fontFamily: 'Open Sans',
-  fontWeight: 700,
-  fontSize: 14,
-  lineHeight: 1.5,
-});
-
-const UnderlyingWrapper = styled('div')({
+const UnderlyingWrapper = styled('div')(({ theme }) => ({
   display: 'flex',
   '&:hover': {
     cursor: 'pointer',
     '& .MuiTypography-root': {
-      color: '#061953',
+      color: theme.palette.secondary.main,
     },
   },
-});
+}));
 
-const TooltipTitle = styled(Typography)({
-  color: '#6D7692',
+const TooltipTitle = styled(Typography)(({ theme }) => ({
+  color: theme.palette.action.disabled,
   width: 128,
   textAlign: 'center',
-});
+}));
 
 const Loader: React.FC = () => (
   <ContentLoader height={32} width={104}>
@@ -85,7 +78,7 @@ const AssetName: FC<Props> = ({
         <>
           <Icon />
           <DataContainer isHovered={isHovered}>
-            <Title text={title} />
+            <Typography variant={'table1'} text={title} />
             {isHovered && (
               <Tooltip
                 title={
