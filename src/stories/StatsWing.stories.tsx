@@ -27,11 +27,13 @@ export default {
   ],
 } as ComponentMeta<typeof StatsWing>;
 
-export const Header: ComponentStory<typeof StatsWing> = (args) => (
-  <StatsWing {...args} />
+export const Stats: ComponentStory<typeof StatsWing> = (args) => (
+  <div style={{ margin: '30px 0' }}>
+    <StatsWing {...args} />
+  </div>
 );
 
-Header.args = {
+Stats.args = {
   leftTextTitle: 'Your Total Supply',
   leftTextValue: '58,763,005.74',
   leftTextCurrencty: '$',

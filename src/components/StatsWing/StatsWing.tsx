@@ -1,6 +1,8 @@
 import React, { ReactComponentElement } from 'react';
 
 import { styled } from '@mui/material/styles';
+import ContentLoader from 'react-content-loader';
+import { getTheme } from 'theme';
 
 import Typography from 'components/Typography/Typography';
 
@@ -49,43 +51,47 @@ const Body = styled('div')<{ connected?: boolean }>(({ theme, connected }) => ({
   borderRadius: '12px',
 }));
 
-const CircleWrapper = styled('div')(() => ({
-  width: 160,
-  height: 160,
-  background: '#FCFCFC',
-  boxShadow: '0px 4px 37px rgba(0, 0, 0, 0.08)',
-  borderRadius: '80px',
-  position: 'relative',
-  zIndex: 1,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-
-  '&:before': {
-    position: 'absolute',
-    top: -4,
-    right: -4,
-    bottom: -4,
-    left: -4,
-    zIndex: -1,
-    background: 'linear-gradient(to bottom, #0C2D9C, #6F9BE1)',
-    content: `''`,
-    borderRadius: 'inherit',
-    borderWidth: 4,
-  },
-
-  '&:after': {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-    zIndex: -1,
+const CircleWrapper = styled('div')<{ connected?: boolean }>(
+  ({ connected }) => ({
+    width: 160,
+    height: 160,
     background: '#FCFCFC',
-    content: `''`,
-    borderRadius: 'inherit',
-  },
-}));
+    boxShadow: '0px 4px 37px rgba(0, 0, 0, 0.08)',
+    borderRadius: '50%',
+    position: 'relative',
+    zIndex: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    '&:before': {
+      position: 'absolute',
+      top: -4,
+      right: -4,
+      bottom: -4,
+      left: -4,
+      zIndex: -1,
+      background: connected
+        ? 'linear-gradient(to bottom, #0C2D9C, #6F9BE1)'
+        : 'linear-gradient(to bottom, #6D7692, #06195333)',
+      content: `''`,
+      borderRadius: 'inherit',
+      borderWidth: 4,
+    },
+
+    '&:after': {
+      position: 'absolute',
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+      zIndex: -1,
+      background: '#FCFCFC',
+      content: `''`,
+      borderRadius: 'inherit',
+    },
+  })
+);
 
 const TextBlockWrapper = styled('div')(() => ({
   textAlign: 'center',
@@ -136,21 +142,8 @@ const PercentSymbol = styled(Currency)(({ theme }) => ({
 
 const MiddleTextBlock = styled('div')();
 
-export const Shimmer = styled('div')<{
-  width: number;
-  height: number;
-  dark?: boolean;
-}>((props) => ({
-  width: props.width,
-  height: props.height,
-  background: props.dark
-    ? props.theme.palette.action.active
-    : props.theme.palette.action.disabledBackground,
-  borderRadius: '4px',
-  marginTop: '4px',
-}));
-
 export const TextBlock = (props: TextBlockType): JSX.Element => {
+  const theme = getTheme('light');
   return (
     <TextBlockWrapper>
       <Title
@@ -159,7 +152,17 @@ export const TextBlock = (props: TextBlockType): JSX.Element => {
       />
 
       {props.loading ? (
-        <Shimmer width={257} height={47} dark={!props.connected} />
+        <ContentLoader
+          height={47}
+          width={257}
+          backgroundColor={
+            !props.connected
+              ? theme.palette.action.active
+              : theme.palette.action.disabledBackground
+          }
+        >
+          <rect x={0} y={4} rx={4} ry={4} width={257} height={47} />
+        </ContentLoader>
       ) : (
         <ValueWrapper>
           <Currency
@@ -176,12 +179,14 @@ export const TextBlock = (props: TextBlockType): JSX.Element => {
 
 export const MiddleCircle = (props: MiddleCircleType): JSX.Element => {
   return (
-    <CircleWrapper>
+    <CircleWrapper connected={props.connected}>
       {props.connected ? (
         <MiddleTextBlock>
           <Title text={'Net APY'} variant='subtitle1' />
           {props.loading ? (
-            <Shimmer width={102} height={47} dark={!props.connected} />
+            <ContentLoader height={47} width={102} color='#000'>
+              <rect x={0} y={4} rx={4} ry={4} width={102} height={47} />
+            </ContentLoader>
           ) : (
             <ValueWrapper>
               <Value
