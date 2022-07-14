@@ -16,9 +16,9 @@ const Wrapper = styled('div')({
   width: 67,
 });
 
-const AmountWrapper = styled('div')(() => ({
+const AmountWrapper = styled('div')(({ theme }) => ({
   display: 'flex',
-  color: '#6D7692',
+  color: theme.palette.action.disabled,
 }));
 
 const LogoWrapper = styled('div')({
@@ -26,41 +26,41 @@ const LogoWrapper = styled('div')({
   height: 12,
 });
 
-const CustomButton = styled(ButtonUnstyled)({
+const CustomButton = styled(ButtonUnstyled)(({ theme }) => ({
   width: '100%',
   height: 20,
   borderRadius: 4,
   border: '1px solid rgba(12, 45, 156, 0.08)',
-  backgroundColor: '#FCFCFC',
+  backgroundColor: theme.palette.grey99.main,
   display: 'flex',
   alignItems: 'center',
   paddingLeft: 3,
   paddingRight: 0,
   '&:hover': {
-    backgroundColor: '#F0F1F2',
+    backgroundColor: theme.palette.action.disabledBackground,
     cursor: 'pointer',
     '& .rewardValue': {
-      color: '#061953',
+      color: theme.palette.secondary.main,
     },
   },
-});
+}));
 
-const TooltipTitle = styled(Typography)({
-  color: '#6D7692',
+const TooltipTitle = styled(Typography)(({ theme }) => ({
+  color: theme.palette.action.disabled,
   textAlign: 'center',
-});
+}));
 
 const NumberPart = styled(Typography, {
   shouldForwardProp: (prop) => prop !== 'open',
-})<{ open: boolean }>(({ open }) => ({
+})<{ open: boolean }>(({ open, theme }) => ({
   marginLeft: 4,
-  color: open ? '#061953' : '#6D7692',
+  color: open ? theme.palette.secondary.main : theme.palette.action.disabled,
 }));
 
-const PercentSign = styled(Typography)({
+const PercentSign = styled(Typography)(({ theme }) => ({
   marginLeft: 2,
-  color: '#6D7692',
-});
+  color: theme.palette.action.disabled,
+}));
 
 const MNTReward: FC<Props> = ({ value, tooltipText }) => {
   const [open, setOpen] = React.useState(false);
