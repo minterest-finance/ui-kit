@@ -14,7 +14,7 @@ export const BigButton: FC<ButtonProps> = (props) => (
   <Button variant={'contained'} size={'large'} {...props} />
 );
 
-export const IconButton = styled(MaterialButton)(({ theme }) => ({
+const IconButton = styled(MaterialButton)(({ theme }) => ({
   color: theme.palette.secondary.main,
   '& .MuiButton-endIcon': {
     '& svg': {

@@ -33,6 +33,10 @@ export const Menu: ComponentStory<typeof SidebarMenuComponent> = (args) => (
 
 Menu.args = {
   title: 'Menu',
-  links: ['Markets', 'Dashboard', 'Send email', 'Drafts'],
-  bottomButton: 'connectWallet',
+  links: [
+    { name: 'Markets', route: '/' },
+    { name: 'Dashboard', route: '/' },
+    { name: 'Governance', route: '/' },
+  ],
+  isOpen: false,
 };

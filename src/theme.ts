@@ -132,6 +132,15 @@ export const getTheme = (mode: PaletteMode): Theme =>
         }
       `,
       },
+      MuiIconButton: {
+        styleOverrides: {
+          root: {
+            '& svg': {
+              fill: '#061953',
+            },
+          },
+        },
+      },
       MuiButton: {
         styleOverrides: {
           disabled: {},
