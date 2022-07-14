@@ -1,10 +1,7 @@
 import React from 'react';
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import {
-  BTCIcon,
-  MetaMaskSmallIcon,
-} from 'assets/svg';
+import { BTCIcon, MetaMaskSmallIcon } from 'assets/svg';
 
 import { AssetName as AssetComponent } from 'components';
 
@@ -42,11 +39,7 @@ export default {
 } as ComponentMeta<any>;
 
 export const AssetName: ComponentStory<any> = (args) => (
-  <AssetComponent
-    Icon={BTCIcon}
-    SubIcon={MetaMaskSmallIcon}
-    {...args}
-  />
+  <AssetComponent Icon={BTCIcon} SubIcon={MetaMaskSmallIcon} {...args} />
 );
 
 AssetName.args = {
