@@ -40,13 +40,6 @@ const Amount = styled(Typography)(({ theme }) => ({
   color: theme.palette.action.disabled,
 }));
 
-const Title = styled(Typography)({
-  fontFamily: 'Open Sans',
-  fontWeight: 700,
-  fontSize: 14,
-  lineHeight: 1.5,
-});
-
 const UnderlyingWrapper = styled('div')(({ theme }) => ({
   display: 'flex',
   '&:hover': {
@@ -85,7 +78,7 @@ const AssetName: FC<Props> = ({
         <>
           <Icon />
           <DataContainer isHovered={isHovered}>
-            <Title text={title} />
+            <Typography variant={'table1'} text={title} />
             {isHovered && (
               <Tooltip
                 title={
