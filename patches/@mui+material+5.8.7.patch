@@ -19,14 +19,16 @@ index 5e28388..b80e6f1 100644
    tonalOffset?: PaletteTonalOffset;
    contrastThreshold?: number;
 diff --git a/node_modules/@mui/material/styles/createTypography.d.ts b/node_modules/@mui/material/styles/createTypography.d.ts
-index d45b25a..023be98 100644
+index d45b25a..12ecd88 100644
 --- a/node_modules/@mui/material/styles/createTypography.d.ts
 +++ b/node_modules/@mui/material/styles/createTypography.d.ts
-@@ -15,6 +15,7 @@ export type Variant =
+@@ -15,6 +15,10 @@ export type Variant =
    | 'body2'
    | 'caption'
    | 'button'
 +  | 'custom'
++  | 'table1'
++  | 'table2'
    | 'overline';
 
  export interface FontStyle

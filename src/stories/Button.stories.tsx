@@ -47,11 +47,22 @@ Big.args = {
   disabled: false,
 };
 
-export const Close: ComponentStory<typeof Button> = (args) => (
+export const CloseTransparent: ComponentStory<typeof Button> = (args) => (
   <CloseButton {...args} />
 );
 
-Close.args = {
+CloseTransparent.args = {
   children: 'Close',
   disabled: false,
+};
+
+export const CloseContained: ComponentStory<typeof Button> = (args) => (
+  <CloseButton {...args} />
+);
+
+CloseContained.args = {
+  children: 'Close',
+  disabled: false,
+  variant: 'contained',
+  color: 'info',
 };
