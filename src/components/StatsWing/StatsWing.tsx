@@ -37,21 +37,22 @@ type MiddleCircleType = {
   loading: boolean;
 };
 
-const Body = styled('div')<{ connected?: boolean }>(({ theme, connected }) => ({
+const Body = styled('div')<{ connected?: string }>(({ theme, connected }) => ({
   padding: '32px 80px',
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
   width: '100%',
   maxHeight: 131,
-  background: !connected
-    ? theme.palette.secondary.dark
-    : theme.palette.custom.contrastText,
+  background:
+    connected !== 'true'
+      ? theme.palette.secondary.dark
+      : theme.palette.custom.contrastText,
   boxShadow: '0px 10px 40px rgba(6, 25, 83, 0.08)',
   borderRadius: '12px',
 }));
 
-const CircleWrapper = styled('div')<{ connected?: boolean }>(
+const CircleWrapper = styled('div')<{ connected?: string }>(
   ({ connected }) => ({
     width: 160,
     height: 160,
@@ -71,9 +72,10 @@ const CircleWrapper = styled('div')<{ connected?: boolean }>(
       bottom: -4,
       left: -4,
       zIndex: -1,
-      background: connected
-        ? 'linear-gradient(to bottom, #0C2D9C, #6F9BE1)'
-        : 'linear-gradient(to bottom, #6D7692, #06195333)',
+      background:
+        connected === 'true'
+          ? 'linear-gradient(to bottom, #0C2D9C, #6F9BE1)'
+          : 'linear-gradient(to bottom, #6D7692, #06195333)',
       content: `''`,
       borderRadius: 'inherit',
       borderWidth: 4,
@@ -119,19 +121,21 @@ const ConnectWalletText = styled(Typography)(({ theme }) => ({
   cursor: 'pointer',
 }));
 
-const Value = styled(Typography)<{ connected?: boolean }>(
+const Value = styled(Typography)<{ connected?: string }>(
   ({ theme, connected }) => ({
-    color: connected
-      ? theme.palette.primary.main
-      : theme.palette.secondary.main,
+    color:
+      connected === 'true'
+        ? theme.palette.primary.main
+        : theme.palette.secondary.main,
   })
 );
 
-const Currency = styled(Typography)<{ connected?: boolean }>(
+const Currency = styled(Typography)<{ connected?: string }>(
   ({ theme, connected }) => ({
-    color: connected
-      ? theme.palette.primary.main
-      : theme.palette.secondary.main,
+    color:
+      connected === 'true'
+        ? theme.palette.primary.main
+        : theme.palette.secondary.main,
     opacity: 0.5,
   })
 );
@@ -168,9 +172,13 @@ export const TextBlock = (props: TextBlockType): JSX.Element => {
           <Currency
             text={props.currency}
             variant='h2'
-            connected={props.connected}
+            connected={String(props.connected)}
           />
-          <Value text={props.value} variant='h2' connected={props.connected} />
+          <Value
+            text={props.value}
+            variant='h2'
+            connected={String(props.connected)}
+          />
         </ValueWrapper>
       )}
     </TextBlockWrapper>
@@ -179,7 +187,7 @@ export const TextBlock = (props: TextBlockType): JSX.Element => {
 
 export const MiddleCircle = (props: MiddleCircleType): JSX.Element => {
   return (
-    <CircleWrapper connected={props.connected}>
+    <CircleWrapper connected={String(props.connected)}>
       {props.connected ? (
         <MiddleTextBlock>
           <Title text={'Net APY'} variant='subtitle1' />
@@ -192,12 +200,12 @@ export const MiddleCircle = (props: MiddleCircleType): JSX.Element => {
               <Value
                 text={props.netApy}
                 variant='h2'
-                connected={props.connected}
+                connected={String(props.connected)}
               />
               <PercentSymbol
                 text={'%'}
                 variant='h2'
-                connected={props.connected}
+                connected={String(props.connected)}
               />
             </ValueWrapper>
           )}
@@ -217,7 +225,7 @@ export const StatsWing = (
   props: StatsWingProps
 ): ReactComponentElement<'div'> => {
   return (
-    <Body connected={props.connected}>
+    <Body connected={String(props.connected)}>
       <TextBlock
         currency={props.leftTextCurrencty}
         title={props.leftTextTitle}
