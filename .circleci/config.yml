@@ -11,7 +11,7 @@ parameters:
 jobs:
   lint:
       docker:
-        - image: cimg/node:16.0.0
+        - image: cimg/node:16.15
       steps:
         - checkout
         - run: yarn install --frozen-lockfile
@@ -20,7 +20,7 @@ jobs:
 
   deploy:
     docker:
-      - image: cimg/node:16.0.0
+      - image: cimg/node:16.15
     steps:
       - checkout
       - run:
@@ -77,7 +77,7 @@ jobs:
 
   temp-env-deploy:
     docker:
-      - image: cimg/node:16.0.0
+      - image: cimg/node:16.15
     steps:
       - checkout
       - run:
