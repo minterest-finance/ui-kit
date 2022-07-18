@@ -17,9 +17,85 @@ jobs:
         - run: yarn install --frozen-lockfile
         - run: yarn run lint:ci
       resource_class: small
+  deploy:
+    docker:
+      - image: cimg/node:16.15
+    steps:
+      - checkout
+      - run:
+          name: Check whether to run
+          command: | # Do not run deployment on pull requests
+            if [[ ! -z "$CIRCLE_PULL_REQUESTS" ]]; then
+              circleci-agent step halt
+            fi
+      - when:
+          condition: << pipeline.parameters.version >>
+          steps:
+            - run:
+                name: Change code version based on the pipeline parameters
+                command: |
+                  git checkout << pipeline.parameters.version >>
+                  echo 'export CIRCLE_SHA1='$(git rev-parse HEAD) >> $BASH_ENV
+
+                  if [[ "<< pipeline.parameters.version >>" == v*.*.* ]]; then
+                    echo 'export CIRCLE_TAG=<< pipeline.parameters.version >>' >> $BASH_ENV
+                  fi
+
+                  echo 'export SUCCEEDED_SLACK_TITLE="Successfully rolled back to version << pipeline.parameters.version >>"' >> $BASH_ENV
+      - run:
+          name: Set common environment variables
+          command: |
+            declare -A ENVS_BY_BRANCH=(["develop"]="dev" ["main"]="temp")
+            declare -A WEBSITE_URLS=(["dev"]="ui-kit.dev.minterest.xyz" ["pre-prod"]="ui-kit.pre-prod.minterest.xyz" ["prod"]="ui-kit.minterest.com")
+
+            if [[ -z "$CIRCLE_TAG" ]]; then
+              ENVIRONMENT=${ENVS_BY_BRANCH[<< pipeline.git.branch >>]}
+              DEPLOYMENT_SUCCEEDED_SLACK_CHANNEL="'front-end-deployment'"
+            else
+              ENVIRONMENT=prod
+              DEPLOYMENT_SUCCEEDED_SLACK_CHANNEL="'front-end-deployment, tech-front-end'"
+            fi
+
+            echo 'export REACT_APP_ENVIRONMENT='${ENVIRONMENT} >> $BASH_ENV
+            echo 'export REACT_APP_VERSION='$(git describe --tags --always) >> $BASH_ENV
+            echo 'export S3_BUCKET=minterest-ui-kit-'${ENVIRONMENT} >> $BASH_ENV
+#            echo 'export DEPLOYMENT_SUCCEEDED_SLACK_TEMPLATE=$(cat .circleci/deployment-succeeded-slack-template.json)' >> $BASH_ENV
+#            echo 'export JOB_FAILED_SLACK_TEMPLATE=$(cat .circleci/job-failed-slack-template.json)' >> $BASH_ENV
+#            echo 'export DEPLOYMENT_SUCCEEDED_SLACK_CHANNEL='${DEPLOYMENT_SUCCEEDED_SLACK_CHANNEL} >> $BASH_ENV
+            echo 'export GIT_COMMIT_DESC=$(git log --format=oneline -n 1 --pretty=format:%s $CIRCLE_SHA1)' >> $BASH_ENV
+            echo 'export WEBSITE_URL=https://'${WEBSITE_URLS[$ENVIRONMENT]} >> $BASH_ENV
+      - run: yarn install --frozen-lockfile
+      - run:
+          name: install awscli
+          command: sudo apt update && sudo apt install awscli
+      - run: yarn run build-storybook
+      - run: | # Do not clean up old files for production environment to avoid downtime
+          if [[ "$REACT_APP_ENVIRONMENT" == "prod" ]]; then
+            aws s3 cp storybook-static s3://${S3_BUCKET} --recursive
+          else
+            aws s3 sync storybook-static s3://${S3_BUCKET} --delete
+          fi
+#      - slack/notify:
+#          event: fail
+#          channel: "tech-front-end"
+#          template: JOB_FAILED_SLACK_TEMPLATE
+#      - slack/notify:
+#          event: pass
+#          channel: "${DEPLOYMENT_SUCCEEDED_SLACK_CHANNEL}"
+#          template: DEPLOYMENT_SUCCEEDED_SLACK_TEMPLATE
+    resource_class: medium
 
 workflows:
   version: 2
   main:
     jobs:
       - lint
+      - deploy:
+          context:
+            - slack-secrets
+            - aws
+          filters:
+            branches:
+              only: [ develop, main ]
+            tags:
+              only: /^v.*/
