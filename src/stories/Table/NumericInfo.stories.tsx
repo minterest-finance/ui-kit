@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { NumericInfo as NumericComponent} from 'components';
+import { NumericInfo as NumericComponent } from 'components';
 
 import { CssBaseline, getTheme, ThemeProvider } from '../../theme';
 
@@ -28,13 +28,11 @@ export default {
 } as ComponentMeta<any>;
 
 export const NumericInfo: ComponentStory<any> = (args) => (
-  <NumericComponent
-    {...args}
-  />
+  <NumericComponent {...args} />
 );
 
 NumericInfo.args = {
-    usdValue: '0000',
-    assetValue: '63.84',
-    isLoading: false,
+  usdValue: '0000',
+  assetValue: '63.84',
+  isLoading: false,
 };
