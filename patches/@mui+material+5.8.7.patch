@@ -22,7 +22,7 @@ diff --git a/node_modules/@mui/material/styles/createTypography.d.ts b/node_modu
 index d45b25a..12ecd88 100644
 --- a/node_modules/@mui/material/styles/createTypography.d.ts
 +++ b/node_modules/@mui/material/styles/createTypography.d.ts
-@@ -15,6 +15,10 @@ export type Variant =
+@@ -15,6 +15,9 @@ export type Variant =
    | 'body2'
    | 'caption'
    | 'button'
@@ -30,5 +30,5 @@ index d45b25a..12ecd88 100644
 +  | 'table1'
 +  | 'table2'
    | 'overline';
-
+ 
  export interface FontStyle
