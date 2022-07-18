@@ -46,8 +46,8 @@ jobs:
       - run:
           name: Set common environment variables
           command: |
-            declare -A ENVS_BY_BRANCH=(["develop"]="dev" ["main"]="temp")
-            declare -A WEBSITE_URLS=(["dev"]="ui-kit.dev.minterest.xyz" ["pre-prod"]="ui-kit.pre-prod.minterest.xyz" ["prod"]="ui-kit.minterest.com")
+            declare -A ENVS_BY_BRANCH=(["develop"]="dev" ["main"]="pre-prod")
+            declare -A WEBSITE_URLS=(["dev"]="ui-kit.dev.minterest.xyz" ["pre-prod"]="ui-kit.pre-prod.minterest.xyz")
 
             if [[ -z "$CIRCLE_TAG" ]]; then
               ENVIRONMENT=${ENVS_BY_BRANCH[<< pipeline.git.branch >>]}
@@ -61,6 +61,9 @@ jobs:
             echo 'export REACT_APP_VERSION='$(git describe --tags --always) >> $BASH_ENV
             echo 'export S3_BUCKET=minterest-ui-kit-'${ENVIRONMENT} >> $BASH_ENV
             echo 'export GIT_COMMIT_DESC=$(git log --format=oneline -n 1 --pretty=format:%s $CIRCLE_SHA1)' >> $BASH_ENV
+            echo 'export DEPLOYMENT_SUCCEEDED_SLACK_TEMPLATE=$(cat .circleci/deployment-succeeded-slack-template.json)' >> $BASH_ENV
+            echo 'export JOB_FAILED_SLACK_TEMPLATE=$(cat .circleci/job-failed-slack-template.json)' >> $BASH_ENV
+            echo 'export DEPLOYMENT_SUCCEEDED_SLACK_CHANNEL='${DEPLOYMENT_SUCCEEDED_SLACK_CHANNEL} >> $BASH_ENV
             echo 'export WEBSITE_URL=https://'${WEBSITE_URLS[$ENVIRONMENT]} >> $BASH_ENV
       - run: yarn install --frozen-lockfile
       - run:
