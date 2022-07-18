@@ -17,6 +17,7 @@ jobs:
         - run: yarn install --frozen-lockfile
         - run: yarn run lint:ci
       resource_class: small
+
   deploy:
     docker:
       - image: cimg/node:16.15
