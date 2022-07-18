@@ -64,3 +64,7 @@ export const CopySSemibold: ComponentStory<typeof Typography> = (args) => (
 export const CopySRegular: ComponentStory<typeof Typography> = (args) => (
   <Typography {...args} variant={'subtitle2'} />
 );
+
+export const Overline: ComponentStory<typeof Typography> = (args) => (
+  <Typography {...args} variant={'overline'} />
+);
