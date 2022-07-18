@@ -18,7 +18,7 @@ export type StatsWingProps = {
   loading: boolean;
   netApy: string;
   connectClick: () => void;
-  connected?: boolean;
+  connected: boolean;
 };
 
 type TextBlockType = {
@@ -26,7 +26,7 @@ type TextBlockType = {
   value: string;
   currency: string;
   loading: boolean;
-  extraTitle?: string;
+  extraTitle: string;
   connected?: boolean;
 };
 
@@ -159,11 +159,7 @@ export const TextBlock = (props: TextBlockType): JSX.Element => {
         <ContentLoader
           height={47}
           width={257}
-          backgroundColor={
-            !props.connected
-              ? theme.palette.action.active
-              : theme.palette.action.disabledBackground
-          }
+          backgroundColor={theme.palette.action.disabledBackground}
         >
           <rect x={0} y={4} rx={4} ry={4} width={257} height={47} />
         </ContentLoader>
