@@ -28,7 +28,7 @@ DEPLOYMENT=$(curl -s -X POST \
   -H "Accept: application/vnd.github.v3+json" \
   -H "Authorization: token $GITHUB_DEPLOYMENT_TOKEN" \
   https://api.github.com/repos/minterest-finance/$CIRCLE_PROJECT_REPONAME/deployments \
-  -d '{"ref":"'"$CIRCLE_BRANCH"'","environment":"temp","transient_environment":true,"required_contexts":[]}')
+  -d '{"ref":"'"$CIRCLE_BRANCH"'","environment":"temp", "auto_merge":false, "transient_environment":true,"required_contexts":[]}')
 
 DEPLOYMENT_ID=$(echo ${DEPLOYMENT} | jq .id)
 
