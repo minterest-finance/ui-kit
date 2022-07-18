@@ -60,9 +60,6 @@ jobs:
             echo 'export REACT_APP_ENVIRONMENT='${ENVIRONMENT} >> $BASH_ENV
             echo 'export REACT_APP_VERSION='$(git describe --tags --always) >> $BASH_ENV
             echo 'export S3_BUCKET=minterest-ui-kit-'${ENVIRONMENT} >> $BASH_ENV
-#            echo 'export DEPLOYMENT_SUCCEEDED_SLACK_TEMPLATE=$(cat .circleci/deployment-succeeded-slack-template.json)' >> $BASH_ENV
-#            echo 'export JOB_FAILED_SLACK_TEMPLATE=$(cat .circleci/job-failed-slack-template.json)' >> $BASH_ENV
-#            echo 'export DEPLOYMENT_SUCCEEDED_SLACK_CHANNEL='${DEPLOYMENT_SUCCEEDED_SLACK_CHANNEL} >> $BASH_ENV
             echo 'export GIT_COMMIT_DESC=$(git log --format=oneline -n 1 --pretty=format:%s $CIRCLE_SHA1)' >> $BASH_ENV
             echo 'export WEBSITE_URL=https://'${WEBSITE_URLS[$ENVIRONMENT]} >> $BASH_ENV
       - run: yarn install --frozen-lockfile
@@ -76,14 +73,6 @@ jobs:
           else
             aws s3 sync storybook-static s3://${S3_BUCKET} --delete
           fi
-#      - slack/notify:
-#          event: fail
-#          channel: "tech-front-end"
-#          template: JOB_FAILED_SLACK_TEMPLATE
-#      - slack/notify:
-#          event: pass
-#          channel: "${DEPLOYMENT_SUCCEEDED_SLACK_CHANNEL}"
-#          template: DEPLOYMENT_SUCCEEDED_SLACK_TEMPLATE
     resource_class: medium
 
 workflows:
