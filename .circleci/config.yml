@@ -89,7 +89,7 @@ jobs:
             echo 'export REACT_APP_ENVIRONMENT=dev' >> $BASH_ENV
             echo 'export PUBLIC_URL=/'${PATH_PREFIX} >> $BASH_ENV
             echo 'export S3_BUCKET=minterest-ui-kit-temp' >> $BASH_ENV
-            echo 'export WEBSITE_URL=https://ui-kit.temp.minterest.xyz/'${PATH_PREFIX} >> $BASH_ENV
+            echo 'export WEBSITE_URL=https://ui-kit.temp.minterest.xyz/'${PATH_PREFIX}'/' >> $BASH_ENV
       - run: yarn install --frozen-lockfile
       - run:
           name: install awscli
