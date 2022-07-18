@@ -11,7 +11,7 @@ parameters:
 jobs:
   lint:
       docker:
-        - image: cimg/node:17.0.0
+        - image: cimg/node:16.15
       steps:
         - checkout
         - run: yarn install --frozen-lockfile
@@ -46,8 +46,8 @@ jobs:
       - run:
           name: Set common environment variables
           command: |
-            declare -A ENVS_BY_BRANCH=(["develop"]="dev" ["main"]="temp")
-            declare -A WEBSITE_URLS=(["dev"]="ui-kit.dev.minterest.xyz" ["pre-prod"]="ui-kit.pre-prod.minterest.xyz" ["prod"]="ui-kit.minterest.com")
+            declare -A ENVS_BY_BRANCH=(["develop"]="dev" ["main"]="pre-prod")
+            declare -A WEBSITE_URLS=(["dev"]="ui-kit.dev.minterest.xyz" ["pre-prod"]="ui-kit.pre-prod.minterest.xyz")
 
             if [[ -z "$CIRCLE_TAG" ]]; then
               ENVIRONMENT=${ENVS_BY_BRANCH[<< pipeline.git.branch >>]}
@@ -75,6 +75,30 @@ jobs:
           fi
     resource_class: medium
 
+  temp-env-deploy:
+    docker:
+      - image: cimg/node:16.15
+    steps:
+      - checkout
+      - run:
+          name: Set common environment variables
+          command: |
+            PATH_PREFIX=${CIRCLE_BRANCH//[^[:alnum:]]/-}
+            echo 'export PATH_PREFIX='${PATH_PREFIX} >> $BASH_ENV
+            echo 'export REACT_APP_VERSION='${CIRCLE_SHA1:0:6} >> $BASH_ENV
+            echo 'export REACT_APP_ENVIRONMENT=dev' >> $BASH_ENV
+            echo 'export PUBLIC_URL=/'${PATH_PREFIX} >> $BASH_ENV
+            echo 'export S3_BUCKET=minterest-ui-kit-temp' >> $BASH_ENV
+            echo 'export WEBSITE_URL=https://ui-kit.temp.minterest.xyz/'${PATH_PREFIX}'/' >> $BASH_ENV
+      - run: yarn install --frozen-lockfile
+      - run:
+          name: install awscli
+          command: sudo apt update && sudo apt install awscli
+      - run: yarn run build-storybook
+      - run: aws s3 sync storybook-static s3://${S3_BUCKET}/${PATH_PREFIX} --delete
+      - run: bash .circleci/publish-github-deployment.sh
+    resource_class: medium
+
 workflows:
   version: 2
   main:
@@ -89,3 +113,11 @@ workflows:
               only: [ develop, main ]
             tags:
               only: /^v.*/
+      - temp-env-deploy:
+          context:
+            - slack-secrets
+            - aws
+            - github
+          filters:
+            branches:
+              ignore: [ develop, main ]
