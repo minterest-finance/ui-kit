@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { CloseIcon } from 'assets/svg';
+import { useLocation } from 'react-router-dom';
 
 import { Typography } from 'components';
 
@@ -49,7 +50,7 @@ type Props = {
   onClose: () => void;
   BottomComponent?: FC;
   isOpen: boolean;
-  isMenuActive: boolean;
+  isMenuActive: (route: string) => void;
 };
 
 export const SidebarMenuComponent: FC<Props> = ({
@@ -59,8 +60,8 @@ export const SidebarMenuComponent: FC<Props> = ({
   onLinkClick,
   isOpen,
   onClose,
-  isMenuActive,
 }: Props) => {
+  const { pathname } = useLocation();
   const isActive = (route: boolean) => {
     if (route) return 'h4';
     return 'button';
@@ -97,7 +98,7 @@ export const SidebarMenuComponent: FC<Props> = ({
                 >
                   <Typography
                     text={link.name}
-                    variant={isActive(isMenuActive)}
+                    variant={isActive([link.route].includes(pathname))}
                   />
                 </ListItemButton>
               </ListItem>
