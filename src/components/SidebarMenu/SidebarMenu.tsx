@@ -61,7 +61,10 @@ export const SidebarMenuComponent: FC<Props> = ({
   onClose,
   isMenuActive,
 }: Props) => {
-  const isActive = isMenuActive ? 'h4' : 'button';
+  const isActive = (route: boolean) => {
+    if (route) return 'h4';
+    return 'button';
+  };
   return (
     // @ts-ignore
     <SwipeableDrawer
@@ -92,7 +95,10 @@ export const SidebarMenuComponent: FC<Props> = ({
                   onClick={() => onLinkClick(link.route)}
                   className={'listItemButtonCustom'}
                 >
-                  <Typography text={link.name} variant={isActive} />
+                  <Typography
+                    text={link.name}
+                    variant={isActive(isMenuActive)}
+                  />
                 </ListItemButton>
               </ListItem>
             ))}

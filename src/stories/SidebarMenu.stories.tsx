@@ -39,4 +39,5 @@ Menu.args = {
     { name: 'Governance', route: '/' },
   ],
   isOpen: false,
+  isMenuActive: false,
 };
