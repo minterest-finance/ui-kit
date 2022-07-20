@@ -47,6 +47,9 @@ export const getTheme = (mode: PaletteMode): Theme =>
       grey99: {
         main: '#FCFCFC',
       },
+      chartsBlue30: {
+        main: 'rgba(20, 110, 255, 0.3)',
+      },
     },
     breakpoints,
     typography: {

@@ -7,8 +7,8 @@ import { MinterestSmallicon } from 'assets/svg';
 
 import { Typography } from 'components';
 
-type Props = {
-  value: string;
+export type MNTRewardProps = {
+  mntRewardValue: string;
   tooltipText: string;
 };
 
@@ -62,7 +62,7 @@ const PercentSign = styled(Typography)(({ theme }) => ({
   color: theme.palette.action.disabled,
 }));
 
-const MNTReward: FC<Props> = ({ value, tooltipText }) => {
+const MNTReward: FC<MNTRewardProps> = ({ mntRewardValue, tooltipText }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleTooltipClose = () => {
@@ -92,7 +92,7 @@ const MNTReward: FC<Props> = ({ value, tooltipText }) => {
               <AmountWrapper>
                 <NumberPart
                   variant={'subtitle2'}
-                  text={`+${value}`}
+                  text={`+${mntRewardValue}`}
                   className={'rewardValue'}
                   open={open}
                 />
