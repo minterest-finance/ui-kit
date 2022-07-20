@@ -14,7 +14,7 @@ type Props = {
 const Label = styled(Typography, {
   shouldForwardProp: (prop) => prop !== 'sorted',
 })<{ sorted?: boolean }>(({ sorted, theme }) => ({
-  color: sorted ? theme.palette.secondary.main : theme.palette.action.disabled, 
+  color: sorted ? theme.palette.secondary.main : theme.palette.action.disabled,
 }));
 
 const Wrapper = styled('div')({
