@@ -12,7 +12,6 @@ type Props = {
 };
 
 const ElementWrapper = styled('div')({
-  width: 80,
   height: 41,
   display: 'flex',
   justifyContent: 'flex-end',
@@ -41,7 +40,6 @@ const BlueText = styled(Typography)(({ theme }) => ({
 const UsdValueWrapper = styled('div')({
   textAlign: 'right',
   // todo DO BETTER
-  fontSize: 0,
   lineHeight: 0,
 });
 
