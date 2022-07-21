@@ -44,6 +44,9 @@ export const getTheme = (mode: PaletteMode): Theme =>
         disabled: '#6D7692',
         disabledOpacity: 0.08,
       },
+      grey99: {
+        main: '#FCFCFC',
+      },
     },
     breakpoints,
     typography: {

@@ -46,8 +46,8 @@ jobs:
       - run:
           name: Set common environment variables
           command: |
-            declare -A ENVS_BY_BRANCH=(["develop"]="dev" ["main"]="temp")
-            declare -A WEBSITE_URLS=(["dev"]="ui-kit.dev.minterest.xyz" ["pre-prod"]="ui-kit.pre-prod.minterest.xyz" ["prod"]="ui-kit.minterest.com")
+            declare -A ENVS_BY_BRANCH=(["develop"]="dev" ["main"]="pre-prod")
+            declare -A WEBSITE_URLS=(["dev"]="ui-kit.dev.minterest.xyz" ["pre-prod"]="ui-kit.pre-prod.minterest.xyz")
 
             if [[ -z "$CIRCLE_TAG" ]]; then
               ENVIRONMENT=${ENVS_BY_BRANCH[<< pipeline.git.branch >>]}

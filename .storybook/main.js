@@ -11,11 +11,15 @@ module.exports = {
   ],
   "framework": "@storybook/react",
   webpackFinal: async (config, { configType }) => {
-    config.output.publicPath = `${process.env.PUBLIC_URL}/`;
+    if(process.env.PUBLIC_URL){
+      config.output.publicPath = `${process.env.PUBLIC_URL}/`;
+    }
     return config;
   },
   managerWebpack: async (config) => {
-    config.output.publicPath = `${process.env.PUBLIC_URL}/`
+    if(process.env.PUBLIC_URL){
+      config.output.publicPath = `${process.env.PUBLIC_URL}/`;
+    }
     return config;
   },
 }
