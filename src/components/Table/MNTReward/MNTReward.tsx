@@ -65,13 +65,10 @@ const PercentSign = styled(Typography)(({ theme }) => ({
 const MNTReward: FC<MNTRewardProps> = ({ mntRewardValue, tooltipText }) => {
   const [open, setOpen] = React.useState(false);
 
-  const handleTooltipClose = () => {
-    setOpen(false);
-  };
+  const handleTooltipClose = () => setOpen(false);
 
-  const handleTooltipOpen = () => {
-    setOpen(true);
-  };
+  const handleTooltipOpen = () => setOpen(true);
+
   return (
     <Wrapper>
       <ClickAwayListener onClickAway={handleTooltipClose}>
