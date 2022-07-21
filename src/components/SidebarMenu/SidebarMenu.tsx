@@ -15,6 +15,7 @@ import { CloseIcon } from 'assets/svg';
 import { Typography } from 'components';
 
 const DrawerStyled = styled('div')(({ theme }) => ({
+  // TODO for mobile need 100%, in this line it's not work!!
   width: '360px',
   '& .box': {
     width: '100%',
@@ -23,11 +24,15 @@ const DrawerStyled = styled('div')(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+    padding: '15px',
+  },
+  '& .nameText': {
+    padding: '15px',
   },
   '& .greenDivideLine': {
     height: '2px',
-    width: '200px',
-    backgroundColor: theme.palette.secondary.main,
+    width: '130px',
+    backgroundColor: theme.palette.success.main,
   },
 }));
 
@@ -35,7 +40,7 @@ const TitleBlock = styled('div')({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  padding: '20px 25px',
+  padding: '15px 25px',
 });
 
 const BottomButton = styled('div')({
@@ -78,7 +83,7 @@ export const SidebarMenuComponent: FC<Props> = ({
     >
       <DrawerStyled>
         <TitleBlock>
-          {title}
+          <Typography text={title} variant='h2' />
           <IconButton onClick={onClose}>
             <CloseIcon />
           </IconButton>
@@ -100,12 +105,12 @@ export const SidebarMenuComponent: FC<Props> = ({
                 >
                   <Typography
                     text={link.name}
-                    variant={activeRoute === link.route ? 'h4' : 'button'}
+                    variant={activeRoute === link.route ? 'button' : 'body2'}
+                    className={'nameText'}
                   />
-                  {/* {activeRoute === link.route && (
+                  {activeRoute === link.route && (
                     <div className='greenDivideLine' />
-                  )} */}
-                  <div className='greenDivideLine' />
+                  )}
                 </ListItemButton>
               </ListItem>
             ))}
