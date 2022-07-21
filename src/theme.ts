@@ -31,6 +31,7 @@ export const getTheme = (mode: PaletteMode): Theme =>
       },
       secondary: {
         main: '#061953',
+        dark: 'rgba(254, 254, 254, 0.5)',
       },
       info: {
         main: '#fafafa',
@@ -38,11 +39,13 @@ export const getTheme = (mode: PaletteMode): Theme =>
       // example todo remove later
       custom: {
         main: 'red',
+        contrastText: '#FCFCFC',
       },
       action: {
         disabledBackground: '#F0F1F2',
         disabled: '#6D7692',
         disabledOpacity: 0.08,
+        active: 'rgba(12, 45, 156, 0.08)',
       },
     },
     breakpoints,
