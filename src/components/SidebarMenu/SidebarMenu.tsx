@@ -14,15 +14,22 @@ import { CloseIcon } from 'assets/svg';
 
 import { Typography } from 'components';
 
-const DrawerStyled = styled('div')({
+const DrawerStyled = styled('div')(({ theme }) => ({
   width: '360px',
   '& .box': {
     width: '100%',
   },
   '& .listItemButtonCustom': {
+    display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'center',
   },
-});
+  '& .greenDivideLine': {
+    height: '2px',
+    width: '200px',
+    backgroundColor: theme.palette.secondary.main,
+  },
+}));
 
 const TitleBlock = styled('div')({
   display: 'flex',
@@ -95,6 +102,10 @@ export const SidebarMenuComponent: FC<Props> = ({
                     text={link.name}
                     variant={activeRoute === link.route ? 'h4' : 'button'}
                   />
+                  {/* {activeRoute === link.route && (
+                    <div className='greenDivideLine' />
+                  )} */}
+                  <div className='greenDivideLine' />
                 </ListItemButton>
               </ListItem>
             ))}
