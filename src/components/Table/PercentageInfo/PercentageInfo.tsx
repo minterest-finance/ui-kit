@@ -36,7 +36,7 @@ const NetApyOnlyWrapper = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  minWidth: 56,
+  width: 56,
   height: 29,
   borderRadius: 4,
   backgroundColor: theme.palette.chartsBlue30.main,
