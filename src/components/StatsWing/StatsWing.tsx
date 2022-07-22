@@ -1,5 +1,6 @@
 import React, { ReactComponentElement } from 'react';
 
+import { useMediaQuery } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import ContentLoader from 'react-content-loader';
 import { getTheme } from 'theme';
@@ -50,10 +51,23 @@ const Body = styled('div')<{ connected?: string }>(({ theme, connected }) => ({
       : theme.palette.custom.contrastText,
   boxShadow: '0px 10px 40px rgba(6, 25, 83, 0.08)',
   borderRadius: '12px',
+
+  [theme.breakpoints.down('lg')]: {
+    padding: '31px 24px',
+    maxHeight: 108,
+  },
+
+  [theme.breakpoints.down('md')]: {
+    padding: '0 42px 0 80px',
+    maxHeight: 116,
+    maxWidth: 259,
+    margin: ' 0 auto',
+    position: 'relative',
+  },
 }));
 
 const CircleWrapper = styled('div')<{ connected?: string }>(
-  ({ connected }) => ({
+  ({ theme, connected }) => ({
     width: 160,
     height: 160,
     background: '#FCFCFC',
@@ -92,26 +106,58 @@ const CircleWrapper = styled('div')<{ connected?: string }>(
       content: `''`,
       borderRadius: 'inherit',
     },
+
+    [theme.breakpoints.down('lg')]: {
+      width: 134,
+      height: 134,
+    },
+
+    [theme.breakpoints.down('md')]: {
+      position: 'absolute',
+      width: 124,
+      height: 124,
+      left: '-62px',
+    },
   })
 );
 
-const TextBlockWrapper = styled('div')(() => ({
+const TextBlockWrapper = styled('div')(({ theme }) => ({
   textAlign: 'center',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   width: 306,
+
+  [theme.breakpoints.down('lg')]: {
+    width: 173,
+  },
+
+  [theme.breakpoints.down('md')]: {
+    maxWidth: 137,
+    margin: '12px 0',
+  },
 }));
 
-const ValueWrapper = styled('div')(() => ({
+const ValueWrapper = styled('div')(({ theme }) => ({
   display: 'flex',
   marginTop: 4,
+
+  [theme.breakpoints.down('md')]: {
+    marginTop: 1,
+  },
 }));
 
 const Title = styled(Typography)(({ theme }) => ({
   textAlign: 'center',
   textTransform: 'capitalize',
   color: theme.palette.action.disabled,
+
+  [theme.breakpoints.down('lg')]: {
+    fontWeight: 400,
+  },
+  [theme.breakpoints.down('md')]: {
+    fontSize: 10,
+  },
 }));
 
 const ConnectWalletText = styled(Typography)(({ theme }) => ({
@@ -127,6 +173,11 @@ const Value = styled(Typography)<{ connected?: string }>(
       connected === 'true'
         ? theme.palette.primary.main
         : theme.palette.secondary.main,
+
+    [theme.breakpoints.down('md')]: {
+      fontSize: 16,
+      lineHeight: '24px',
+    },
   })
 );
 
@@ -137,6 +188,11 @@ const Currency = styled(Typography)<{ connected?: string }>(
         ? theme.palette.primary.main
         : theme.palette.secondary.main,
     opacity: 0.5,
+
+    [theme.breakpoints.down('md')]: {
+      fontSize: 16,
+      lineHeight: '24px',
+    },
   })
 );
 
@@ -146,8 +202,12 @@ const PercentSymbol = styled(Currency)(({ theme }) => ({
 
 const MiddleTextBlock = styled('div')();
 
+const MobileTextBlockWrapper = styled('div')();
+
 export const TextBlock = (props: TextBlockType): JSX.Element => {
   const theme = getTheme('light');
+  const tablet = useMediaQuery(theme.breakpoints.down('lg'));
+  const mobile = useMediaQuery(theme.breakpoints.down('md'));
   return (
     <TextBlockWrapper>
       <Title
@@ -157,11 +217,18 @@ export const TextBlock = (props: TextBlockType): JSX.Element => {
 
       {props.loading ? (
         <ContentLoader
-          height={47}
-          width={257}
+          height={mobile ? 24 : tablet ? 26 : 47}
+          width={mobile ? 137 : tablet ? 173 : 257}
           backgroundColor={theme.palette.action.disabledBackground}
         >
-          <rect x={0} y={4} rx={4} ry={4} width={257} height={47} />
+          <rect
+            x={0}
+            y={mobile ? 1 : 4}
+            rx={4}
+            ry={4}
+            width={mobile ? 137 : tablet ? 173 : 257}
+            height={mobile ? 24 : tablet ? 26 : 47}
+          />
         </ContentLoader>
       ) : (
         <ValueWrapper>
@@ -182,14 +249,30 @@ export const TextBlock = (props: TextBlockType): JSX.Element => {
 };
 
 export const MiddleCircle = (props: MiddleCircleType): JSX.Element => {
+  const theme = getTheme('light');
+
+  const mobile = useMediaQuery(theme.breakpoints.down('md'));
+  const tablet = useMediaQuery(theme.breakpoints.down('lg'));
+
   return (
     <CircleWrapper connected={String(props.connected)}>
       {props.connected ? (
         <MiddleTextBlock>
           <Title text={'Net APY'} variant='subtitle1' />
           {props.loading ? (
-            <ContentLoader height={47} width={102} color='#000'>
-              <rect x={0} y={4} rx={4} ry={4} width={102} height={47} />
+            <ContentLoader
+              height={mobile ? 24 : tablet ? 26 : 47}
+              width={mobile ? 56 : tablet ? 57 : 102}
+              color='#000'
+            >
+              <rect
+                x={0}
+                y={mobile ? 1 : 4}
+                rx={4}
+                ry={4}
+                width={102}
+                height={47}
+              />
             </ContentLoader>
           ) : (
             <ValueWrapper>
@@ -220,6 +303,41 @@ export const MiddleCircle = (props: MiddleCircleType): JSX.Element => {
 export const StatsWing = (
   props: StatsWingProps
 ): ReactComponentElement<'div'> => {
+  const theme = getTheme('light');
+  const mobile = useMediaQuery(theme.breakpoints.down('md'));
+  if (mobile) {
+    return (
+      <Body connected={String(props.connected)}>
+        <MiddleCircle
+          connected={props.connected}
+          netApy={props.netApy}
+          connectClick={props.connectClick}
+          loading={props.loading}
+        />
+
+        <MobileTextBlockWrapper>
+          <TextBlock
+            currency={props.leftTextCurrencty}
+            title={props.leftTextTitle}
+            value={props.leftTextValue}
+            loading={props.loading}
+            connected={props.connected}
+            extraTitle={props.leftTextNotConnected}
+          />
+
+          <TextBlock
+            currency={props.rightTextCurrencty}
+            title={props.rightTextTitle}
+            value={props.rightTextValue}
+            loading={props.loading}
+            connected={props.connected}
+            extraTitle={props.rightTextNotConnected}
+          />
+        </MobileTextBlockWrapper>
+      </Body>
+    );
+  }
+
   return (
     <Body connected={String(props.connected)}>
       <TextBlock
