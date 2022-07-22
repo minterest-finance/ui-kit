@@ -17,6 +17,9 @@ import { Typography } from 'components';
 const DrawerStyled = styled('div')(({ theme }) => ({
   // TODO for mobile need 100%, in this line it's not work!!
   width: '360px',
+  [theme.breakpoints.down('md')]: {
+    width: '100vw',
+  },
   '& .box': {
     width: '100%',
   },
