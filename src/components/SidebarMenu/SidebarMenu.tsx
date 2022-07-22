@@ -15,7 +15,6 @@ import { CloseIcon } from 'assets/svg';
 import { Typography } from 'components';
 
 const DrawerStyled = styled('div')(({ theme }) => ({
-  // TODO for mobile need 100%, in this line it's not work!!
   width: '360px',
   [theme.breakpoints.down('md')]: {
     width: '100vw',
@@ -43,7 +42,7 @@ const TitleBlock = styled('div')({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  padding: '15px 25px',
+  padding: '13.8px 25px',
 });
 
 const BottomButton = styled('div')({
