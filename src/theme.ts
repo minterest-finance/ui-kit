@@ -1,6 +1,7 @@
 import { PaletteMode } from '@mui/material';
 import { createTheme, Theme } from '@mui/material/styles';
 
+import OpenSansBold from './assets/fonts/OpenSans-Bold.ttf';
 import OpenSansRegular from './assets/fonts/OpenSans-Regular.ttf';
 import OpenSansSemiBold from './assets/fonts/OpenSans-SemiBold.ttf';
 import UbuntuBold from './assets/fonts/Ubuntu-Bold.ttf';
@@ -44,6 +45,9 @@ export const getTheme = (mode: PaletteMode): Theme =>
         disabledBackground: '#F0F1F2',
         disabled: '#6D7692',
         disabledOpacity: 0.08,
+      },
+      grey99: {
+        main: '#FCFCFC',
       },
     },
     breakpoints,
@@ -200,7 +204,25 @@ export const getTheme = (mode: PaletteMode): Theme =>
           font-weight: 400;
           src: url(${OpenSansRegular}) format('truetype');
         }
+        @font-face {
+          font-family: 'Open Sans';
+          font-style: normal;
+          font-weight: 700;
+          src: url(${OpenSansBold}) format('truetype');
+        }
       `,
+      },
+      MuiTooltip: {
+        styleOverrides: {
+          tooltip: {
+            // todo styles for dark mode
+            backgroundColor: mode === 'light' ? '#FCFCFC' : '#000000',
+            boxShadow: '0px 4px 37px rgba(0, 0, 0, 0.08)',
+          },
+          arrow: {
+            color: '#FCFCFC',
+          },
+        },
       },
       MuiButton: {
         styleOverrides: {

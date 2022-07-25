@@ -9,5 +9,17 @@ module.exports = {
     "@storybook/addon-interactions",
     "@storybook/preset-create-react-app"
   ],
-  "framework": "@storybook/react"
+  "framework": "@storybook/react",
+  webpackFinal: async (config, { configType }) => {
+    if(process.env.PUBLIC_URL){
+      config.output.publicPath = `${process.env.PUBLIC_URL}/`;
+    }
+    return config;
+  },
+  managerWebpack: async (config) => {
+    if(process.env.PUBLIC_URL){
+      config.output.publicPath = `${process.env.PUBLIC_URL}/`;
+    }
+    return config;
+  },
 }
