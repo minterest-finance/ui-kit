@@ -38,6 +38,8 @@ export const getTheme = (mode: PaletteMode): Theme =>
       // example todo remove later
       custom: {
         main: 'red',
+        dark: '#061953',
+        light: '#f6f7f9',
       },
       action: {
         disabledBackground: '#F0F1F2',
