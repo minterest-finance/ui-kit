@@ -40,6 +40,8 @@ export const getTheme = (mode: PaletteMode): Theme =>
       custom: {
         main: 'red',
         contrastText: '#FCFCFC',
+        dark: '#061953',
+        light: '#f6f7f9',
       },
       action: {
         disabledBackground: '#F0F1F2',
