@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { StatsWing } from 'components';
+import { StatsWing, StatsWingCircle } from 'components';
 
 import { CssBaseline, getTheme, ThemeProvider } from '../theme';
 
@@ -33,6 +33,10 @@ export const Stats: ComponentStory<typeof StatsWing> = (args) => (
   </div>
 );
 
+export const MiddleCircle: ComponentStory<typeof StatsWingCircle> = (args) => (
+  <StatsWingCircle {...args} />
+);
+
 Stats.args = {
   leftTextTitle: 'Your Total Supply',
   leftTextValue: '58,763,005.74',
@@ -46,4 +50,13 @@ Stats.args = {
   loading: false,
   connected: false,
   connectClick: () => console.log('test'),
+  titleForMiddleCircle: 'Net APY',
+};
+
+MiddleCircle.args = {
+  connected: false,
+  netApy: '9.87',
+  connectClick: () => console.log('test'),
+  loading: false,
+  title: 'Net APY',
 };
