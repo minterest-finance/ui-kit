@@ -137,6 +137,7 @@ export const StatsWingCircle = (props: StatsWingCircleType): JSX.Element => {
                 text={props.netApy}
                 variant='h2'
                 connected={props.connected}
+                mobileFontWeight={400}
               />
               <PercentSymbol
                 text={'%'}

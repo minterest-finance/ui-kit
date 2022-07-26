@@ -58,19 +58,25 @@ export const Title = styled(Typography)(({ theme }) => ({
 
 export const Value = styled(Typography, {
   shouldForwardProp: (prop) => prop !== 'connected',
-})<{ connected?: boolean }>(({ theme, connected }) => ({
-  color: connected ? theme.palette.primary.main : theme.palette.secondary.main,
+})<{ connected?: boolean; mobileFontWeight?: number }>(
+  ({ theme, connected, mobileFontWeight }) => ({
+    color: connected
+      ? theme.palette.primary.main
+      : theme.palette.secondary.main,
 
-  [theme.breakpoints.down('lg')]: {
-    fontSize: 20,
-    lineHeight: '26px',
-  },
+    [theme.breakpoints.down('lg')]: {
+      fontSize: 20,
+      lineHeight: '26px',
+      fontWeight: mobileFontWeight || 'bold',
+    },
 
-  [theme.breakpoints.down('md')]: {
-    fontSize: 16,
-    lineHeight: '24px',
-  },
-}));
+    [theme.breakpoints.down('md')]: {
+      fontSize: 16,
+      lineHeight: '24px',
+      fontWeight: 700,
+    },
+  })
+);
 
 export const Currency = styled(Typography, {
   shouldForwardProp: (prop) => prop !== 'connected',
