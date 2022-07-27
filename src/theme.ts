@@ -1,4 +1,4 @@
-import { PaletteMode } from '@mui/material';
+import { PaletteColor, PaletteColorOptions, PaletteMode } from '@mui/material';
 import { createTheme, Theme } from '@mui/material/styles';
 
 import OpenSansBold from './assets/fonts/OpenSans-Bold.ttf';
@@ -8,6 +8,37 @@ import UbuntuBold from './assets/fonts/Ubuntu-Bold.ttf';
 
 export { ThemeProvider, useTheme } from '@mui/material/styles';
 export { default as CssBaseline } from '@mui/material/CssBaseline';
+
+declare module '@mui/material/styles' {
+  // custom colors
+  interface Palette {
+    custom: PaletteColor;
+    grey99: PaletteColor;
+    chartsBlue30: PaletteColor;
+  }
+  interface PaletteOptions {
+    custom?: PaletteColorOptions;
+    grey99?: PaletteColorOptions;
+    chartsBlue30?: PaletteColorOptions;
+  }
+
+  // custom typography
+  interface TypographyVariants {
+    table1: React.CSSProperties;
+    table2: React.CSSProperties;
+  }
+  interface TypographyVariantsOptions {
+    table1: React.CSSProperties;
+    table2: React.CSSProperties;
+  }
+}
+
+declare module '@mui/material/Typography' {
+  interface TypographyPropsVariantOverrides {
+    table1: true;
+    table2: true;
+  }
+}
 
 export const breakpoints = {
   values: {
@@ -40,6 +71,8 @@ export const getTheme = (mode: PaletteMode): Theme =>
       custom: {
         main: 'red',
         contrastText: '#FCFCFC',
+        dark: '#061953',
+        light: '#f6f7f9',
       },
       action: {
         disabledBackground: '#F0F1F2',
@@ -178,13 +211,6 @@ export const getTheme = (mode: PaletteMode): Theme =>
           fontSize: 10,
           lineHeight: 1.3,
         },
-      },
-      // example todo remove later
-      custom: {
-        fontSize: 50,
-        fontFamily: 'Open Sans',
-        fontWeight: 700,
-        lineHeight: 1.5,
       },
     },
     components: {

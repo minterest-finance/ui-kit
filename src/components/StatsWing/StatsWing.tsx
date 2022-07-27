@@ -1,24 +1,41 @@
 import React, { ReactComponentElement } from 'react';
 
+<<<<<<< HEAD
 import { styled } from '@mui/material/styles';
 import ContentLoader from 'react-content-loader';
 import { getTheme } from 'theme';
 
 import Typography from 'components/Typography/Typography';
+=======
+import { useMediaQuery } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { getTheme } from 'theme';
+
+import { StatsWingCircle } from './StatsWingCircle';
+import { TextBlock } from './StatsWingTextBlock';
+>>>>>>> origin/main
 
 export type StatsWingProps = {
   leftTextTitle: string;
   leftTextValue: string;
+<<<<<<< HEAD
   leftTextCurrencty: string;
   rightTextTitle: string;
   rightTextValue: string;
   rightTextCurrencty: string;
+=======
+  leftTextCurrency: string;
+  rightTextTitle: string;
+  rightTextValue: string;
+  rightTextCurrency: string;
+>>>>>>> origin/main
   leftTextNotConnected: string;
   rightTextNotConnected: string;
   loading: boolean;
   netApy: string;
   connectClick: () => void;
   connected: boolean;
+<<<<<<< HEAD
 };
 
 type TextBlockType = {
@@ -35,6 +52,9 @@ type MiddleCircleType = {
   netApy: string;
   connectClick: () => void;
   loading: boolean;
+=======
+  titleForMiddleCircle: string;
+>>>>>>> origin/main
 };
 
 const Body = styled('div')<{ connected?: string }>(({ theme, connected }) => ({
@@ -50,6 +70,7 @@ const Body = styled('div')<{ connected?: string }>(({ theme, connected }) => ({
       : theme.palette.custom.contrastText,
   boxShadow: '0px 10px 40px rgba(6, 25, 83, 0.08)',
   borderRadius: '12px',
+<<<<<<< HEAD
 }));
 
 const CircleWrapper = styled('div')<{ connected?: string }>(
@@ -224,20 +245,93 @@ export const StatsWing = (
     <Body connected={String(props.connected)}>
       <TextBlock
         currency={props.leftTextCurrencty}
+=======
+
+  [theme.breakpoints.down('lg')]: {
+    padding: '31px 24px',
+    maxHeight: 108,
+  },
+
+  [theme.breakpoints.down('md')]: {
+    padding: '0 42px 0 80px',
+    maxHeight: 116,
+    maxWidth: 259,
+    margin: ' 0 auto',
+    position: 'relative',
+  },
+}));
+
+const MobileTextBlockWrapper = styled('div')();
+
+export const StatsWing = (
+  props: StatsWingProps
+): ReactComponentElement<'div'> => {
+  const theme = getTheme('light');
+  const mobile = useMediaQuery(theme.breakpoints.down('md'));
+  if (mobile) {
+    return (
+      <Body connected={String(props.connected)}>
+        <StatsWingCircle
+          connected={props.connected}
+          netApy={props.netApy}
+          connectClick={props.connectClick}
+          loading={props.loading}
+          title={props.titleForMiddleCircle}
+        />
+
+        <MobileTextBlockWrapper>
+          <TextBlock
+            currency={props.leftTextCurrency}
+            title={props.leftTextTitle}
+            value={props.leftTextValue}
+            loading={props.loading}
+            connected={props.connected}
+            extraTitle={props.leftTextNotConnected}
+          />
+
+          <TextBlock
+            currency={props.rightTextCurrency}
+            title={props.rightTextTitle}
+            value={props.rightTextValue}
+            loading={props.loading}
+            connected={props.connected}
+            extraTitle={props.rightTextNotConnected}
+          />
+        </MobileTextBlockWrapper>
+      </Body>
+    );
+  }
+
+  return (
+    <Body connected={String(props.connected)}>
+      <TextBlock
+        currency={props.leftTextCurrency}
+>>>>>>> origin/main
         title={props.leftTextTitle}
         value={props.leftTextValue}
         loading={props.loading}
         connected={props.connected}
         extraTitle={props.leftTextNotConnected}
       />
+<<<<<<< HEAD
       <MiddleCircle
+=======
+      <StatsWingCircle
+>>>>>>> origin/main
         connected={props.connected}
         netApy={props.netApy}
         connectClick={props.connectClick}
         loading={props.loading}
+<<<<<<< HEAD
       />
       <TextBlock
         currency={props.rightTextCurrencty}
+=======
+        title={props.titleForMiddleCircle}
+      />
+      <TextBlock
+        currency={props.rightTextCurrency}
+>>>>>>> origin/main
         title={props.rightTextTitle}
         value={props.rightTextValue}
         loading={props.loading}
