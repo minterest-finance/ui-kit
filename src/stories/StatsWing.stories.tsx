@@ -40,10 +40,10 @@ export const MiddleCircle: ComponentStory<typeof StatsWingCircle> = (args) => (
 Stats.args = {
   leftTextTitle: 'Your Total Supply',
   leftTextValue: '58,763,005.74',
-  leftTextCurrencty: '$',
+  leftTextCurrency: '$',
   rightTextTitle: 'Your Total Borrow',
   rightTextValue: '58,763,005.74',
-  rightTextCurrencty: '$',
+  rightTextCurrency: '$',
   leftTextNotConnected: 'Total Markets Supply',
   rightTextNotConnected: 'Total Markets Borrow',
   netApy: '9.87',

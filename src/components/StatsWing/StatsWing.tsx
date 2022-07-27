@@ -10,10 +10,10 @@ import { TextBlock } from './StatsWingTextBlock';
 export type StatsWingProps = {
   leftTextTitle: string;
   leftTextValue: string;
-  leftTextCurrencty: string;
+  leftTextCurrency: string;
   rightTextTitle: string;
   rightTextValue: string;
-  rightTextCurrencty: string;
+  rightTextCurrency: string;
   leftTextNotConnected: string;
   rightTextNotConnected: string;
   loading: boolean;
@@ -71,7 +71,7 @@ export const StatsWing = (
 
         <MobileTextBlockWrapper>
           <TextBlock
-            currency={props.leftTextCurrencty}
+            currency={props.leftTextCurrency}
             title={props.leftTextTitle}
             value={props.leftTextValue}
             loading={props.loading}
@@ -80,7 +80,7 @@ export const StatsWing = (
           />
 
           <TextBlock
-            currency={props.rightTextCurrencty}
+            currency={props.rightTextCurrency}
             title={props.rightTextTitle}
             value={props.rightTextValue}
             loading={props.loading}
@@ -95,7 +95,7 @@ export const StatsWing = (
   return (
     <Body connected={String(props.connected)}>
       <TextBlock
-        currency={props.leftTextCurrencty}
+        currency={props.leftTextCurrency}
         title={props.leftTextTitle}
         value={props.leftTextValue}
         loading={props.loading}
@@ -110,7 +110,7 @@ export const StatsWing = (
         title={props.titleForMiddleCircle}
       />
       <TextBlock
-        currency={props.rightTextCurrencty}
+        currency={props.rightTextCurrency}
         title={props.rightTextTitle}
         value={props.rightTextValue}
         loading={props.loading}
