@@ -31,7 +31,7 @@ declare module '@mui/material/styles' {
   }
 }
 
-declare module "@mui/material/Typography" {
+declare module '@mui/material/Typography' {
   interface TypographyPropsVariantOverrides {
     table1: true;
     table2: true;
