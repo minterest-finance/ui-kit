@@ -6,7 +6,6 @@ import { getTheme } from 'theme';
 
 import { StatsWingCircle } from './StatsWingCircle';
 import { TextBlock } from './StatsWingTextBlock';
->>>>>>> origin/main
 
 export type StatsWingProps = {
   leftTextTitle: string;
