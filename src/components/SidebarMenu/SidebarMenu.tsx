@@ -42,7 +42,7 @@ const TitleBlock = styled('div')({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  padding: '13.8px 25px',
+  padding: '14px 25px',
 });
 
 const BottomButton = styled('div')({
@@ -76,7 +76,7 @@ export const SidebarMenuComponent: FC<Props> = ({
   activeRoute,
 }: Props) => {
   return (
-    // @ts-ignore
+    //@ts-ignore
     <SwipeableDrawer
       hideBackdrop={true}
       anchor={'right'}
