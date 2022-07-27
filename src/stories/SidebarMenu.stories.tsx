@@ -34,9 +34,9 @@ export const Menu: ComponentStory<typeof SidebarMenuComponent> = (args) => (
 Menu.args = {
   title: 'Menu',
   links: [
-    { name: 'Markets', route: '/' },
-    { name: 'Dashboard', route: '/' },
-    { name: 'Governance', route: '/' },
+    { name: 'Markets', route: '/', disabled: false },
+    { name: 'Dashboard', route: '/',  disabled: true },
+    { name: 'Governance', route: '/', disabled: true },
   ],
   isOpen: false,
 };

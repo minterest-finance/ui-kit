@@ -27,6 +27,10 @@ const DrawerStyled = styled('div')(({ theme }) => ({
     flexDirection: 'column',
     justifyContent: 'center',
     padding: '15px',
+    '& .Mui-disabled':{
+      color: "#6D7692",
+      opacity: 0,
+    }
   },
   '& .nameText': {
     padding: '15px',
@@ -54,6 +58,7 @@ const BottomButton = styled('div')({
 export type LinkItem = {
   name: string;
   route: string;
+  disabled?: boolean;
 };
 
 type Props = {
@@ -104,6 +109,7 @@ export const SidebarMenuComponent: FC<Props> = ({
                 <ListItemButton
                   onClick={() => onLinkClick(link.route)}
                   className={'listItemButtonCustom'}
+                  disabled={link.disabled}
                 >
                   <Typography
                     text={link.name}
