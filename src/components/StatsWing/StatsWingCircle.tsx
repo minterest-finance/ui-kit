@@ -1,10 +1,12 @@
 import React from 'react';
 
-import { styled, useMediaQuery } from '@mui/material';
+import { styled, Tooltip, useMediaQuery } from '@mui/material';
+import { TooltipQuestion } from 'assets/svg';
 import ContentLoader from 'react-content-loader';
 import { getTheme } from 'theme';
 
 import { Currency, Title, Value, ValueWrapper } from './StatsWingTextBlock';
+import { TooltipTitle } from 'components/Table/MNTReward/MNTReward';
 import Typography from 'components/Typography/Typography';
 
 type StatsWingCircleType = {
@@ -13,6 +15,7 @@ type StatsWingCircleType = {
   connectClick: () => void;
   loading: boolean;
   title: string;
+  tooltipText?: string;
 };
 
 const CircleWrapper = styled('div', {
@@ -83,7 +86,11 @@ const PercentSymbol = styled(Currency)(({ theme }) => ({
   },
 }));
 
-const MiddleTextBlock = styled('div')();
+const MiddleTextBlock = styled('div')(() => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+}));
 
 const ConnectWalletText = styled(Typography)(({ theme }) => ({
   color: theme.palette.secondary.main,
@@ -105,17 +112,61 @@ const ConnectWalletText = styled(Typography)(({ theme }) => ({
   },
 }));
 
+const TextWithToolTip = styled('div')(() => ({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+}));
+
 export const StatsWingCircle = (props: StatsWingCircleType): JSX.Element => {
   const theme = getTheme('light');
 
   const mobile = useMediaQuery(theme.breakpoints.down('md'));
   const tablet = useMediaQuery(theme.breakpoints.down('lg'));
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleTooltipClose = () => {
+    setOpen(false);
+  };
+
+  const handleTooltipOpen = () => {
+    setOpen(true);
+  };
+
   return (
     <CircleWrapper connected={props.connected}>
       {props.connected ? (
         <MiddleTextBlock>
-          <Title text={props.title} variant='subtitle1' />
+          <TextWithToolTip>
+            <Title text={props.title} variant='subtitle1' />
+            <Tooltip
+              style={{ maxWidth: 320, padding: 10 }}
+              title={
+                <TooltipTitle
+                  variant={'subtitle2'}
+                  text={props?.tooltipText || ''}
+                />
+              }
+              onClose={handleTooltipClose}
+              open={open}
+              disableFocusListener
+              disableTouchListener
+              arrow
+              placement='top'
+            >
+              <TooltipQuestion
+                style={{
+                  width: 12,
+                  height: 12,
+                  marginLeft: 5,
+                  cursor: 'pointer',
+                }}
+                onMouseEnter={handleTooltipOpen}
+                onMouseLeave={handleTooltipClose}
+              />
+            </Tooltip>
+          </TextWithToolTip>
           {props.loading ? (
             <ContentLoader
               height={mobile ? 24 : tablet ? 26 : 47}
