@@ -14,10 +14,12 @@ declare module '@mui/material/styles' {
   interface Palette {
     custom: PaletteColor;
     grey99: PaletteColor;
+    chartsBlue30: PaletteColor;
   }
   interface PaletteOptions {
     custom?: PaletteColorOptions;
-    grey99: PaletteColorOptions;
+    grey99?: PaletteColorOptions;
+    chartsBlue30?: PaletteColorOptions;
   }
 
   // custom typography
