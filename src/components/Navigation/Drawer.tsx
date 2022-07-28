@@ -88,8 +88,6 @@ const DrawerMenu: FC<Props> = ({
         <Box
           sx={{ width: 250 }}
           role='presentation'
-          onClick={onClose}
-          onKeyDown={onClose}
           className={'box'}
         >
           <List>
