@@ -14,10 +14,12 @@ declare module '@mui/material/styles' {
   interface Palette {
     custom: PaletteColor;
     grey99: PaletteColor;
+    chartsBlue30: PaletteColor;
   }
   interface PaletteOptions {
     custom?: PaletteColorOptions;
-    grey99: PaletteColorOptions;
+    grey99?: PaletteColorOptions;
+    chartsBlue30?: PaletteColorOptions;
   }
 
   // custom typography
@@ -80,6 +82,9 @@ export const getTheme = (mode: PaletteMode): Theme =>
       },
       grey99: {
         main: '#FCFCFC',
+      },
+      chartsBlue30: {
+        main: 'rgba(20, 110, 255, 0.3)',
       },
     },
     breakpoints,
@@ -243,6 +248,7 @@ export const getTheme = (mode: PaletteMode): Theme =>
             // todo styles for dark mode
             backgroundColor: mode === 'light' ? '#FCFCFC' : '#000000',
             boxShadow: '0px 4px 37px rgba(0, 0, 0, 0.08)',
+            marginTop: '8px !important',
           },
           arrow: {
             color: '#FCFCFC',
