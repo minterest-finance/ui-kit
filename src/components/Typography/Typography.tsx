@@ -7,7 +7,11 @@ type Props = {
 } & TypographyProps;
 
 const TypographyComponent: FC<Props> = ({ text, ...props }: Props) => {
-  return <Typography {...props}>{text}</Typography>;
+  return (
+    <Typography {...props}>
+      {text} {props.children && props.children}
+    </Typography>
+  );
 };
 
 export default TypographyComponent;

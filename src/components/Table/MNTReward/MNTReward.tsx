@@ -45,7 +45,7 @@ const CustomButton = styled(ButtonUnstyled)(({ theme }) => ({
   },
 }));
 
-const TooltipTitle = styled(Typography)(({ theme }) => ({
+export const TooltipTitle = styled(Typography)(({ theme }) => ({
   color: theme.palette.action.disabled,
   textAlign: 'center',
 }));
