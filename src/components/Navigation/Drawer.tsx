@@ -85,11 +85,7 @@ const DrawerMenu: FC<Props> = ({
           </IconButton>
         </TitleBlock>
         <Divider />
-        <Box
-          sx={{ width: 250 }}
-          role='presentation'
-          className={'box'}
-        >
+        <Box sx={{ width: 250 }} role='presentation' className={'box'}>
           <List>
             {links.map((link, index) => {
               const isActive = activeRoute === link.route;
