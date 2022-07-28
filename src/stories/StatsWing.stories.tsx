@@ -51,6 +51,7 @@ Stats.args = {
   connected: false,
   connectClick: () => console.log('test'),
   titleForMiddleCircle: 'Net APY',
+  tooltipText: 'Test text for stats tooltip net apy',
 };
 
 MiddleCircle.args = {
@@ -59,4 +60,5 @@ MiddleCircle.args = {
   connectClick: () => console.log('test'),
   loading: false,
   title: 'Net APY',
+  tooltipText: 'Test text for stats tooltip net apy',
 };

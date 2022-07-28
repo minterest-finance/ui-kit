@@ -21,6 +21,7 @@ export type StatsWingProps = {
   connectClick: () => void;
   connected: boolean;
   titleForMiddleCircle: string;
+  tooltipText?: string;
 };
 
 const Body = styled('div')<{ connected?: string }>(({ theme, connected }) => ({
@@ -67,6 +68,7 @@ export const StatsWing = (
           connectClick={props.connectClick}
           loading={props.loading}
           title={props.titleForMiddleCircle}
+          tooltipText={props.tooltipText}
         />
 
         <MobileTextBlockWrapper>
@@ -108,6 +110,7 @@ export const StatsWing = (
         connectClick={props.connectClick}
         loading={props.loading}
         title={props.titleForMiddleCircle}
+        tooltipText={props.tooltipText}
       />
       <TextBlock
         currency={props.rightTextCurrency}
