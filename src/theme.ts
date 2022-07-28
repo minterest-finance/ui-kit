@@ -1,4 +1,4 @@
-import { PaletteMode } from '@mui/material';
+import { PaletteColor, PaletteColorOptions, PaletteMode } from '@mui/material';
 import { createTheme, Theme } from '@mui/material/styles';
 
 import OpenSansBold from './assets/fonts/OpenSans-Bold.ttf';
@@ -8,6 +8,37 @@ import UbuntuBold from './assets/fonts/Ubuntu-Bold.ttf';
 
 export { ThemeProvider, useTheme } from '@mui/material/styles';
 export { default as CssBaseline } from '@mui/material/CssBaseline';
+
+declare module '@mui/material/styles' {
+  // custom colors
+  interface Palette {
+    custom: PaletteColor;
+    grey99: PaletteColor;
+    chartsBlue30: PaletteColor;
+  }
+  interface PaletteOptions {
+    custom?: PaletteColorOptions;
+    grey99?: PaletteColorOptions;
+    chartsBlue30?: PaletteColorOptions;
+  }
+
+  // custom typography
+  interface TypographyVariants {
+    table1: React.CSSProperties;
+    table2: React.CSSProperties;
+  }
+  interface TypographyVariantsOptions {
+    table1: React.CSSProperties;
+    table2: React.CSSProperties;
+  }
+}
+
+declare module '@mui/material/Typography' {
+  interface TypographyPropsVariantOverrides {
+    table1: true;
+    table2: true;
+  }
+}
 
 export const breakpoints = {
   values: {
@@ -31,6 +62,7 @@ export const getTheme = (mode: PaletteMode): Theme =>
       },
       secondary: {
         main: '#061953',
+        dark: 'rgba(254, 254, 254, 0.5)',
       },
       info: {
         main: '#fafafa',
@@ -38,14 +70,21 @@ export const getTheme = (mode: PaletteMode): Theme =>
       // example todo remove later
       custom: {
         main: 'red',
+        contrastText: '#FCFCFC',
+        dark: '#061953',
+        light: '#f6f7f9',
       },
       action: {
         disabledBackground: '#F0F1F2',
         disabled: '#6D7692',
         disabledOpacity: 0.08,
+        active: 'rgba(12, 45, 156, 0.08)',
       },
       grey99: {
         main: '#FCFCFC',
+      },
+      chartsBlue30: {
+        main: 'rgba(20, 110, 255, 0.3)',
       },
     },
     breakpoints,
@@ -173,13 +212,6 @@ export const getTheme = (mode: PaletteMode): Theme =>
           lineHeight: 1.3,
         },
       },
-      // example todo remove later
-      custom: {
-        fontSize: 50,
-        fontFamily: 'Open Sans',
-        fontWeight: 700,
-        lineHeight: 1.5,
-      },
     },
     components: {
       MuiCssBaseline: {
@@ -216,6 +248,7 @@ export const getTheme = (mode: PaletteMode): Theme =>
             // todo styles for dark mode
             backgroundColor: mode === 'light' ? '#FCFCFC' : '#000000',
             boxShadow: '0px 4px 37px rgba(0, 0, 0, 0.08)',
+            marginTop: '8px !important',
           },
           arrow: {
             color: '#FCFCFC',
