@@ -19,7 +19,7 @@
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
-    "@mui/material": "^5.8.5",
+    "@mui/material": "5.8.7",
     "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-node-resolve": "^13.0.6",
     "@rollup/plugin-typescript": "^8.3.0",
@@ -29,7 +29,6 @@
     "@testing-library/user-event": "^13.2.1",
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.2",
-    "patch-package": "^6.4.7",
     "postcss": "^8.4.14",
     "react-content-loader": "^6.2.0",
     "react-scripts": "4.0.3",
@@ -45,7 +44,6 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "postinstall": "patch-package",
     "start": "react-scripts start",
     "install": "yarn build",
     "build": "yarn run clean && rollup -c",
