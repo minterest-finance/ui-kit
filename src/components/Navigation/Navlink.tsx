@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { ButtonBase } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { styled, useTheme} from '@mui/material/styles';
 
 import { Typography } from 'components';
 
@@ -24,8 +24,6 @@ export const NavlinkText = styled(Typography)(({ theme }) => ({
   [theme.breakpoints.down('md')]: {
     maxHeight: 53,
   },
-  // todo fix color destination
-  color: theme.palette.action.disabled,
   padding: '16px 24px',
   '&:hover': {
     color: theme.palette.secondary.main,
@@ -52,9 +50,12 @@ const Navlink: React.FC<NavlinkT> = ({
       onClick(route);
     }
   };
+  const theme = useTheme();
   return (
     <NavlinkButton active={active} disabled={disabled} onClick={onClickHandler}>
-      <NavlinkText variant={active ? 'button' : 'body2'} text={name} />
+      <NavlinkText sx={{
+        color: active ? theme.palette.secondary.main : theme.palette.action.disabled,
+      }} variant={active ? 'button' : 'body2'} text={name} />
     </NavlinkButton>
   );
 };
