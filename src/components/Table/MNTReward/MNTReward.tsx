@@ -3,8 +3,8 @@ import React, { FC } from 'react';
 import ButtonUnstyled from '@mui/base/ButtonUnstyled';
 import { Tooltip, ClickAwayListener } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { MinterestSmallicon } from 'assets/svg';
 
+import { MinterestSmallicon } from 'assets/svg';
 import { Typography } from 'components';
 
 export type MNTRewardProps = {
