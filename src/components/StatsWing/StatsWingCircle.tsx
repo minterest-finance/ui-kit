@@ -157,8 +157,8 @@ export const StatsWingCircle = (props: StatsWingCircleType): JSX.Element => {
             >
               <TooltipQuestion
                 style={{
-                  width: 12,
-                  height: 12,
+                  width: 16,
+                  height: 16,
                   marginLeft: 5,
                   cursor: 'pointer',
                 }}
