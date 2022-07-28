@@ -7,11 +7,11 @@ import {
   Divider,
   List,
   ListItem,
-  ListItemButton,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { CloseIcon } from 'assets/svg';
 
+import Navlink from './Navlink';
 import { Typography } from 'components';
 
 const DrawerStyled = styled('div')(({ theme }) => ({
@@ -21,26 +21,14 @@ const DrawerStyled = styled('div')(({ theme }) => ({
   },
   '& .box': {
     width: '100%',
-  },
-  '& .listItemButtonCustom': {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    padding: '15px',
-    '& .Mui-disabled':{
-      color: "#6D7692",
-      opacity: 0,
-    }
-  },
-  '& .nameText': {
-    padding: '15px',
-  },
-  '& .greenDivideLine': {
-    height: '2px',
-    width: '130px',
-    backgroundColor: theme.palette.success.main,
+    paddingTop: '32px',
   },
 }));
+
+const DrawerItem = styled(ListItem)({
+  justifyContent: 'center',
+  marginBottom: '24px',
+});
 
 const TitleBlock = styled('div')({
   display: 'flex',
@@ -71,7 +59,7 @@ type Props = {
   activeRoute: string;
 };
 
-export const SidebarMenuComponent: FC<Props> = ({
+const DrawerMenu: FC<Props> = ({
   title,
   links,
   BottomComponent,
@@ -81,11 +69,12 @@ export const SidebarMenuComponent: FC<Props> = ({
   activeRoute,
 }: Props) => {
   return (
-    //@ts-ignore
+    // @ts-ignore
     <SwipeableDrawer
       hideBackdrop={true}
       anchor={'right'}
       open={isOpen}
+      onOpen={() => undefined}
       onClose={onClose}
     >
       <DrawerStyled>
@@ -104,24 +93,20 @@ export const SidebarMenuComponent: FC<Props> = ({
           className={'box'}
         >
           <List>
-            {links.map((link, index) => (
-              <ListItem key={index} disablePadding>
-                <ListItemButton
-                  onClick={() => onLinkClick(link.route)}
-                  className={'listItemButtonCustom'}
-                  disabled={link.disabled}
-                >
-                  <Typography
-                    text={link.name}
-                    variant={activeRoute === link.route ? 'button' : 'body2'}
-                    className={'nameText'}
+            {links.map((link, index) => {
+              const isActive = activeRoute === link.route;
+              return (
+                <DrawerItem key={index} disablePadding>
+                  <Navlink
+                    name={link.name}
+                    route={link.route}
+                    disabled={link.disabled}
+                    active={isActive}
+                    onClick={onLinkClick}
                   />
-                  {activeRoute === link.route && (
-                    <div className='greenDivideLine' />
-                  )}
-                </ListItemButton>
-              </ListItem>
-            ))}
+                </DrawerItem>
+              );
+            })}
           </List>
         </Box>
         <BottomButton>{BottomComponent && <BottomComponent />}</BottomButton>
@@ -129,3 +114,5 @@ export const SidebarMenuComponent: FC<Props> = ({
     </SwipeableDrawer>
   );
 };
+
+export default DrawerMenu;
