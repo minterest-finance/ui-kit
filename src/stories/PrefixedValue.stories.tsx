@@ -2,13 +2,13 @@ import React from 'react';
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { Money } from 'components';
+import { PrefixedValue } from 'components';
 
 import { CssBaseline, getTheme, ThemeProvider } from '../theme';
 
 export default {
-  title: 'Typography/Money',
-  component: Money,
+  title: 'Typography/PrefixedValue',
+  component: PrefixedValue,
   args: {
     mode: 'light',
   },
@@ -25,10 +25,10 @@ export default {
       );
     },
   ],
-} as ComponentMeta<typeof Money>;
+} as ComponentMeta<typeof PrefixedValue>;
 
-export const Default: ComponentStory<typeof Money> = (args) => (
-  <Money {...args} />
+export const Default: ComponentStory<typeof PrefixedValue> = (args) => (
+  <PrefixedValue {...args} />
 );
 
 Default.args = {
@@ -36,11 +36,22 @@ Default.args = {
   variant: 'default',
 };
 
-export const Connected: ComponentStory<typeof Money> = (args) => (
-  <Money {...args} />
+export const Connected: ComponentStory<typeof PrefixedValue> = (args) => (
+  <PrefixedValue {...args} />
 );
 
 Connected.args = {
   value: '6,726,763,007.10',
   variant: 'connected',
+};
+
+export const Percent: ComponentStory<typeof PrefixedValue> = (args) => (
+  <PrefixedValue {...args} />
+);
+
+Percent.args = {
+  value: '100.00',
+  symbol: '%',
+  prefix: false,
+  postfix: true,
 };

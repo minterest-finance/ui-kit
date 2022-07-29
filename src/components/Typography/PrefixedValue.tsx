@@ -11,20 +11,24 @@ import { Row } from '../Common';
 interface Props extends LoadableComponent {
   value: string;
   variant?: 'default' | 'connected';
-  currency?: string;
+  symbol?: string;
   currencyProps: TypographyProps;
   valueProps: TypographyProps;
+  prefix?: boolean;
+  postfix?: boolean;
 }
 
-const Money: React.FC<Props> = ({
+const PrefixedValue: React.FC<Props> = ({
   value,
-  currency = '$',
+  symbol = '$',
   variant = 'default',
   isLoading,
   currencyProps = {},
   valueProps = {},
   contentLoaderProps = {},
   rect = {},
+  prefix = true,
+  postfix,
 }) => {
   const theme = useTheme();
   const isTablet = useMediaQuery(theme.breakpoints.down('lg'));
@@ -56,17 +60,21 @@ const Money: React.FC<Props> = ({
     );
   }
 
+  const Symbol = () => (
+    <Typography
+      sx={{
+        color: Colors[variant],
+        opacity: 0.5,
+      }}
+      text={symbol}
+      variant={textVariant}
+      {...currencyProps}
+    />
+  );
+
   return (
     <Row>
-      <Typography
-        sx={{
-          color: Colors[variant],
-          opacity: 0.5,
-        }}
-        text={currency}
-        variant={textVariant}
-        {...currencyProps}
-      />
+      {prefix && <Symbol />}
       <Typography
         sx={{
           color: Colors[variant],
@@ -75,8 +83,9 @@ const Money: React.FC<Props> = ({
         variant={textVariant}
         {...valueProps}
       />
+      {postfix && <Symbol />}
     </Row>
   );
 };
 
-export default Money;
+export default PrefixedValue;
