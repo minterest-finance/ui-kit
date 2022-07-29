@@ -7,7 +7,7 @@ import { Typography } from 'components';
 import { getTheme, ThemeProvider, CssBaseline } from '../theme';
 
 export default {
-  title: 'Typography',
+  title: 'Typography/Standard',
   component: Typography,
   args: {
     mode: 'light',
