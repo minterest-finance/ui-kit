@@ -12,8 +12,8 @@ interface Props extends LoadableComponent {
   value: string;
   variant?: 'default' | 'connected';
   symbol?: string;
-  currencyProps: TypographyProps;
-  valueProps: TypographyProps;
+  currencyProps?: TypographyProps;
+  valueProps?: TypographyProps;
   prefix?: boolean;
   postfix?: boolean;
 }
