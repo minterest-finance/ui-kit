@@ -3,7 +3,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { MetaMaskSmallIcon } from 'assets/svg';
-import { TooltipWrapper } from 'components';
+import { TooltipWrapper, Typography } from 'components';
 
 import { CssBaseline, getTheme, ThemeProvider } from '../theme';
 
@@ -64,4 +64,16 @@ export const IconOnly: ComponentStory<typeof TooltipWrapper> = (args) => (
 IconOnly.args = {
   title: 'Tooltip text',
   placement: 'top',
+};
+
+export const CustomTitle: ComponentStory<typeof TooltipWrapper> = (args) => (
+  <TooltipWrapper {...args} />
+);
+
+CustomTitle.args = {
+  children: 'Net APY',
+  title: (
+    <Typography sx={{ padding: '10px' }} variant='h2' text={'Custom title'} />
+  ),
+  placement: 'right',
 };

@@ -25,6 +25,7 @@ const TooltipWrapper: React.FC<Props> = ({
   return (
     <Tooltip
       placement='top'
+      arrow
       {...rest}
       title={
         typeof title === 'string' ? (
