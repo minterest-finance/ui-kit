@@ -55,3 +55,15 @@ Percent.args = {
   prefix: false,
   postfix: true,
 };
+
+export const Loading: ComponentStory<typeof PrefixedValue> = (args) => (
+  <PrefixedValue {...args} />
+);
+
+Loading.args = {
+  value: '100.00',
+  symbol: '%',
+  prefix: false,
+  postfix: true,
+  isLoading: true,
+};
