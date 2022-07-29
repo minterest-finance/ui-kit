@@ -46,7 +46,6 @@ const Money: React.FC<Props> = ({
       >
         <rect
           x={0}
-          y={isMobile ? 1 : 4}
           rx={4}
           ry={4}
           width={isMobile ? 125 : isTablet ? 173 : 257}

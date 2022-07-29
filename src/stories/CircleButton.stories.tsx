@@ -7,7 +7,7 @@ import { CircleButton, Typography } from 'components';
 import { CssBaseline, getTheme, ThemeProvider } from '../theme';
 
 export default {
-  title: 'Button/Custom',
+  title: 'Button/Circle',
   component: CircleButton,
   args: {
     mode: 'light',
