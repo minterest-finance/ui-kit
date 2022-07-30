@@ -256,7 +256,7 @@ export const getTheme = (mode: PaletteMode): Theme =>
       MuiTooltip: {
         styleOverrides: {
           tooltip: {
-            // todo styles for dark mode
+            // TODO: styles for dark mode
             backgroundColor: mode === 'light' ? '#FCFCFC' : '#000000',
             boxShadow: '0px 4px 37px rgba(0, 0, 0, 0.08)',
             marginTop: '8px !important',
