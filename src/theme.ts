@@ -6,7 +6,7 @@ import OpenSansRegular from './assets/fonts/OpenSans-Regular.ttf';
 import OpenSansSemiBold from './assets/fonts/OpenSans-SemiBold.ttf';
 import UbuntuBold from './assets/fonts/Ubuntu-Bold.ttf';
 
-export { ThemeProvider, useTheme } from '@mui/material/styles';
+export { ThemeProvider, useTheme, useMediaQuery } from '@mui/material';
 export { default as CssBaseline } from '@mui/material/CssBaseline';
 
 declare module '@mui/material/styles' {
@@ -260,9 +260,14 @@ export const getTheme = (mode: PaletteMode): Theme =>
             backgroundColor: mode === 'light' ? '#FCFCFC' : '#000000',
             boxShadow: '0px 4px 37px rgba(0, 0, 0, 0.08)',
             marginTop: '8px !important',
+            padding: '8px 17px',
           },
           arrow: {
-            color: '#FCFCFC',
+            // todo style arrow like in figma
+            '&:before': {
+              borderRadius: '2px',
+            },
+            color: mode === 'light' ? '#FCFCFC' : '#000000',
           },
         },
       },

@@ -7,7 +7,7 @@ import { Button, SmallButton, BigButton, CloseButton } from 'components';
 import { CssBaseline, getTheme, ThemeProvider } from '../theme';
 
 export default {
-  title: 'Button',
+  title: 'Button/Standard',
   component: Button,
   args: {
     mode: 'light',
