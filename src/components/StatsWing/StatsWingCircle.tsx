@@ -1,11 +1,11 @@
 import React from 'react';
 
 import { styled, Tooltip, useMediaQuery } from '@mui/material';
-import { TooltipQuestion } from 'assets/svg';
 import ContentLoader from 'react-content-loader';
 import { getTheme } from 'theme';
 
 import { Currency, Title, Value, ValueWrapper } from './StatsWingTextBlock';
+import { TooltipQuestion } from 'assets/svg';
 import { TooltipTitle } from 'components/Table/MNTReward/MNTReward';
 import Typography from 'components/Typography/Typography';
 
