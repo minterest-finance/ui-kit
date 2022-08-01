@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { ButtonBase } from '@mui/material';
-import { styled, useTheme} from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 
 import { Typography } from 'components';
 
@@ -53,9 +53,15 @@ const Navlink: React.FC<NavlinkT> = ({
   const theme = useTheme();
   return (
     <NavlinkButton active={active} disabled={disabled} onClick={onClickHandler}>
-      <NavlinkText sx={{
-        color: active ? theme.palette.secondary.main : theme.palette.action.disabled,
-      }} variant={active ? 'button' : 'body2'} text={name} />
+      <NavlinkText
+        sx={{
+          color: active
+            ? theme.palette.secondary.main
+            : theme.palette.action.disabled,
+        }}
+        variant={active ? 'button' : 'body2'}
+        text={name}
+      />
     </NavlinkButton>
   );
 };
