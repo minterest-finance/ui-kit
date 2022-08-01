@@ -8,7 +8,7 @@ import { Typography } from 'components';
 type Props = {
   label: string;
   sorted: boolean;
-  sortOrder: 'asc' | 'desc';
+  sortOrder: string; 
 };
 
 const Label = styled(Typography, {

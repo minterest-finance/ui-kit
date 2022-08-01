@@ -1,10 +1,23 @@
 import * as React from 'react';
 
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridValueGetterParams, GridRowParams } from '@mui/x-data-grid';
 import { BTCIcon, MetaMaskSmallIcon } from 'assets/svg';
 
 import AssetName from './AssetName/AssetName';
+import HeaderCategory from './HeaderCategory/HeaderCategory';
 import MNTReward from './MNTReward/MNTReward';
+import NumericInfo from './NumericInfo/NumericInfo';
+import PercentageInfo from './PercentageInfo/PercentageInfo';
+import { BigButton, SmallButton } from 'components/Button/Button';
+
+// Dunno where this should reside
+// const formatHeaderCell = (item) => {
+//   return (
+//     // <HeaderCategory {...headerCategoryProps}/>
+//     <HeaderCategory {...item.colDef} />
+  // );
+// }
+
 const MainFront = () => {
   const [sortingModel, updateSortingModel] = React.useState({
     field: 'undefined',
@@ -18,11 +31,12 @@ const MainFront = () => {
   }
   const columns: GridColDef[] = [
     {
-      field: 'id',
-      headerName: 'ID',
+      field: 'asset',
+      headerName: 'Asset',
       width: 300,
       hideSortIcons: true,
       filterable: false,
+      disableColumnMenu: true,
       renderCell: (item) => {
         const assetNameArguments = {
           isHovered: false,
@@ -36,47 +50,181 @@ const MainFront = () => {
         );
       },
       renderHeader: (item) => {
-        /*
-          HeaderCategory component is here
-          https://github.com/minterest-finance/ui-kit/pull/10
-        */
         const headerCategoryProps = {
-          label: item.field,
+          label: item.colDef.headerName || '', // or just hardcode it here, dunno
           sorted: sortingModel.field === item.field,
           sortOrder: sortingModel.sort
         }
         return (
-          <div>{item.field}</div>
-          // <HeaderCategory {...headerCategoryProps}/>
+          <HeaderCategory {...headerCategoryProps}/>
         );
       },
-      disableColumnMenu: true,
     },
-    { field: 'firstName', headerName: 'First name', width: 130 },
-    { field: 'lastName', headerName: 'Last name', width: 130 },
+
+
+    { 
+    field: 'totalSupply',
+    headerName: 'Total Supply',
+    width: 130,
+    disableColumnMenu: true,
+    hideSortIcons: true,
+    filterable: false,
+      renderCell: (item) => {
+        const { usdValue, assetValue, isLoading } = item.row.totalSupplyData;
+        const numericInfoArguments = {
+          usdValue,
+          assetValue,
+          isLoading,
+        };
+        return (
+          <NumericInfo {...numericInfoArguments}/>
+        );
+      },
+      renderHeader: (item) => {
+        const headerCategoryProps = {
+          // label: item.field,
+          label: item.colDef.headerName || '', // or just hardcode it here, dunno
+          sorted: sortingModel.field === item.field,
+          sortOrder: sortingModel.sort
+        }
+        return (
+          <HeaderCategory {...headerCategoryProps}/>
+        );
+      },
+      
+    },
+
+
+    { 
+    field: 'supplyApy',
+    headerName: 'Supply Apy',
+    width: 130,
+    disableColumnMenu: true,
+    hideSortIcons: true,
+    filterable: false,
+      renderCell: (item) => {
+        const { percentageValue, netApyOnly, loading, tooltipText, mntRewardValue } = item.row.supplyApyData;
+        const percentageInfoProps = {
+          percentageValue,
+          netApyOnly,
+          loading,
+          tooltipText,
+          mntRewardValue
+        };
+        return (
+          <PercentageInfo {...percentageInfoProps}/>
+        );
+      },
+      renderHeader: (item) => {
+        const headerCategoryProps = {
+          // label: item.field,
+          label: item.colDef.headerName || '', // or just hardcode it here, dunno
+          sorted: sortingModel.field === item.field,
+          sortOrder: sortingModel.sort
+        }
+        return (
+          <HeaderCategory {...headerCategoryProps}/>
+        );
+      },
+    },
+
+
     {
-      field: 'age',
-      headerName: 'Age',
-      type: 'number',
+      field: 'yourSupply',
+      headerName: 'Your Supply',
       width: 90,
+      hideSortIcons: true,
+      filterable: false,
+      disableColumnMenu: true,
+      renderHeader: (item) => {
+        const headerCategoryProps = {
+          // label: item.field,
+          label: item.colDef.headerName || '', // or just hardcode it here, dunno
+          sorted: sortingModel.field === item.field,
+          sortOrder: sortingModel.sort
+        }
+        return (
+          <HeaderCategory {...headerCategoryProps}/>
+        );
+      },
+      renderCell: (item) => {
+        const { usdValue, assetValue, isLoading } = item.row.yourSupplyData;
+        const numericInfoArguments = {
+          usdValue,
+          assetValue,
+          isLoading,
+        };
+        return (
+          <NumericInfo {...numericInfoArguments}/>
+        );
+      },
     },
+
+
     {
-      field: 'fullName',
+      field: 'supplyButtons',
       headerName: '',
       description: 'This column has a value getter and is not sortable.',
       sortable: false,
       width: 160,
       valueGetter: (params: GridValueGetterParams) =>
         `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+      renderCell: (item) => {
+        const buttonProps = {
+          children: 'Supply',
+          disabled: false,
+        };
+        return (<SmallButton {...buttonProps} color={'primary'}/>);
+      }
     },
   ];
   
   const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
+    { id: 1,
+      asset: 'A',
+      totalSupply: 5000000000,
+      supplyApy: 238,
+      yourSupply: 50000000,
+      totalSupplyData: {usdValue: '5.00B', assetValue: '63.87', isLoading: false},
+      supplyApyData: {percentageValue: '2.38', netApyOnly: false, loading: false, tooltipText: 'qweqr', mntRewardValue: '0.45'},
+      yourSupplyData: {usdValue: '50.00M', assetValue: '63.87', isLoading: false}
+    },
+    { id: 2,
+      totalSupply: 500000000,
+      supplyApy: 538,
+      yourSupply: 5000000,
+      asset: 'Z',
+      totalSupplyData: {usdValue: '500M', assetValue: '63.87', isLoading: false},
+      supplyApyData: {percentageValue: '5.38', netApyOnly: false, loading: false, tooltipText: 'qweqr', mntRewardValue: '0.45'}, 
+      yourSupplyData: {usdValue: '5.00M', assetValue: '63.87', isLoading: false} 
+    },
+    { id: 3,
+      totalSupply: 50000000,
+      supplyApy: 838,
+      yourSupply: 0,
+      asset: 'B',
+      totalSupplyData: {usdValue: '50.00M', assetValue: '63.87', isLoading: false},
+      supplyApyData: {percentageValue: '8.38', netApyOnly: false, loading: false, tooltipText: 'qweqr', mntRewardValue: '0.45'}, 
+      yourSupplyData: {usdValue: '', assetValue: '', isLoading: false} 
+    },
+    { id: 4,
+      asset: 'C',
+      totalSupply: 5000000,
+      supplyApy: 0,
+      yourSupply: 0,
+      totalSupplyData: {usdValue: '5.00M', assetValue: '63.87', isLoading: false},
+      supplyApyData: {percentageValue: '0', netApyOnly: false, loading: false, tooltipText: 'qweqr', mntRewardValue: '0.45'}, 
+      yourSupplyData: {usdValue: '', assetValue: '', isLoading: false} 
+    },
+    { id: 5,
+      asset: 'D',
+      totalSupply: 500000,
+      supplyApy: 938,
+      yourSupply: 5000,
+      totalSupplyData: {usdValue: '500K', assetValue: '63.87', isLoading: false},
+      supplyApyData: {percentageValue: '9.38', netApyOnly: false, loading: false, tooltipText: 'qweqr', mntRewardValue: '0.45'}, 
+      yourSupplyData: {usdValue: '5,000.00', assetValue: '63.87', isLoading: false} 
+    },
   ];
 
   const props = {
@@ -97,6 +245,12 @@ const DataTable = ({rows, columns, handleStateChange}: any) => {
         sx={{
           '.MuiDataGrid-columnSeparator--sideRight': {
             visibility: 'hidden',
+          },
+          '.MuiDataGrid-cell:focus': {
+            outline: 'none',
+          },
+          '.MuiDataGrid-columnHeader:focus': {
+            outline: 'none',
           }
         }}
         rows={rows}
