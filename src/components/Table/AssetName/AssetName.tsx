@@ -12,7 +12,6 @@ export type SVGIcon = FC<
 
 type Props = {
   isLoading: boolean;
-  isHovered: boolean;
   title: string;
   Icon: SVGIcon;
   SubIcon?: SVGIcon;
@@ -26,13 +25,10 @@ const Container = styled('div')({
   alignItems: 'center',
 });
 
-const DataContainer = styled('div', {
-  shouldForwardProp: (prop) => prop !== 'isHovered',
-})<{ isHovered?: boolean }>(({ isHovered }) => ({
+const DataContainer = styled('div')(() => ({
   marginLeft: 8,
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: isHovered ? 'space-between' : 'center',
 }));
 
 const Amount = styled(Typography)(({ theme }) => ({
@@ -65,7 +61,6 @@ const Loader: React.FC = () => (
 
 const AssetName: FC<Props> = ({
   isLoading,
-  isHovered,
   title,
   Icon,
   SubIcon,
@@ -77,21 +72,25 @@ const AssetName: FC<Props> = ({
       {!isLoading && (
         <>
           <Icon />
-          <DataContainer isHovered={isHovered}>
+          <DataContainer>
             <Typography variant={'table1'} text={title} />
-            {isHovered && (
-              <Tooltip
-                title={
-                  <TooltipTitle variant={'subtitle2'} text={tooltipText} />
-                }
-                arrow
-              >
-                <UnderlyingWrapper>
-                  {SubIcon && <SubIcon />}
-                  <Amount variant={'subtitle1'} text={balance} />
-                </UnderlyingWrapper>
-              </Tooltip>
-            )}
+            <Tooltip
+              title={<TooltipTitle variant={'subtitle2'} text={tooltipText} />}
+              arrow
+              sx={{
+                'max-height': 0,
+                overflow: 'hidden',
+                transition: 'max-height 0.3s ease, opacity 3s ease',
+                height: 'auto',
+                opacity: 0,
+              }}
+              className='asset-tooltip-container'
+            >
+              <UnderlyingWrapper>
+                {SubIcon && <SubIcon />}
+                <Amount variant={'subtitle1'} text={balance} />
+              </UnderlyingWrapper>
+            </Tooltip>
           </DataContainer>
         </>
       )}
