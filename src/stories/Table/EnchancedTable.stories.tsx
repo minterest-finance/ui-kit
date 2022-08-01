@@ -39,7 +39,7 @@ export default {
 } as ComponentMeta<any>;
 
 export const EnchancedTable: ComponentStory<any> = (args) => (
-  <EnchancedTableComponent {...args} />
+  <div style={{ width: 612 }}><EnchancedTableComponent {...args} /></div>
 );
 
 // AssetName.args = {

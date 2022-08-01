@@ -41,6 +41,7 @@ const UsdValueWrapper = styled('div')({
   textAlign: 'right',
   // todo DO BETTER
   lineHeight: 0,
+  display: 'flex',
 });
 
 const Loader: React.FC = () => (
@@ -66,7 +67,9 @@ const NumericInfo: FC<Props> = ({ usdValue, assetValue, isLoading }: Props) => {
       {!bothValuesAreZero && (
         <DataWrapper>
           <UsdValueWrapper>
-            <GreyText variant={'table2'} text={'$'} />
+            <GreyText variant={'table2'} text={'$'} sx={{
+              display: 'block',
+            }}/>
             <BlueText variant={'table2'} text={usdValue} />
           </UsdValueWrapper>
           <>

@@ -33,7 +33,7 @@ const MainFront = () => {
     {
       field: 'asset',
       headerName: 'Asset',
-      width: 300,
+      width: 169,
       hideSortIcons: true,
       filterable: false,
       disableColumnMenu: true,
@@ -65,7 +65,7 @@ const MainFront = () => {
     { 
     field: 'totalSupply',
     headerName: 'Total Supply',
-    width: 130,
+    width: 104,
     disableColumnMenu: true,
     hideSortIcons: true,
     filterable: false,
@@ -98,7 +98,7 @@ const MainFront = () => {
     { 
     field: 'supplyApy',
     headerName: 'Supply Apy',
-    width: 130,
+    width: 99,
     disableColumnMenu: true,
     hideSortIcons: true,
     filterable: false,
@@ -132,7 +132,7 @@ const MainFront = () => {
     {
       field: 'yourSupply',
       headerName: 'Your Supply',
-      width: 90,
+      width: 104,
       hideSortIcons: true,
       filterable: false,
       disableColumnMenu: true,
@@ -166,7 +166,7 @@ const MainFront = () => {
       headerName: '',
       description: 'This column has a value getter and is not sortable.',
       sortable: false,
-      width: 160,
+      width: 137,
       valueGetter: (params: GridValueGetterParams) =>
         `${params.row.firstName || ''} ${params.row.lastName || ''}`,
       renderCell: (item) => {
