@@ -9,9 +9,9 @@ import {
   ListItem,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { CloseIcon } from 'assets/svg';
 
 import Navlink from './Navlink';
+import { CloseIcon } from 'assets/svg';
 import { Typography } from 'components';
 
 const DrawerStyled = styled('div')(({ theme }) => ({
