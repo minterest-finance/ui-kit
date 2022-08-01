@@ -1,10 +1,9 @@
 import React from 'react';
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { CssBaseline, getTheme, ThemeProvider } from 'theme';
 
-import { DrawerMenu } from 'components';
-
-import { CssBaseline, getTheme, ThemeProvider } from '../../theme';
+import { DrawerMenu, SmallButton } from 'components';
 
 export default {
   title: 'Navigation/Drawer',
@@ -31,7 +30,9 @@ export const Menu: ComponentStory<typeof DrawerMenu> = (args) => {
   const [isOpen, setOpen] = React.useState(false);
   return (
     <React.Fragment>
-      <button onClick={() => setOpen((prev) => !prev)}>menu</button>
+      <SmallButton onClick={() => setOpen((prev) => !prev)}>
+        {isOpen ? 'Close menu' : 'Open menu'}
+      </SmallButton>
       <DrawerMenu
         {...args}
         isOpen={isOpen}
