@@ -36,7 +36,7 @@ const DataTable: React.FC<EnchancedTableProps> = ({
   getCellClassNameHandler,
   ...rest
 }) => {
-  const removeTopBorder = addHeader
+  const removeTopBorderTop = addHeader
     ? {
         borderTop: 'none',
         borderTopLeftRadius: 0,
@@ -52,10 +52,11 @@ const DataTable: React.FC<EnchancedTableProps> = ({
             paddingTop: headerPaddingTop || 0,
             paddingBottom: headerPaddingBottom || 0,
             paddingLeft: headerPaddingLeft || 0,
-            border: '1px solid rgba(224, 224, 224, 1)',
+            // border: '1px solid rgba(224, 224, 224, 1)',
+            border: '1px solid rgba(12, 45, 156, 0.08)',
             borderBottom: 'none',
-            borderTopLeftRadius: 4,
-            borderTopRightRadius: 4,
+            borderTopLeftRadius: 12,
+            borderTopRightRadius: 12,
           }}
         >
           {headerTitle && <Typography text={headerTitle} variant={'h3'} />}
@@ -63,8 +64,9 @@ const DataTable: React.FC<EnchancedTableProps> = ({
       )}
       <DataGrid
         sx={{
-          ...removeTopBorder,
           ...customStyles,
+          border: '1px solid rgba(12, 45, 156, 0.08)',
+          ...removeTopBorderTop,
           '& .customizedCell': {
             paddingLeft: 0,
             paddingRight: 0,
@@ -81,7 +83,15 @@ const DataTable: React.FC<EnchancedTableProps> = ({
           '.MuiDataGrid-columnHeader:focus': {
             outline: 'none',
           },
+          '& .MuiDataGrid-columnHeaders': {
+            borderBottom: '1px solid rgba(12, 45, 156, 0.08)',
+          },
+        
+          '& .MuiDataGrid-cell': {
+            borderBottom: '1px solid rgba(12, 45, 156, 0.08)',
+          },
           '.MuiDataGrid-row': {
+            // border: '1px solid rgba(12, 45, 156, 0.08)',
             transition: 'transform 0.3s ease',
             // 'border-bottom': '1px solid rgba(224, 224, 224, 1)',
             // 'z-index': 1,
