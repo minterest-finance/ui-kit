@@ -83,6 +83,9 @@ export const getTheme = (mode: PaletteMode): Theme =>
       grey99: {
         main: '#FCFCFC',
       },
+      success: {
+        main: '#00C7CF',
+      },
       chartsBlue30: {
         main: 'rgba(20, 110, 255, 0.3)',
       },
@@ -144,6 +147,14 @@ export const getTheme = (mode: PaletteMode): Theme =>
         fontWeight: 600,
         textTransform: 'none',
         lineHeight: 1.5,
+        [`@media (max-width:${breakpoints.values.lg}px)`]: {
+          fontSize: 16,
+          lineHeight: '24px',
+        },
+        [`@media (max-width:${breakpoints.values.md}px)`]: {
+          fontSize: 14,
+          lineHeight: '21px',
+        },
       },
       body1: {
         fontSize: 20,

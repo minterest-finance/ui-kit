@@ -8,4 +8,5 @@ export * from './StatsWing/StatsWingCircle';
 export * from './StatsWing/StatsWingTextBlock';
 export * from './HeaderMessage/HeaderMessage';
 export * from './Table/index';
+export * from './Navigation';
 export * from './Common';
