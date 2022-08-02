@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { SxProps, Theme } from '@mui/material';
+import { GridRowsProp } from '@mui/x-data-grid';
 import {
   DataGrid,
   GridColDef,
@@ -43,12 +45,12 @@ const MainFront = () => {
       width: 169,
       headerClassName: 'assetHeaderCell',
       renderCell: (item) => {
+        const { isLoading, title, balance, tooltipText } = item.row.assetData;
         const assetNameArguments = {
-          isHovered: true,
-          isLoading: false,
-          title: 'BTC',
-          balance: '~17.23',
-          tooltipText: 'Your current BTC balance in your wallet',
+          isLoading,
+          title,
+          balance,
+          tooltipText,
         };
         return (
           <AssetName
@@ -173,10 +175,16 @@ const MainFront = () => {
   const rows = [
     {
       id: 1,
-      asset: 'A',
+      asset: 'BTC',
       totalSupply: 5000000000,
       supplyApy: 238,
       yourSupply: 50000000,
+      assetData: {
+        isLoading: false,
+        title: 'BTC',
+        balance: '~17.23',
+        tooltipText: 'Your current BTC balance in your wallet',
+      },
       totalSupplyData: {
         usdValue: '5.00B',
         assetValue: '63.87',
@@ -200,7 +208,13 @@ const MainFront = () => {
       totalSupply: 500000000,
       supplyApy: 538,
       yourSupply: 5000000,
-      asset: 'Z',
+      asset: 'DAI',
+      assetData: {
+        isLoading: false,
+        title: 'DAI',
+        balance: '~17.23',
+        tooltipText: 'Your current DAI balance in your wallet',
+      },
       totalSupplyData: {
         usdValue: '500M',
         assetValue: '63.87',
@@ -224,7 +238,13 @@ const MainFront = () => {
       totalSupply: 50000000,
       supplyApy: 838,
       yourSupply: 0,
-      asset: 'B',
+      asset: 'USDC',
+      assetData: {
+        isLoading: false,
+        title: 'USDC',
+        balance: '~17.23',
+        tooltipText: 'Your current USDC balance in your wallet',
+      },
       totalSupplyData: {
         usdValue: '50.00M',
         assetValue: '63.87',
@@ -241,10 +261,16 @@ const MainFront = () => {
     },
     {
       id: 4,
-      asset: 'C',
+      asset: 'USDT',
       totalSupply: 5000000,
       supplyApy: 0,
       yourSupply: 0,
+      assetData: {
+        isLoading: false,
+        title: 'USDT',
+        balance: '~17.23',
+        tooltipText: 'Your current USDT balance in your wallet',
+      },
       totalSupplyData: {
         usdValue: '5.00M',
         assetValue: '63.87',
@@ -261,10 +287,16 @@ const MainFront = () => {
     },
     {
       id: 5,
-      asset: 'D',
+      asset: 'ETH',
       totalSupply: 500000,
       supplyApy: 938,
       yourSupply: 5000,
+      assetData: {
+        isLoading: false,
+        title: 'ETH',
+        balance: '~17.23',
+        tooltipText: 'Your current ETH balance in your wallet',
+      },
       totalSupplyData: {
         usdValue: '500K',
         assetValue: '63.87',
@@ -285,13 +317,68 @@ const MainFront = () => {
     },
   ];
 
+  const customStyles = {
+    '& .assetHeaderCell': {
+      paddingLeft: '32px',
+    },
+    '& .buttonColumn': {
+      paddingLeft: '18px',
+    },
+    '& .assetColumn': {
+      paddingLeft: '32px',
+    },
+    '.MuiDataGrid-row:hover': {
+      // transform: 'scale(0.1)',
+      // transition: 'transform 1s ease',
+      // This class controlls AssetName component behaviour
+      '.asset-tooltip-container': {
+        'max-height': '16px',
+        opacity: 1,
+      },
+    },
+  };
+
+  const getCellClassNameHandler = ({ field }: GridCellParams<number>) => {
+    if (field === 'asset') return 'assetColumn';
+    if (field === 'supplyButtons') return 'buttonColumn';
+    return 'customizedCell';
+  };
+
   const props = {
     rows,
     columns,
     handleStateChange,
+    customStyles,
+    getCellClassNameHandler,
+    addHeader: true,
+    headerTitle: 'Supply',
+    headerPaddingTop: 24,
+    headerPaddingBottom: 28,
+    headerPaddingLeft: 32,
+    headerHeight: 24,
+    rowHeight: 73,
   };
 
   return <DataTable {...props} />;
+};
+
+// TODO fix row type
+type EnchancedTableProps = {
+  rows: any;
+  columns: GridColDef[];
+  handleStateChange: (state: {
+    field: string,
+    sort: string,
+  }) => void;
+  customStyles: SxProps<Theme>;
+  getCellClassNameHandler: ({ field }: GridCellParams<number>) => string;
+  addHeader: boolean;
+  headerTitle: string;
+  headerPaddingTop: number;
+  headerPaddingBottom: number;
+  headerPaddingLeft: number;
+  headerHeight: number;
+  rowHeight: number;
 };
 
 // const TableHeader = styled('div', {
@@ -315,16 +402,20 @@ const MainFront = () => {
 //   justifyContent: 'center',
 //   alignItems: 'center',
 
-const DataTable = ({
+const DataTable: React.FC<EnchancedTableProps> = ({
   rows,
   columns,
   handleStateChange,
-  addHeader = true,
-  headerTitle = 'Supply',
-  headerPaddingTop = 24,
-  headerPaddingBottom = 28,
-  headerPaddingLeft = 32,
-}: any) => {
+  addHeader,
+  headerTitle,
+  headerPaddingTop,
+  headerPaddingBottom,
+  headerPaddingLeft,
+  headerHeight,
+  rowHeight,
+  customStyles,
+  getCellClassNameHandler,
+}) => {
   const removeTopBorder = addHeader
     ? {
         borderTop: 'none',
@@ -353,27 +444,18 @@ const DataTable = ({
       <DataGrid
         sx={{
           ...removeTopBorder,
-          '& .assetHeaderCell': {
-            paddingLeft: '32px',
-          },
+          ...customStyles,
           '& .customizedCell': {
-            //Unstyling
             paddingLeft: 0,
             paddingRight: 0,
           },
-          '& .buttonColumn': {
-            paddingLeft: '18px',
-          },
-          '& .assetColumn': {
-            paddingLeft: '32px',
-          },
-          // '& .MuiDataGrid-root': {
-          //   borderColor: 'red',
-          // },
           '.MuiDataGrid-columnSeparator--sideRight': {
             visibility: 'hidden',
           },
           '.MuiDataGrid-cell:focus': {
+            outline: 'none',
+          },
+          '.MuiDataGrid-cell:focus-within': {
             outline: 'none',
           },
           '.MuiDataGrid-columnHeader:focus': {
@@ -383,14 +465,6 @@ const DataTable = ({
             transition: 'transform 0.3s ease',
             // 'border-bottom': '1px solid rgba(224, 224, 224, 1)',
             // 'z-index': 1,
-          },
-          '.MuiDataGrid-row:hover': {
-            // transform: 'scale(0.3)',
-            // transition: 'transform 1s ease',
-            '.asset-tooltip-container': {
-              'max-height': '16px',
-              opacity: 1,
-            },
           },
           // '.MuiDataGrid-virtualScroller': {
           //   overflow: 'visible',
@@ -411,13 +485,9 @@ const DataTable = ({
         autoHeight
         onStateChange={handleStateChange}
         disableSelectionOnClick={true}
-        headerHeight={24}
-        rowHeight={73}
-        getCellClassName={({ field }: GridCellParams<number>) => {
-          if (field === 'asset') return 'assetColumn';
-          if (field === 'supplyButtons') return 'buttonColumn';
-          return 'customizedCell';
-        }}
+        headerHeight={headerHeight}
+        rowHeight={rowHeight}
+        getCellClassName={getCellClassNameHandler}
       />
     </>
   );

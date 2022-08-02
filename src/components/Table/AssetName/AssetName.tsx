@@ -80,7 +80,7 @@ const AssetName: FC<Props> = ({
               sx={{
                 'max-height': 0,
                 overflow: 'hidden',
-                transition: 'max-height 0.3s ease, opacity 3s ease',
+                transition: 'max-height 0.3s ease, opacity 0.8s ease',
                 height: 'auto',
                 opacity: 0,
               }}
