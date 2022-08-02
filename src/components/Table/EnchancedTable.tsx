@@ -3,8 +3,8 @@ import * as React from 'react';
 import {
   DataGrid,
   GridColDef,
-  GridValueGetterParams,
   GridSortDirection,
+  GridCellParams,
 } from '@mui/x-data-grid';
 import { BTCIcon, MetaMaskSmallIcon } from 'assets/svg';
 
@@ -12,18 +12,11 @@ import AssetName from './AssetName/AssetName';
 import HeaderCategory from './HeaderCategory/HeaderCategory';
 import NumericInfo from './NumericInfo/NumericInfo';
 import PercentageInfo from './PercentageInfo/PercentageInfo';
-import { SmallButton } from 'components/Button/Button';
-
-// Dunno where this should reside
-// const formatHeaderCell = (item) => {
-//   return (
-//     // <HeaderCategory {...headerCategoryProps}/>
-//     <HeaderCategory {...item.colDef} />
-// );
-// }
+import { SmallButton, Typography } from 'components';
 
 const MainFront = () => {
   const sortingOrder: GridSortDirection[] = ['desc', 'asc'];
+
   const [sortingModel, updateSortingModel] = React.useState({
     field: 'undefined',
     sort: 'undefined',
@@ -34,15 +27,21 @@ const MainFront = () => {
       updateSortingModel(state.sorting.sortModel[0]);
     }
   };
+
+  const commonCellParams = {
+    hideSortIcons: true,
+    filterable: false,
+    disableColumnMenu: true,
+    sortingOrder,
+  };
+
   const columns: GridColDef[] = [
     {
+      ...commonCellParams,
       field: 'asset',
       headerName: 'Asset',
       width: 169,
-      hideSortIcons: true,
-      filterable: false,
-      disableColumnMenu: true,
-      sortingOrder,
+      headerClassName: 'assetHeaderCell',
       renderCell: (item) => {
         const assetNameArguments = {
           isHovered: true,
@@ -70,13 +69,12 @@ const MainFront = () => {
     },
 
     {
+      ...commonCellParams,
       field: 'totalSupply',
       headerName: 'Total Supply',
       width: 104,
-      disableColumnMenu: true,
-      hideSortIcons: true,
-      filterable: false,
-      sortingOrder,
+      align: 'center',
+      headerAlign: 'center',
       renderCell: (item) => {
         const { usdValue, assetValue, isLoading } = item.row.totalSupplyData;
         const numericInfoArguments = {
@@ -88,7 +86,6 @@ const MainFront = () => {
       },
       renderHeader: (item) => {
         const headerCategoryProps = {
-          // label: item.field,
           label: item.colDef.headerName || '', // or just hardcode it here, dunno
           sorted: sortingModel.field === item.field,
           sortOrder: sortingModel.sort,
@@ -98,13 +95,12 @@ const MainFront = () => {
     },
 
     {
+      ...commonCellParams,
       field: 'supplyApy',
       headerName: 'Supply Apy',
       width: 99,
-      disableColumnMenu: true,
-      hideSortIcons: true,
-      filterable: false,
-      sortingOrder,
+      align: 'center',
+      headerAlign: 'center',
       renderCell: (item) => {
         const {
           percentageValue,
@@ -124,7 +120,6 @@ const MainFront = () => {
       },
       renderHeader: (item) => {
         const headerCategoryProps = {
-          // label: item.field,
           label: item.colDef.headerName || '', // or just hardcode it here, dunno
           sorted: sortingModel.field === item.field,
           sortOrder: sortingModel.sort,
@@ -134,16 +129,14 @@ const MainFront = () => {
     },
 
     {
+      ...commonCellParams,
       field: 'yourSupply',
       headerName: 'Your Supply',
       width: 104,
-      hideSortIcons: true,
-      filterable: false,
-      disableColumnMenu: true,
-      sortingOrder,
+      align: 'center',
+      headerAlign: 'center',
       renderHeader: (item) => {
         const headerCategoryProps = {
-          // label: item.field,
           label: item.colDef.headerName || '', // or just hardcode it here, dunno
           sorted: sortingModel.field === item.field,
           sortOrder: sortingModel.sort,
@@ -162,13 +155,11 @@ const MainFront = () => {
     },
 
     {
+      ...commonCellParams,
       field: 'supplyButtons',
       headerName: '',
-      description: 'This column has a value getter and is not sortable.',
       sortable: false,
       width: 137,
-      valueGetter: (params: GridValueGetterParams) =>
-        `${params.row.firstName || ''} ${params.row.lastName || ''}`,
       renderCell: (item) => {
         const buttonProps = {
           children: 'Supply',
@@ -303,53 +294,132 @@ const MainFront = () => {
   return <DataTable {...props} />;
 };
 
-const DataTable = ({ rows, columns, handleStateChange }: any) => {
+// const TableHeader = styled('div', {
+//   shouldForwardProp: (prop) => prop !== 'headerPaddingTop' && prop !== 'headerPaddingBottom',
+// })<{ headerPaddingTop?: number, headerPaddingBottom?: number }>(({ theme, headerPaddingTop, headerPaddingBottom }) => ({
+//   paddingTop: headerPaddingTop,
+//   paddingBottom: headerPaddingBottom,
+// }));
+
+// const CircleWrapper = styled('div', {
+//   shouldForwardProp: (prop) => prop !== 'connected',
+// })<{ connected?: boolean }>(({ theme, connected }) => ({
+//   width: 160,
+//   height: 160,
+//   background: '#FCFCFC',
+//   boxShadow: '0px 4px 37px rgba(0, 0, 0, 0.08)',
+//   borderRadius: '50%',
+//   position: 'relative',
+//   zIndex: 1,
+//   display: 'flex',
+//   justifyContent: 'center',
+//   alignItems: 'center',
+
+const DataTable = ({
+  rows,
+  columns,
+  handleStateChange,
+  addHeader = true,
+  headerTitle = 'Supply',
+  headerPaddingTop = 24,
+  headerPaddingBottom = 28,
+  headerPaddingLeft = 32,
+}: any) => {
+  const removeTopBorder = addHeader
+    ? {
+        borderTop: 'none',
+        borderTopLeftRadius: 0,
+        borderTopRightRadius: 0,
+      }
+    : {};
+
   return (
-    <DataGrid
-      sx={{
-        '.MuiDataGrid-columnSeparator--sideRight': {
-          visibility: 'hidden',
-        },
-        '.MuiDataGrid-cell:focus': {
-          outline: 'none',
-        },
-        '.MuiDataGrid-columnHeader:focus': {
-          outline: 'none',
-        },
-        '.MuiDataGrid-row': {
-          transition: 'transform 0.3s ease',
-          // 'border-bottom': '1px solid rgba(224, 224, 224, 1)',
-          // 'z-index': 1,
-        },
-        '.MuiDataGrid-row:hover': {
-          // transform: 'scale(1.1)',
-          '.asset-tooltip-container': {
-            'max-height': '16px',
-            opacity: 1,
+    <>
+      {addHeader && (
+        <div
+          style={{
+            paddingTop: headerPaddingTop,
+            paddingBottom: headerPaddingBottom,
+            paddingLeft: headerPaddingLeft,
+            border: '1px solid rgba(224, 224, 224, 1)',
+            borderBottom: 'none',
+            borderTopLeftRadius: 4,
+            borderTopRightRadius: 4,
+          }}
+        >
+          <Typography text={headerTitle} variant={'h3'} />
+        </div>
+      )}
+      <DataGrid
+        sx={{
+          ...removeTopBorder,
+          '& .assetHeaderCell': {
+            paddingLeft: '32px',
           },
-        },
-        // '.MuiDataGrid-virtualScroller': {
-        //   overflow: 'visible',
-        //   'overflow-y': 'visible !important',
-        // },
-        // '.MuiDataGrid-main': {
-        //   overflow: 'visible',
-        // },
-        // '.MuiDataGrid-cell': {
-        //   'border-bottom': 'none',
-        // },
-      }}
-      rows={rows}
-      columns={columns}
-      showColumnRightBorder={false}
-      hideFooterPagination={true}
-      hideFooter={true}
-      autoHeight
-      onStateChange={handleStateChange}
-      disableSelectionOnClick={true}
-      headerHeight={40}
-      rowHeight={73}
-    />
+          '& .customizedCell': {
+            //Unstyling
+            paddingLeft: 0,
+            paddingRight: 0,
+          },
+          '& .buttonColumn': {
+            paddingLeft: '18px',
+          },
+          '& .assetColumn': {
+            paddingLeft: '32px',
+          },
+          // '& .MuiDataGrid-root': {
+          //   borderColor: 'red',
+          // },
+          '.MuiDataGrid-columnSeparator--sideRight': {
+            visibility: 'hidden',
+          },
+          '.MuiDataGrid-cell:focus': {
+            outline: 'none',
+          },
+          '.MuiDataGrid-columnHeader:focus': {
+            outline: 'none',
+          },
+          '.MuiDataGrid-row': {
+            transition: 'transform 0.3s ease',
+            // 'border-bottom': '1px solid rgba(224, 224, 224, 1)',
+            // 'z-index': 1,
+          },
+          '.MuiDataGrid-row:hover': {
+            // transform: 'scale(0.3)',
+            // transition: 'transform 1s ease',
+            '.asset-tooltip-container': {
+              'max-height': '16px',
+              opacity: 1,
+            },
+          },
+          // '.MuiDataGrid-virtualScroller': {
+          //   overflow: 'visible',
+          //   'overflow-y': 'visible !important',
+          // },
+          // '.MuiDataGrid-main': {
+          //   overflow: 'visible',
+          // },
+          // '.MuiDataGrid-cell': {
+          //   'border-bottom': 'none',
+          // },
+        }}
+        rows={rows}
+        columns={columns}
+        showColumnRightBorder={false}
+        hideFooterPagination={true}
+        hideFooter={true}
+        autoHeight
+        onStateChange={handleStateChange}
+        disableSelectionOnClick={true}
+        headerHeight={24}
+        rowHeight={73}
+        getCellClassName={({ field }: GridCellParams<number>) => {
+          if (field === 'asset') return 'assetColumn';
+          if (field === 'supplyButtons') return 'buttonColumn';
+          return 'customizedCell';
+        }}
+      />
+    </>
   );
 };
 

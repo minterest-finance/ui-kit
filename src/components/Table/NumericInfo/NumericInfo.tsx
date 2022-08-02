@@ -13,6 +13,8 @@ type Props = {
 
 const ElementWrapper = styled('div')({
   height: 41,
+  // TODO talk to Oleg about returning hardcoded width
+  width: 70,
   display: 'flex',
   justifyContent: 'flex-end',
 });
@@ -67,9 +69,13 @@ const NumericInfo: FC<Props> = ({ usdValue, assetValue, isLoading }: Props) => {
       {!bothValuesAreZero && (
         <DataWrapper>
           <UsdValueWrapper>
-            <GreyText variant={'table2'} text={'$'} sx={{
-              display: 'block',
-            }}/>
+            <GreyText
+              variant={'table2'}
+              text={'$'}
+              sx={{
+                display: 'block',
+              }}
+            />
             <BlueText variant={'table2'} text={usdValue} />
           </UsdValueWrapper>
           <>
