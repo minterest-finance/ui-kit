@@ -66,6 +66,8 @@ const DataTable: React.FC<EnchancedTableProps> = ({
         sx={{
           ...customStyles,
           border: '1px solid rgba(12, 45, 156, 0.08)',
+          borderBottomLeftRadius: '12px',
+          borderBottomRightRadius: '12px',
           ...removeTopBorderTop,
           '& .customizedCell': {
             paddingLeft: 0,
