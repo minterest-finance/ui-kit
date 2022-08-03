@@ -313,7 +313,7 @@ export const SupplyTable: ComponentStory<any> = () => {
         netApyOnly: false,
         loading: false,
         tooltipText: 'qweqr',
-        mntRewardValue: '0.45',
+        mntRewardValue: '',
       },
       yourSupplyData: { usdValue: '', assetValue: '', isLoading: false },
     },
@@ -339,7 +339,7 @@ export const SupplyTable: ComponentStory<any> = () => {
         netApyOnly: false,
         loading: false,
         tooltipText: 'qweqr',
-        mntRewardValue: '0.45',
+        mntRewardValue: '',
       },
       yourSupplyData: {
         usdValue: '5,000.00',

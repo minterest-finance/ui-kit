@@ -88,7 +88,7 @@ const DataTable: React.FC<EnchancedTableProps> = ({
           '& .MuiDataGrid-columnHeaders': {
             borderBottom: '1px solid rgba(12, 45, 156, 0.08)',
           },
-        
+
           '& .MuiDataGrid-cell': {
             borderBottom: '1px solid rgba(12, 45, 156, 0.08)',
           },
