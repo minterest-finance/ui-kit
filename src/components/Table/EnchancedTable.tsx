@@ -52,7 +52,6 @@ const DataTable: React.FC<EnchancedTableProps> = ({
             paddingTop: headerPaddingTop || 0,
             paddingBottom: headerPaddingBottom || 0,
             paddingLeft: headerPaddingLeft || 0,
-            // border: '1px solid rgba(224, 224, 224, 1)',
             border: '1px solid rgba(12, 45, 156, 0.08)',
             borderBottom: 'none',
             borderTopLeftRadius: 12,
@@ -93,9 +92,7 @@ const DataTable: React.FC<EnchancedTableProps> = ({
             borderBottom: '1px solid rgba(12, 45, 156, 0.08)',
           },
           '.MuiDataGrid-row': {
-            // border: '1px solid rgba(12, 45, 156, 0.08)',
             transition: 'transform 0.3s ease',
-            // 'border-bottom': '1px solid rgba(224, 224, 224, 1)',
             // 'z-index': 1,
           },
           // '.MuiDataGrid-virtualScroller': {

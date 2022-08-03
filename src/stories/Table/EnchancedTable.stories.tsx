@@ -94,7 +94,7 @@ export const SupplyTable: ComponentStory<any> = () => {
       },
       renderHeader: (item) => {
         const headerCategoryProps = {
-          label: item.colDef.headerName || '', // or just hardcode it here, dunno
+          label: item.colDef.headerName || '',
           sorted: sortingModel.field === item.field,
           sortOrder: sortingModel.sort,
         };
@@ -120,7 +120,7 @@ export const SupplyTable: ComponentStory<any> = () => {
       },
       renderHeader: (item) => {
         const headerCategoryProps = {
-          label: item.colDef.headerName || '', // or just hardcode it here, dunno
+          label: item.colDef.headerName || '',
           sorted: sortingModel.field === item.field,
           sortOrder: sortingModel.sort,
         };
@@ -154,7 +154,7 @@ export const SupplyTable: ComponentStory<any> = () => {
       },
       renderHeader: (item) => {
         const headerCategoryProps = {
-          label: item.colDef.headerName || '', // or just hardcode it here, dunno
+          label: item.colDef.headerName || '',
           sorted: sortingModel.field === item.field,
           sortOrder: sortingModel.sort,
         };
@@ -171,7 +171,7 @@ export const SupplyTable: ComponentStory<any> = () => {
       headerAlign: 'center',
       renderHeader: (item) => {
         const headerCategoryProps = {
-          label: item.colDef.headerName || '', // or just hardcode it here, dunno
+          label: item.colDef.headerName || '',
           sorted: sortingModel.field === item.field,
           sortOrder: sortingModel.sort,
         };
