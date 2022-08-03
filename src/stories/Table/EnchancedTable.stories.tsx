@@ -350,6 +350,7 @@ export const SupplyTable: ComponentStory<any> = () => {
   ];
 
   const customStyles = {
+    border: '1px solid rgba(12, 45, 156, 0.08)',
     '& .assetHeaderCell': {
       paddingLeft: '32px',
     },
@@ -368,6 +369,13 @@ export const SupplyTable: ComponentStory<any> = () => {
         opacity: 1,
       },
     },
+    '& .MuiDataGrid-columnHeaders': {
+      borderBottom: '1px solid rgba(12, 45, 156, 0.08)',
+    },
+
+    '& .MuiDataGrid-cell': {
+      borderBottom: '1px solid rgba(12, 45, 156, 0.08)',
+    },
   };
 
   const getCellClassNameHandler = ({ field }: GridCellParams<number>) => {
@@ -376,11 +384,18 @@ export const SupplyTable: ComponentStory<any> = () => {
     return 'customizedCell';
   };
 
+  const headerStyles = {
+    border: '1px solid rgba(12, 45, 156, 0.08)',
+    color: 'red',
+    somethingWeird: 123,
+  };
+
   const props = {
     rows,
     columns,
     handleStateChange,
     customStyles,
+    headerStyles,
     getCellClassNameHandler,
     addHeader: true,
     headerTitle: 'Supply',
