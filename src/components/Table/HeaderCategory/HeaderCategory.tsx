@@ -28,7 +28,7 @@ const Arrows = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
-  transform: sortOrder === 'desc' ? 'rotate(180deg)' : '',
+  transform: sortOrder === 'asc' ? 'rotate(180deg)' : '',
 }));
 
 const ArrowDownDark = styled(SortArrowUpDark)({
