@@ -16,6 +16,10 @@ const GreyText = styled(Typography)(({ theme }) => ({
   color: theme.palette.action.disabled,
 }));
 
+const PercentageText = styled(Typography)({
+  display: 'inline-block',
+});
+
 const Loader: React.FC = () => (
   <ContentLoader height={21} width={64}>
     <rect x={0} y={0} rx={4} ry={4} width={64} height={21} />
@@ -57,6 +61,7 @@ const PercentageInfo: FC<PercentageInfoProps> = ({
   mntRewardValue,
   tooltipText,
 }: PercentageInfoProps) => {
+  const mntRewardValueIsZero = !mntRewardValue || mntRewardValue === '0';
   const percentageValueIsZero = !percentageValue || percentageValue === '0';
 
   if (loading)
@@ -82,24 +87,24 @@ const PercentageInfo: FC<PercentageInfoProps> = ({
 
   return (
     <Wrapper>
-      {!percentageValueIsZero && (
-        <>
-          <TopRowWrapper>
-            <Typography variant={'table2'} text={percentageValue} />
-            <GreyText variant={'table2'} text={'%'} />
-          </TopRowWrapper>
-          <BottowRowWrapper>
-            <MNTReward
-              mntRewardValue={mntRewardValue}
-              tooltipText={tooltipText}
-            />
-          </BottowRowWrapper>
-        </>
-      )}
-      {percentageValueIsZero && (
+      {percentageValueIsZero ? (
         <TopRowWrapper>
           <GreyText variant={'table1'} text={'0%'} />
         </TopRowWrapper>
+      ) : (
+        <TopRowWrapper>
+          <PercentageText variant={'table2'} text={percentageValue} />
+          <GreyText variant={'table2'} text={'%'} />
+        </TopRowWrapper>
+      )}
+
+      {!mntRewardValueIsZero && (
+        <BottowRowWrapper>
+          <MNTReward
+            mntRewardValue={mntRewardValue}
+            tooltipText={tooltipText}
+          />
+        </BottowRowWrapper>
       )}
     </Wrapper>
   );
