@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 
 import MaterialButton, { ButtonProps } from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
+
 import { CloseIcon } from 'assets/svg';
 
 export const Button: FC<ButtonProps> = (props) => <MaterialButton {...props} />;

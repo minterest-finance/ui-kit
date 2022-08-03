@@ -1151,6 +1151,13 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@babel/runtime@^7.18.6":
+  version "7.18.9"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.18.9.tgz#b4fcfce55db3d2e5e080d2490f608a3b9f407f4a"
+  integrity sha512-lkqXDcvlFT5rvEjiu6+QYO+1GXrEHRo2LOtS7E4GtX5ESIZOgepqsZBVIj6Pv+a6zqsya9VCgiK1KAK4BvJDAw==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/runtime@~7.5.4":
   version "7.5.5"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.5.5.tgz#74fba56d35efbeca444091c7850ccd494fd2f132"
@@ -1752,10 +1759,27 @@
     prop-types "^15.8.1"
     react-is "^18.2.0"
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+"@mui/material@5.8.7":
+=======
+>>>>>>> main
 "@mui/icons-material@^5.8.4":
   version "5.8.4"
   resolved "https://registry.yarnpkg.com/@mui/icons-material/-/icons-material-5.8.4.tgz#3f2907c9f8f5ce4d754cb8fb4b68b5a1abf4d095"
   integrity sha512-9Z/vyj2szvEhGWDvb+gG875bOGm8b8rlHBKOD1+nA3PcgC3fV6W1AU6pfOorPeBfH2X4mb9Boe97vHvaSndQvA==
+<<<<<<< HEAD
+=======
+  dependencies:
+    "@babel/runtime" "^7.17.2"
+
+"@mui/material@^5.8.5":
+>>>>>>> 91ebcd3 ([MUI-413] created table component draft)
+  version "5.8.7"
+  resolved "https://registry.yarnpkg.com/@mui/material/-/material-5.8.7.tgz#28617c5b8a9e354e300f19fc38e1286ba1e15ad3"
+  integrity sha512-Oo62UhrgEi+BMLr3nUEASJgScE2/hhq14CbBUmrVV3GQlEGtqMZsy26Vb0AqEmphFeN3TXlsbM9aeW5yq8ZFlw==
+>>>>>>> main
   dependencies:
     "@babel/runtime" "^7.17.2"
 
@@ -1814,7 +1838,17 @@
   resolved "https://registry.yarnpkg.com/@mui/types/-/types-7.1.5.tgz#5e5cc49d719bc86522983359bc1f90eddcff0624"
   integrity sha512-HnRXrxgHJYJcT8ZDdDCQIlqk0s0skOKD7eWs9mJgBUu70hyW4iA6Kiv3yspJR474RFH8hysKR65VVSzUSzkuwA==
 
+<<<<<<< HEAD
 "@mui/utils@^5.4.1", "@mui/utils@^5.9.1":
+=======
+<<<<<<< HEAD
+"@mui/utils@^5.8.6", "@mui/utils@^5.9.1":
+>>>>>>> main
+  version "5.9.1"
+  resolved "https://registry.yarnpkg.com/@mui/utils/-/utils-5.9.1.tgz#2b2c9dadbf8ba6561e145b5688fb7df5ef15a934"
+  integrity sha512-8+4adOR3xusyJwvbnZxcjqcmbWvl7Og+260ZKIrSvwnFs0aLubL+8MhiceeDDGcmb0bTKxfUgRJ96j32Jb7P+A==
+=======
+"@mui/utils@^5.4.1":
   version "5.9.1"
   resolved "https://registry.yarnpkg.com/@mui/utils/-/utils-5.9.1.tgz#2b2c9dadbf8ba6561e145b5688fb7df5ef15a934"
   integrity sha512-8+4adOR3xusyJwvbnZxcjqcmbWvl7Og+260ZKIrSvwnFs0aLubL+8MhiceeDDGcmb0bTKxfUgRJ96j32Jb7P+A==
@@ -1825,6 +1859,21 @@
     prop-types "^15.8.1"
     react-is "^18.2.0"
 
+<<<<<<< HEAD
+=======
+"@mui/utils@^5.8.6":
+  version "5.8.6"
+  resolved "https://registry.yarnpkg.com/@mui/utils/-/utils-5.8.6.tgz#543de64a64bb9135316ecfd91d75a8740544d79f"
+  integrity sha512-QM2Sd1xZo2jOt2Vz5Rmro+pi2FLJyiv4+OjxkUwXR3oUM65KSMAMLl/KNYU55s3W3DLRFP5MVwE4FhAbHseHAg==
+>>>>>>> 91ebcd3 ([MUI-413] created table component draft)
+  dependencies:
+    "@babel/runtime" "^7.17.2"
+    "@types/prop-types" "^15.7.5"
+    "@types/react-is" "^16.7.1 || ^17.0.0"
+    prop-types "^15.8.1"
+    react-is "^18.2.0"
+
+>>>>>>> main
 "@mui/x-data-grid@^5.13.1":
   version "5.13.1"
   resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-5.13.1.tgz#401ff147bebef6fea085a17a536be5774fa6cd50"

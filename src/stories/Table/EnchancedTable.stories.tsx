@@ -6,8 +6,8 @@ import {
   GridCellParams,
 } from '@mui/x-data-grid';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { BTCIcon, MetaMaskSmallIcon } from 'assets/svg';
 
+import { BTCIcon, MetaMaskSmallIcon } from 'assets/svg';
 import { EnchancedTable as EnchancedTableComponent } from 'components';
 
 import { SmallButton } from '../../components';

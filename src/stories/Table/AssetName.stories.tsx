@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { BTCIcon, MetaMaskSmallIcon } from 'assets/svg';
 
+import { BTCIcon, MetaMaskSmallIcon } from 'assets/svg';
 import { AssetName as AssetComponent } from 'components';
 
 import { CssBaseline, getTheme, ThemeProvider } from '../../theme';

@@ -20,7 +20,7 @@
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@mui/icons-material": "^5.8.4",
-    "@mui/material": "^5.8.7",
+    "@mui/material": "^5.8.5",
     "@mui/x-data-grid": "^5.13.1",
     "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-node-resolve": "^13.0.6",

@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 
 import { styled } from '@mui/material/styles';
-import { SortArrowUpLight, SortArrowUpDark } from 'assets/svg';
 
+import { SortArrowUpLight, SortArrowUpDark } from 'assets/svg';
 import { Typography } from 'components';
 
 type Props = {

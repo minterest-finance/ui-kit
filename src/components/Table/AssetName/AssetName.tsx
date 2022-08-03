@@ -1,14 +1,11 @@
-import React, { FC, SVGProps } from 'react';
+import React, { FC } from 'react';
 
 import { Tooltip } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import ContentLoader from 'react-content-loader';
 
 import { Typography } from 'components';
-
-export type SVGIcon = FC<
-  SVGProps<SVGSVGElement> & { title?: string | undefined }
->;
+import { SVGIcon } from 'types';
 
 type Props = {
   isLoading: boolean;
